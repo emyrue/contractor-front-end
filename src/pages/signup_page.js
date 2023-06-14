@@ -1,21 +1,28 @@
 import { useState } from 'react';
+import { TextField } from '@mui/material';
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <section>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
       <form>
-        <label htmlFor="login-email">
-          <input
-            type="text"
-            name="login-email"
-            id="login-email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+        <TextField
+          id="email"
+          label="Email"
+          variant="outlined"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          id="password"
+          label="Password"
+          variant="outlined"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </form>
     </section>
   );

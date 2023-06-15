@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/nav';
 import LoginPage from './pages/login_page';
 import SignupPage from './pages/signup_page';
+import CheckGetUser from './pages/checkGetUser';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/getuser" element={<CheckGetUser />} />
       </Routes>
     </BrowserRouter>
   );

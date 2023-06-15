@@ -29,6 +29,8 @@ export default function LoginPage() {
           password,
         },
       });
+    const serializedToken = JSON.stringify(response.headers.Authorization);
+    localStorage.setItem('Authorization', serializedToken);
     console.log(response);
   };
 

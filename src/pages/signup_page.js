@@ -5,6 +5,7 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
+import endpoint from '../redux/endpoint';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);
@@ -23,19 +24,13 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://127.0.0.1:4000/api/users',
+    const response = await axios.post(`${endpoint}users`,
       {
         user: {
           name,
           email,
           password,
           password_confirmation: passwordConfirmation,
-        },
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
       });
     console.log(response);

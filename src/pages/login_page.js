@@ -29,7 +29,7 @@ export default function LoginPage() {
           password,
         },
       });
-    const serializedToken = JSON.stringify(response.headers.Authorization);
+    const serializedToken = JSON.stringify(response.headers.get('Authorization'));
     localStorage.setItem('Authorization', serializedToken);
     console.log(response);
   };

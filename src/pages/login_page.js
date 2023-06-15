@@ -4,7 +4,8 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-// import axios from 'axios';
+import axios from 'axios';
+import endpoint from '../redux/endpoint';
 
 export default function LoginPage() {
   const [show, setShow] = useState(false);
@@ -19,10 +20,22 @@ export default function LoginPage() {
     e.preventDefault();
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post(`${endpoint}users/sign_in`,
+      {
+        user: {
+          email,
+          password,
+        },
+      });
+    console.log(response);
+  };
+
   return (
     <section>
       <h1>Log In</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextField
           id="email"
           label="Email"

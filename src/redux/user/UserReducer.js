@@ -12,7 +12,7 @@ const LOGOUT = 'User/END_SESSION';
 
 export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   const response = await axios.post(loginEndpoint, user);
-  const serializedToken = JSON.stringify(response.headers.Authorization);
+  const serializedToken = JSON.stringify(response.headers.get('Authorization'));
   localStorage.setItem('Authorization', serializedToken);
   const { data } = response;
   return data.data;

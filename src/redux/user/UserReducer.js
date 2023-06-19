@@ -28,7 +28,7 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
       },
     });
   if (user.data) {
-    return user.data
+    return user.data;
   }
   return {};
 });
@@ -40,7 +40,6 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
       Authorization: JSON.parse(serializedToken),
     },
   });
-  return;
 });
 
 const initialState = {

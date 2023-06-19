@@ -4,7 +4,7 @@ import endpoint from '../redux/endpoint';
 
 export default function CheckGetUser() {
   const handleClick = async () => {
-    const response = await axios.post(`${endpoint}users/sign_in`,
+    const response = await axios.get(`${endpoint}v1/users`,
       {
         headers: {
           Authorization: localStorage.getItem('Authorization'),

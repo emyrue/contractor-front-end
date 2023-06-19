@@ -4,6 +4,7 @@ import axios from 'axios';
 import endpoint from '../endpoint';
 
 const loginEndpoint = `${endpoint}users/sign_in`;
+const getUserEndpoint = `${endpoint}v1/users`;
 const logoutEndpoint = `${endpoint}users/sign_out`;
 
 const LOGIN = 'User/NEW_SESSION';
@@ -20,13 +21,26 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
 
 export const getUser = createAsyncThunk(GET_USER, async () => {
   const serializedToken = localStorage.getItem('Authorization');
-  const user = await axios.post(loginEndpoint,
+  const user = await axios.get(getUserEndpoint,
     {
       headers: {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  return user;
+  if (user.data) {
+    return user.data
+  }
+  return {};
+});
+
+export const userLogout = createAsyncThunk(LOGOUT, async () => {
+  const serializedToken = localStorage.getItem('Authorization');
+  await axios.delete(logoutEndpoint, {
+    headers: {
+      Authorization: JSON.parse(serializedToken),
+    },
+  });
+  return;
 });
 
 const initialState = {
@@ -55,8 +69,29 @@ const userSlice = createSlice({
     [userLogin.pending]: (state) => {
       state.isLoading = true;
     },
+    [getUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.isLoading = false;
+    },
+    [getUser.rejected]: (state) => {
+      state.user = {};
+      state.isLoading = false;
+    },
+    [getUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [userLogout.fulfilled]: (state) => {
+      state.user = {};
+      state.isLoading = false;
+    },
+    [userLogout.rejected]: (state) => {
+      state.user = {};
+      state.isLoading = false;
+    },
+    [userLogout.pending]: (state) => {
+      state.isLoading = true;
+    },
   },
 });
 
-export { loginEndpoint, logoutEndpoint, LOGOUT };
 export default userSlice.reducer;

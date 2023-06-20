@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import axios from 'axios';
-import endpoint from '../redux/endpoint';
+import { userLogin } from '../redux/user/UserReducer';
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,16 +24,13 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${endpoint}users/sign_in`,
-      {
-        user: {
-          email,
-          password,
-        },
-      });
-    const serializedToken = JSON.stringify(response.headers.get('Authorization'));
-    localStorage.setItem('Authorization', serializedToken);
-    console.log(response);
+    dispatch(userLogin({
+      user: {
+        email,
+        password,
+      },
+    }));
+    // console.log(user);
   };
 
   return (

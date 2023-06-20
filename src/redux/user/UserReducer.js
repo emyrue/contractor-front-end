@@ -16,6 +16,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   const serializedToken = JSON.stringify(response.headers.get('Authorization'));
   localStorage.setItem('Authorization', serializedToken);
   const { data } = response;
+  console.log(data.data);
   return data.data;
 });
 
@@ -27,10 +28,8 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  if (user.data) {
-    return user.data;
-  }
-  return {};
+  // console.log(user.data);
+  return user.data;
 });
 
 export const userLogout = createAsyncThunk(LOGOUT, async () => {
@@ -50,16 +49,12 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    clearUser: (state) => {
-      state.user = {};
-      state.isLoading = false;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [userLogin.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
+      console.log(state.user);
     },
     [userLogin.rejected]: (state) => {
       state.user = {};

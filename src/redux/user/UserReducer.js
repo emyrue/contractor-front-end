@@ -16,7 +16,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   const serializedToken = JSON.stringify(response.headers.get('Authorization'));
   localStorage.setItem('Authorization', serializedToken);
   const { data } = response;
-  console.log(data.data);
+  // console.log(data.data);
   return data.data;
 });
 

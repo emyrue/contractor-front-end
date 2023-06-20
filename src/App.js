@@ -5,17 +5,16 @@ import { getUser } from './redux/user/UserReducer';
 import Nav from './components/nav';
 import LoginPage from './pages/login_page';
 import SignupPage from './pages/signup_page';
-import CheckGetUser from './pages/checkGetUser';
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUser());
-    // console.log(user);
-  }, []);
+    console.log(user);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

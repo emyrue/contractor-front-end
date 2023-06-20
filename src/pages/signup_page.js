@@ -24,7 +24,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${endpoint}users`,
+    await axios.post(`${endpoint}users`,
       {
         user: {
           name,
@@ -33,7 +33,6 @@ export default function SignupPage() {
           password_confirmation: passwordConfirmation,
         },
       });
-    console.log(response);
   };
 
   return (

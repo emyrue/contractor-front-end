@@ -30,7 +30,7 @@ export default function LoginPage() {
         password,
       },
     }));
-    // console.log(user);
+    console.log(user);
   };
 
   return (

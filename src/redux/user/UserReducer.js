@@ -37,6 +37,7 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
       Authorization: JSON.parse(serializedToken),
     },
   });
+  localStorage.clear();
 });
 
 const initialState = {

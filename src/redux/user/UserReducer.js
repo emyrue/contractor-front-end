@@ -49,41 +49,41 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
-  extraReducers: {
-    [userLogin.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(userLogin.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-    },
-    [userLogin.rejected]: (state) => {
+    });
+    builder.addCase(userLogin.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
-    },
-    [userLogin.pending]: (state) => {
+    });
+    builder.addCase(userLogin.pending, (state) => {
       state.isLoading = true;
-    },
-    [getUser.fulfilled]: (state, action) => {
+    });
+    builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
       state.message = 'fulfilled';
-    },
-    [getUser.rejected]: (state) => {
+    });
+    builder.addCase(getUser.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
-    },
-    [getUser.pending]: (state) => {
+    });
+    builder.addCase(getUser.pending, (state) => {
       state.isLoading = true;
-    },
-    [userLogout.fulfilled]: (state) => {
+    });
+    builder.addCase(userLogout.fulfilled, (state) => {
       state.user = {};
       state.isLoading = false;
-    },
-    [userLogout.rejected]: (state) => {
+    });
+    builder.addCase(userLogout.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
-    },
-    [userLogout.pending]: (state) => {
+    });
+    builder.addCase(userLogout.pending, (state) => {
       state.isLoading = true;
-    },
+    });
   },
 });
 

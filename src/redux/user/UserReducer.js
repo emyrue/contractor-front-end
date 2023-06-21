@@ -16,7 +16,6 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   const serializedToken = JSON.stringify(response.headers.get('Authorization'));
   localStorage.setItem('Authorization', serializedToken);
   const { data } = response;
-  // console.log(data.data);
   return data.data;
 });
 
@@ -28,7 +27,6 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  // console.log(user.data);
   return user.data;
 });
 

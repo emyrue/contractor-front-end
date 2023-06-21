@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
 } from '@mui/material';
@@ -9,7 +9,6 @@ import { userLogin } from '../redux/user/UserReducer';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +29,6 @@ export default function LoginPage() {
         password,
       },
     }));
-    console.log(user);
   };
 
   return (

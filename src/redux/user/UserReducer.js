@@ -21,13 +21,16 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
 
 export const getUser = createAsyncThunk(GET_USER, async () => {
   const serializedToken = localStorage.getItem('Authorization');
-  const user = await axios.get(getUserEndpoint,
-    {
-      headers: {
-        Authorization: JSON.parse(serializedToken),
-      },
-    });
-  return user.data;
+  if (serializedToken) {
+    const user = await axios.get(getUserEndpoint,
+      {
+        headers: {
+          Authorization: JSON.parse(serializedToken),
+        },
+      });
+    return user.data;
+  }
+  return {};
 });
 
 export const userLogout = createAsyncThunk(LOGOUT, async () => {

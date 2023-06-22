@@ -7,7 +7,9 @@ export default function AccountPage() {
 
   return (
     <section>
-      { !userInfo.user.name
+      { userInfo.isLoading
+        && <h1>Loading...</h1>}
+      { (!userInfo.user.name && !userInfo.isLoading)
         && <h1>Please log in to view your account details.</h1>}
       { userInfo.user.name
         && <UserDetails />}

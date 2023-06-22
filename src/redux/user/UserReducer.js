@@ -46,7 +46,6 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
 const initialState = {
   user: {},
   isLoading: false,
-  message: 'initial',
 };
 
 const userSlice = createSlice({
@@ -68,7 +67,6 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-      state.message = 'fulfilled';
     });
     builder.addCase(getUser.rejected, (state) => {
       state.user = {};

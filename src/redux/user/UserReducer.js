@@ -46,6 +46,7 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
 const initialState = {
   user: {},
   isLoading: false,
+  contractor: {},
 };
 
 const userSlice = createSlice({

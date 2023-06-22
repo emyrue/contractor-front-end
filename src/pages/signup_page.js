@@ -41,7 +41,7 @@ export default function SignupPage() {
       <form onSubmit={handleSubmit}>
         <TextField
           id="name"
-          label="Name"
+          label="Username"
           variant="outlined"
           value={name}
           onChange={(e) => setName(e.target.value)}

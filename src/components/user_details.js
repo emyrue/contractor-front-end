@@ -21,7 +21,7 @@ export default function UserDetails() {
       { !userInfo.user.isContractor
         && (
         <li>
-          <button type="button">Register as a Contractor Here</button>
+          <a href='/'>Register as a Contractor</a>
         </li>
         )}
     </ul>

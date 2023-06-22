@@ -9,6 +9,7 @@ const logoutEndpoint = `${endpoint}users/sign_out`;
 
 const LOGIN = 'User/NEW_SESSION';
 const GET_USER = 'User/GET_USER';
+const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
 
 export const userLogin = createAsyncThunk(LOGIN, async (user) => {
@@ -31,6 +32,24 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
     return user.data;
   }
   return {};
+});
+
+export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
+  const serializedToken = localStorage.getItem('Authorization');
+  const user = await axios.get(getUserEndpoint,
+    {
+      headers: {
+        Authorization: JSON.parse(serializedToken),
+      },
+    });
+  const newEndpoint = getUserEndpoint + user.id;
+  const response = await axios.patch(newEndpoint, {
+    headers: {
+      Authorization: JSON.parse(serializedToken),
+    },
+    user: newInfo,
+  });
+  return response;
 });
 
 export const userLogout = createAsyncThunk(LOGOUT, async () => {
@@ -75,6 +94,16 @@ const userSlice = createSlice({
     });
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(editUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(editUser.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(editUser.pending, (state) => {
+      state.isLoading = false;
     });
     builder.addCase(userLogout.fulfilled, (state) => {
       state.user = {};

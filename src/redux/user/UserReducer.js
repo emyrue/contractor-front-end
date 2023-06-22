@@ -42,14 +42,14 @@ export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  const newEndpoint = getUserEndpoint + user.id;
+  const newEndpoint = `${getUserEndpoint}/${user.data.id}`;
   const response = await axios.patch(newEndpoint, {
-    headers: {
-      Authorization: JSON.parse(serializedToken),
-    },
+    // headers: {
+    //   Authorization: JSON.parse(serializedToken),
+    // },
     user: newInfo,
   });
-  return response;
+  return response.data;
 });
 
 export const userLogout = createAsyncThunk(LOGOUT, async () => {

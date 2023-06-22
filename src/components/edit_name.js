@@ -3,20 +3,24 @@ import { useDispatch } from 'react-redux';
 import {
   TextField, Button,
 } from '@mui/material';
+import { PropTypes } from 'prop-types';
 import { editUser } from '../redux/user/UserReducer';
 
-export default function EditUserPopup() {
-  const name = useState('');
+export default function EditNamePopup(props) {
+  const { handleClose } = props;
+  const [name, setName] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(editUser({
       name,
     }));
+    handleClose();
   };
 
   return (
-    <section>
+    <div>
       <form onSubmit={handleSubmit}>
         <TextField
           id="name"
@@ -32,6 +36,10 @@ export default function EditUserPopup() {
           Submit
         </Button>
       </form>
-    </section>
+    </div>
   );
 }
+
+EditNamePopup.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+};

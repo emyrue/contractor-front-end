@@ -20,23 +20,21 @@ export default function EditNamePopup(props) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          id="name"
-          label="Name"
-          variant="outlined"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Button
-          type="submit"
-          variant="outlined"
-        >
-          Submit
-        </Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        id="name"
+        label="Name"
+        variant="outlined"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <Button
+        type="submit"
+        variant="outlined"
+      >
+        Submit
+      </Button>
+    </form>
   );
 }
 

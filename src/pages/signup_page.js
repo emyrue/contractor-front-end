@@ -45,6 +45,7 @@ export default function SignupPage() {
           variant="outlined"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <TextField
           id="email"
@@ -52,6 +53,7 @@ export default function SignupPage() {
           variant="outlined"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <FormControl variant="outlined">
           <InputLabel>Password</InputLabel>
@@ -74,6 +76,7 @@ export default function SignupPage() {
               </InputAdornment>
           )}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </FormControl>
         <FormControl variant="outlined">
@@ -97,6 +100,7 @@ export default function SignupPage() {
               </InputAdornment>
           )}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
+            required
           />
         </FormControl>
         <Button

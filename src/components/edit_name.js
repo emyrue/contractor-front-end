@@ -27,6 +27,7 @@ export default function EditNamePopup(props) {
         variant="outlined"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        required
       />
       <Button
         type="submit"

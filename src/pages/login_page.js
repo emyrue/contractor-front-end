@@ -41,6 +41,7 @@ export default function LoginPage() {
           variant="outlined"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <FormControl variant="outlined">
           <InputLabel>Password</InputLabel>
@@ -50,6 +51,7 @@ export default function LoginPage() {
             variant="outlined"
             value={password}
             type={show ? 'text' : 'password'}
+            required
             endAdornment={(
               <InputAdornment position="end">
                 <IconButton

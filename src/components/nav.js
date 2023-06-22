@@ -17,6 +17,8 @@ export default function Nav() {
       { !userInfo.user.name
         && <a href="/login">Log in</a>}
       { userInfo.user.name
+        && <a href="/my_account">Account</a>}
+      { userInfo.user.name
         && <button onClick={handleClick} type="button">Log out</button>}
     </nav>
   );

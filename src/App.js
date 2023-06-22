@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUser } from './redux/user/UserReducer';
 import Nav from './components/nav';
+import Home from './pages/home';
 import LoginPage from './pages/login_page';
 import SignupPage from './pages/signup_page';
-import Home from './pages/home';
+import AccountPage from './pages/account_page';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/my_account" element={<AccountPage />} />
       </Routes>
     </BrowserRouter>
   );

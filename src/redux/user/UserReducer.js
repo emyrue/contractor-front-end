@@ -42,7 +42,6 @@ export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  console.log(user);
   const newEndpoint = `${getUserEndpoint}/${user.data.user.id}`;
   const response = await axios.patch(newEndpoint, {
     user: newInfo,

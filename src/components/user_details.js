@@ -32,7 +32,7 @@ export default function UserDetails() {
           Reservations:
           {' '}
         </li>
-        { !userInfo.user.isContractor
+        { !userInfo.user.is_contractor
         && (
         <li>
           <button onClick={() => setContractorFormDisplay(true)} type="button">Register as a Contractor</button>

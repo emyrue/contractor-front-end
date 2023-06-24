@@ -42,7 +42,8 @@ export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
         Authorization: JSON.parse(serializedToken),
       },
     });
-  const newEndpoint = `${getUserEndpoint}/${user.data.id}`;
+  console.log(user);
+  const newEndpoint = `${getUserEndpoint}/${user.data.user.id}`;
   const response = await axios.patch(newEndpoint, {
     user: newInfo,
   });
@@ -71,30 +72,35 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.isLoading = false;
+      state.contractor = action.payload.contractor;
     });
     builder.addCase(userLogin.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
+      state.contractor = {};
     });
     builder.addCase(userLogin.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.isLoading = false;
+      state.contractor = action.payload.contractor;
     });
     builder.addCase(getUser.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
+      state.contractor = {};
     });
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(editUser.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.isLoading = false;
+      state.contractor = action.payload.contractor;
     });
     builder.addCase(editUser.rejected, (state) => {
       state.isLoading = false;
@@ -105,10 +111,12 @@ const userSlice = createSlice({
     builder.addCase(userLogout.fulfilled, (state) => {
       state.user = {};
       state.isLoading = false;
+      state.contractor = {};
     });
     builder.addCase(userLogout.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
+      state.contractor = {};
     });
     builder.addCase(userLogout.pending, (state) => {
       state.isLoading = true;

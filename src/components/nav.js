@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { userLogout } from '../redux/user/UserReducer';
 
 export default function Nav() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userInfo = useSelector((state) => state.user);
 
   const handleClick = () => {
     dispatch(userLogout());
+    navigate('/');
   };
 
   return (

@@ -31,7 +31,10 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
       });
     return user.data;
   }
-  return {};
+  return {
+    user: {},
+    contractor: {},
+  };
 });
 
 export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {

@@ -1,16 +1,27 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { editUser, getUser } from '../redux/user/UserReducer';
+import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import EditNamePopup from './edit_name';
 import ContractorForm from './contractor_form';
 
 export default function UserDetails() {
   const [nameFormDisplay, setNameFormDisplay] = useState(false);
   const [contractorFormDisplay, setContractorFormDisplay] = useState(false);
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
 
   const handleClose = () => {
     setNameFormDisplay(false);
     setContractorFormDisplay(false);
+  };
+
+  const handleDelete = async () => {
+    dispatch(editUser({
+      is_contractor: false,
+    }));
+    dispatch(deleteContractor(userInfo.contractor.id));
+    dispatch(getUser());
   };
 
   return (
@@ -32,6 +43,12 @@ export default function UserDetails() {
           Reservations:
           {' '}
         </li>
+        { userInfo.user.is_contractor
+        && (
+        <li>
+          <button onClick={handleDelete} type="button">Delete Contractor Information</button>
+        </li>
+        )}
         { !userInfo.user.is_contractor
         && (
         <li>

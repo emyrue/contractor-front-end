@@ -30,6 +30,21 @@ export default function ContractorDetails() {
           && (
           <div>
             <li>
+              Display name:
+              {' '}
+              {userInfo.contractor.name}
+            </li>
+            <li>
+              Bio:
+              {' '}
+              {userInfo.contractor.bio}
+            </li>
+            <li>
+              Rate: $
+              {userInfo.contractor.rate}
+              /hr
+            </li>
+            <li>
               <button onClick={() => setDeleteDisplay(true)} type="button">Delete Contractor Information</button>
             </li>
             { deleteDisplay

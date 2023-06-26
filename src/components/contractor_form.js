@@ -9,14 +9,15 @@ import { editUser } from '../redux/user/UserReducer';
 import { createContractor } from '../redux/contractors/ContractorReducer';
 
 export default function ContractorForm(props) {
-  const { handleClose } = props;
+  const { handleClose1 } = props;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const [name, setName] = useState('');
   const [rate, setRate] = useState(0);
   const [bio, setBio] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(editUser({
       is_contractor: true,
     }));
@@ -26,6 +27,7 @@ export default function ContractorForm(props) {
       rate,
       bio,
     }));
+    handleClose1();
   };
 
   return (
@@ -65,7 +67,7 @@ export default function ContractorForm(props) {
       <Button
         type="button"
         variant="outlined"
-        onClick={handleClose}
+        onClick={handleClose1}
       >
         Cancel
       </Button>
@@ -74,5 +76,5 @@ export default function ContractorForm(props) {
 }
 
 ContractorForm.propTypes = {
-  handleClose: PropTypes.func.isRequired,
+  handleClose1: PropTypes.func.isRequired,
 };

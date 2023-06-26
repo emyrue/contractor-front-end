@@ -8,7 +8,7 @@ import { PropTypes } from 'prop-types';
 import { editContractor } from '../redux/contractors/ContractorReducer';
 
 export default function EditContractorForm(props) {
-  const { handleClose } = props;
+  const { handleClose2 } = props;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const [name, setName] = useState(userInfo.contractor.name);
@@ -24,6 +24,7 @@ export default function EditContractorForm(props) {
         bio,
       },
     }));
+    handleClose2();
   };
 
   return (
@@ -63,7 +64,7 @@ export default function EditContractorForm(props) {
       <Button
         type="button"
         variant="outlined"
-        onClick={handleClose}
+        onClick={handleClose2}
       >
         Cancel
       </Button>
@@ -72,5 +73,5 @@ export default function EditContractorForm(props) {
 }
 
 EditContractorForm.propTypes = {
-  handleClose: PropTypes.func.isRequired,
+  handleClose2: PropTypes.func.isRequired,
 };

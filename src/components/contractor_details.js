@@ -13,9 +13,12 @@ export default function ContractorDetails() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
 
-  const handleClose = () => {
+  const handleClose1 = () => {
     setContractorFormDisplay(false);
-    setEditFormDisplay(false);
+  };
+
+  const handleClose2 = () => {
+    setEditFormDisplay(true);
   };
 
   const handleDelete = async () => {
@@ -101,16 +104,22 @@ export default function ContractorDetails() {
         { !userInfo.user.is_contractor
           && (
           <li>
-            <button onClick={() => setContractorFormDisplay(true)} type="button">Register as a Contractor</button>
+            <Button
+              onClick={() => setContractorFormDisplay(true)}
+              type="button"
+              variant="outlined"
+            >
+              Register as a Contractor
+            </Button>
           </li>
           )}
         { contractorFormDisplay
           && (
-          <ContractorForm handleClose={handleClose} />
+          <ContractorForm handleClose1={handleClose1} />
           )}
         { editFormDisplay
           && (
-          <EditContractorForm handleClose={handleClose} />
+          <EditContractorForm handleClose2={handleClose2} />
           )}
       </ul>
     </div>

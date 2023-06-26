@@ -8,6 +8,7 @@ const getContractorsEndpoint = `${endpoint}v1/contractors`;
 const GET_CONTRACTORS = 'Contractors/GET_CONTRACTORS';
 const CREATE_CONTRACTOR = 'Contractors/CREATE_CONTRACTOR';
 const DELETE_CONTRACTOR = 'Contractors/DELETE_CONTRACTOR';
+const EDIT_CONTRACTOR = 'Contractors/EDIT_CONTRACTOR';
 
 export const getContractors = createAsyncThunk(GET_CONTRACTORS, async () => {
   const response = await axios.get(getContractorsEndpoint);
@@ -23,6 +24,13 @@ export const createContractor = createAsyncThunk(CREATE_CONTRACTOR, async (objec
 export const deleteContractor = createAsyncThunk(DELETE_CONTRACTOR, async (id) => {
   const deleteContractorEndpoint = `${getContractorsEndpoint}/${id}`;
   await axios.delete(deleteContractorEndpoint);
+  const response = await axios.get(getContractorsEndpoint);
+  return response.data;
+});
+
+export const editContractor = createAsyncThunk(EDIT_CONTRACTOR, async (newInfo) => {
+  const editContractorEndpoint = `${getContractorsEndpoint}/${newInfo.contractor.id}`;
+  await axios.patch(editContractorEndpoint, newInfo);
   const response = await axios.get(getContractorsEndpoint);
   return response.data;
 });
@@ -68,6 +76,17 @@ const contractorsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(deleteContractor.pending, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(editContractor.fulfilled, (state, action) => {
+      state.allContractors = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(editContractor.rejected, (state) => {
+      state.allContractors = [];
+      state.isLoading = false;
+    });
+    builder.addCase(editContractor.pending, (state) => {
       state.isLoading = false;
     });
   },

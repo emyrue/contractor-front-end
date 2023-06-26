@@ -4,15 +4,18 @@ import { Button } from '@mui/material';
 import { getUser, editUser } from '../redux/user/UserReducer';
 import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
+import EditContractorForm from './edit_contractor';
 
 export default function ContractorDetails() {
   const [contractorFormDisplay, setContractorFormDisplay] = useState(false);
+  const [editFormDisplay, setEditFormDisplay] = useState(false);
   const [deleteDisplay, setDeleteDisplay] = useState(false);
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
 
   const handleClose = () => {
     setContractorFormDisplay(false);
+    setEditFormDisplay(false);
   };
 
   const handleDelete = async () => {
@@ -46,6 +49,9 @@ export default function ContractorDetails() {
             </li>
             <li>
               <button onClick={() => setDeleteDisplay(true)} type="button">Delete Contractor Information</button>
+            </li>
+            <li>
+              <button onClick={() => setEditFormDisplay(true)} type="button">Edit Contractor Information</button>
             </li>
             { deleteDisplay
               && (
@@ -89,9 +95,11 @@ export default function ContractorDetails() {
           )}
         { contractorFormDisplay
           && (
-          <li>
-            <ContractorForm handleClose={handleClose} />
-          </li>
+          <ContractorForm handleClose={handleClose} />
+          )}
+        { editFormDisplay
+          && (
+          <EditContractorForm handleClose={handleClose} />
           )}
       </ul>
     </div>

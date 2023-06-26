@@ -1,32 +1,31 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   TextField, Button,
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
-import { editUser } from '../redux/user/UserReducer';
-import { createContractor } from '../redux/contractors/ContractorReducer';
+import { getUser } from '../redux/user/UserReducer';
+import { editContractor } from '../redux/contractors/ContractorReducer';
 
-export default function ContractorForm(props) {
+export default function EditContractorForm(props) {
   const { handleClose } = props;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
-  const [name, setName] = useState('');
-  const [rate, setRate] = useState(0);
-  const [bio, setBio] = useState('');
+  const [name, setName] = useState(userInfo.contractor.name);
+  const [rate, setRate] = useState(userInfo.contractor.rate);
+  const [bio, setBio] = useState(userInfo.contractor.bio);
 
   const handleSubmit = () => {
-    dispatch(editUser({
-      is_contractor: true,
+    dispatch(editContractor({
+      contractor: {
+        id: userInfo.contractor.id,
+        name,
+        rate,
+        bio,
+      },
     }));
-    dispatch(createContractor({
-      user_id: userInfo.user.id,
-      name,
-      rate,
-      bio,
-    }));
-    handleClose();
+    dispatch(getUser());
   };
 
   return (
@@ -74,6 +73,6 @@ export default function ContractorForm(props) {
   );
 }
 
-ContractorForm.propTypes = {
+EditContractorForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
 };

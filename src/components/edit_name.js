@@ -35,6 +35,13 @@ export default function EditNamePopup(props) {
       >
         Submit
       </Button>
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={handleClose}
+      >
+        Cancel
+      </Button>
     </form>
   );
 }

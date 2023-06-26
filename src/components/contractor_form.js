@@ -64,6 +64,13 @@ export default function ContractorForm(props) {
       >
         Submit
       </Button>
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={handleClose}
+      >
+        Cancel
+      </Button>
     </form>
   );
 }

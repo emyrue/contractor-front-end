@@ -47,10 +47,22 @@ export default function ContractorDetails() {
               /hr
             </li>
             <li>
-              <button onClick={() => setDeleteDisplay(true)} type="button">Delete Contractor Information</button>
+              <Button
+                onClick={() => setEditFormDisplay(true)}
+                type="button"
+                variant="outlined"
+              >
+                Edit Contractor Information
+              </Button>
             </li>
             <li>
-              <button onClick={() => setEditFormDisplay(true)} type="button">Edit Contractor Information</button>
+              <Button
+                onClick={() => setDeleteDisplay(true)}
+                type="button"
+                variant="outlined"
+              >
+                Delete Contractor Information
+              </Button>
             </li>
             { deleteDisplay
               && (

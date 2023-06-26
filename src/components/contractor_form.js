@@ -26,7 +26,6 @@ export default function ContractorForm(props) {
       rate,
       bio,
     }));
-    handleClose();
   };
 
   return (

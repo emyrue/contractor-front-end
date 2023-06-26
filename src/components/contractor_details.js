@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
-import { getUser, editUser } from '../redux/user/UserReducer';
+import { editUser } from '../redux/user/UserReducer';
 import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
@@ -23,7 +23,6 @@ export default function ContractorDetails() {
       is_contractor: false,
     }));
     dispatch(deleteContractor(userInfo.contractor.id));
-    dispatch(getUser());
   };
 
   return (

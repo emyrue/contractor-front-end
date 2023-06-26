@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
-import { getUser } from '../redux/user/UserReducer';
 import { editContractor } from '../redux/contractors/ContractorReducer';
 
 export default function EditContractorForm(props) {
@@ -25,7 +24,6 @@ export default function EditContractorForm(props) {
         bio,
       },
     }));
-    dispatch(getUser());
   };
 
   return (

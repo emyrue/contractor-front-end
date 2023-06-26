@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUser } from './redux/user/UserReducer';
+import { getContractors } from './redux/contractors/ContractorReducer';
 import Nav from './components/nav';
 import Home from './pages/home';
 import LoginPage from './pages/login_page';
@@ -14,6 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getContractors());
   }, [dispatch]);
 
   return (

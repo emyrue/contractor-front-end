@@ -13,7 +13,7 @@ export default function AccountPage() {
         && <h1>Please log in to view your account details.</h1>}
       { userInfo.user.name
         && <UserDetails />}
-      { userInfo.user.isContractor
+      { userInfo.user.name
         && <ContractorDetails />}
     </section>
   );

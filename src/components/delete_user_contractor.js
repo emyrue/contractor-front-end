@@ -1,6 +1,9 @@
 import { Fab } from '@mui/material';
+import { PropTypes } from 'prop-types';
 
-export default function DeleteUserContractor() {
+export default function DeleteUserContractor(props) {
+  const { setDeleteDisplay, handleDelete } = props;
+
   return (
     <div>
       <span>
@@ -31,3 +34,8 @@ export default function DeleteUserContractor() {
     </div>
   );
 }
+
+DeleteUserContractor.propTypes = {
+  setDeleteDisplay: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+};

@@ -5,6 +5,7 @@ import { editUser } from '../redux/user/UserReducer';
 import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
+import DeleteUserContractor from './delete_user_contractor';
 
 export default function ContractorDetails() {
   const [contractorFormDisplay, setContractorFormDisplay] = useState(false);
@@ -67,33 +68,10 @@ export default function ContractorDetails() {
             </li>
             { deleteDisplay
               && (
-              <div>
-                <span>
-                  Are you sure? This will delete all information
-                  {' '}
-                  regarding your status as a contractor,
-                  {' '}
-                  including reviews and reservations from clients.
-                  {' '}
-                  Reservations and reviews that you have made for other contractors
-                  {' '}
-                  will remain intact.
-                </span>
-                <div>
-                  <Fab
-                    variant="extended"
-                    onClick={handleDelete}
-                  >
-                    Yes, delete my information
-                  </Fab>
-                  <Fab
-                    variant="extended"
-                    onClick={() => setDeleteDisplay(false)}
-                  >
-                    No, do not delete my information
-                  </Fab>
-                </div>
-              </div>
+              <DeleteUserContractor
+                handleDelete={handleDelete}
+                setDeleteDisplay={setDeleteDisplay}
+              />
               )}
           </div>
           )}

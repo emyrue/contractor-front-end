@@ -29,8 +29,6 @@ export default function ContractorsPage() {
               <br />
               <span>{`Rate: $${contractor.rate}/hr`}</span>
               <br />
-              <span>{contractor.bio}</span>
-              <br />
               <Fab
                 variant="extended"
                 onClick={() => redirect(contractor)}

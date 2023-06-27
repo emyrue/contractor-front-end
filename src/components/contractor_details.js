@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
+import { Fab } from '@mui/material';
 import { editUser } from '../redux/user/UserReducer';
 import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
@@ -18,7 +18,7 @@ export default function ContractorDetails() {
   };
 
   const handleClose2 = () => {
-    setEditFormDisplay(true);
+    setEditFormDisplay(false);
   };
 
   const handleDelete = async () => {
@@ -50,22 +50,20 @@ export default function ContractorDetails() {
               /hr
             </li>
             <li>
-              <Button
+              <Fab
                 onClick={() => setEditFormDisplay(true)}
-                type="button"
-                variant="outlined"
+                variant="extended"
               >
-                Edit Contractor Information
-              </Button>
+                Edit
+              </Fab>
             </li>
             <li>
-              <Button
+              <Fab
                 onClick={() => setDeleteDisplay(true)}
-                type="button"
-                variant="outlined"
+                variant="extended"
               >
-                Delete Contractor Information
-              </Button>
+                Delete
+              </Fab>
             </li>
             { deleteDisplay
               && (
@@ -82,20 +80,18 @@ export default function ContractorDetails() {
                   will remain intact.
                 </span>
                 <div>
-                  <Button
-                    type="button"
-                    variant="outlined"
+                  <Fab
+                    variant="extended"
                     onClick={handleDelete}
                   >
                     Yes, delete my information
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outlined"
+                  </Fab>
+                  <Fab
+                    variant="extended"
                     onClick={() => setDeleteDisplay(false)}
                   >
                     No, do not delete my information
-                  </Button>
+                  </Fab>
                 </div>
               </div>
               )}
@@ -104,13 +100,12 @@ export default function ContractorDetails() {
         { !userInfo.user.is_contractor
           && (
           <li>
-            <Button
+            <Fab
               onClick={() => setContractorFormDisplay(true)}
-              type="button"
-              variant="outlined"
+              variant="extended"
             >
               Register as a Contractor
-            </Button>
+            </Fab>
           </li>
           )}
         { contractorFormDisplay

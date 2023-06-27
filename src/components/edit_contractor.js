@@ -24,7 +24,6 @@ export default function EditContractorForm(props) {
         bio,
       },
     }));
-    handleClose2();
   };
 
   return (

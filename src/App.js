@@ -8,6 +8,7 @@ import LoginPage from './pages/login_page';
 import SignupPage from './pages/signup_page';
 import AccountPage from './pages/account_page';
 import ContractorsPage from './pages/contractors_page';
+import ContractorInfoPage from './pages/contractorInfo_page';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<ContractorsPage />} />
+        <Route exact path="/:contractor" element={<ContractorInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/my_account" element={<AccountPage />} />

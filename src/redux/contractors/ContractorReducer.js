@@ -9,6 +9,7 @@ const GET_CONTRACTORS = 'Contractors/GET_CONTRACTORS';
 const CREATE_CONTRACTOR = 'Contractors/CREATE_CONTRACTOR';
 const DELETE_CONTRACTOR = 'Contractors/DELETE_CONTRACTOR';
 const EDIT_CONTRACTOR = 'Contractors/EDIT_CONTRACTOR';
+const GET_CONTRACTOR = 'Contractors/GET_CONTRACTOR';
 
 export const getContractors = createAsyncThunk(GET_CONTRACTORS, async () => {
   const response = await axios.get(getContractorsEndpoint);
@@ -35,9 +36,16 @@ export const editContractor = createAsyncThunk(EDIT_CONTRACTOR, async (newInfo) 
   return response.data;
 });
 
+export const getOneContractor = createAsyncThunk(GET_CONTRACTOR, async (id) => {
+  const getOneContractorEndpoint = `${getContractorsEndpoint}/${id}`;
+  const response = await axios.get(getOneContractorEndpoint);
+  return response.data;
+});
+
 const initialState = {
   allContractors: [],
   isLoading: false,
+  contractorDetails: {},
 };
 
 const contractorsSlice = createSlice({
@@ -54,7 +62,7 @@ const contractorsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getContractors.pending, (state) => {
-      state.isLoading = false;
+      state.isLoading = true;
     });
     builder.addCase(createContractor.fulfilled, (state, action) => {
       state.allContractors = action.payload;
@@ -65,7 +73,7 @@ const contractorsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(createContractor.pending, (state) => {
-      state.isLoading = false;
+      state.isLoading = true;
     });
     builder.addCase(deleteContractor.fulfilled, (state, action) => {
       state.allContractors = action.payload;
@@ -76,7 +84,7 @@ const contractorsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(deleteContractor.pending, (state) => {
-      state.isLoading = false;
+      state.isLoading = true;
     });
     builder.addCase(editContractor.fulfilled, (state, action) => {
       state.allContractors = action.payload;
@@ -87,7 +95,18 @@ const contractorsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(editContractor.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getOneContractor.fulfilled, (state, action) => {
+      state.contractorDetails = action.payload;
       state.isLoading = false;
+    });
+    builder.addCase(getOneContractor.rejected, (state) => {
+      state.contractorDetails = {};
+      state.isLoading = false;
+    });
+    builder.addCase(getOneContractor.pending, (state) => {
+      state.isLoading = true;
     });
   },
 });

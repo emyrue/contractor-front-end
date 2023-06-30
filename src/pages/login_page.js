@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
 } from '@mui/material';
@@ -10,18 +11,12 @@ import { userLogin } from '../redux/user/UserReducer';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  const location = useLocation();
-  // const navigate = useNavigate();
-  const user = useSelector((state) => state.user.user);
+  // const location = useLocation();
+  const navigate = useNavigate();
+  // const user = useSelector((state) => state.user.user);
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // useEffect(() => {
-  //   if (user.name) {
-  //     navigate('/');
-  //   }
-  // }, []);
 
   const handleClickShowPassword = () => {
     setShow(!show);
@@ -39,6 +34,7 @@ export default function LoginPage() {
         password,
       },
     }));
+    navigate('/');
   };
 
   return (

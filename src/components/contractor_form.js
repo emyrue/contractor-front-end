@@ -16,8 +16,7 @@ export default function ContractorForm(props) {
   const [rate, setRate] = useState(0);
   const [bio, setBio] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     dispatch(editUser({
       is_contractor: true,
     }));
@@ -27,7 +26,6 @@ export default function ContractorForm(props) {
       rate,
       bio,
     }));
-    handleClose1();
   };
 
   return (

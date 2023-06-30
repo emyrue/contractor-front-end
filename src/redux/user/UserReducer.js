@@ -13,11 +13,19 @@ const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
 
 export const userLogin = createAsyncThunk(LOGIN, async (user) => {
-  const response = await axios.post(loginEndpoint, user);
-  const serializedToken = JSON.stringify(response.headers.get('Authorization'));
-  localStorage.setItem('Authorization', serializedToken);
-  const { data } = response;
-  return data.data;
+  try {
+    const response = await axios.post(loginEndpoint, user);
+    const serializedToken = JSON.stringify(response.headers.get('Authorization'));
+    localStorage.setItem('Authorization', serializedToken);
+    const { data } = response;
+    return data.data;
+  } catch (err) {
+    console.log(err.message);
+    return {
+      user: {},
+      contractor: {},
+    };
+  }
 });
 
 export const getUser = createAsyncThunk(GET_USER, async () => {
@@ -66,6 +74,7 @@ const initialState = {
   user: {},
   isLoading: false,
   contractor: {},
+  errorMessage: '',
 };
 
 const userSlice = createSlice({
@@ -77,11 +86,13 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isLoading = false;
       state.contractor = action.payload.contractor;
+      state.errorMessage = '';
     });
     builder.addCase(userLogin.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.errorMessage = 'Please confirm your email.';
     });
     builder.addCase(userLogin.pending, (state) => {
       state.isLoading = true;
@@ -90,11 +101,13 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isLoading = false;
       state.contractor = action.payload.contractor;
+      state.errorMessage = '';
     });
     builder.addCase(getUser.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.errorMessage = '';
     });
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true;
@@ -103,9 +116,11 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isLoading = false;
       state.contractor = action.payload.contractor;
+      state.errorMessage = '';
     });
     builder.addCase(editUser.rejected, (state) => {
       state.isLoading = false;
+      state.errorMessage = '';
     });
     builder.addCase(editUser.pending, (state) => {
       state.isLoading = false;
@@ -114,11 +129,13 @@ const userSlice = createSlice({
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.errorMessage = '';
     });
     builder.addCase(userLogout.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.errorMessage = '';
     });
     builder.addCase(userLogout.pending, (state) => {
       state.isLoading = true;

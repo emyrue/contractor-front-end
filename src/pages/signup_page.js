@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
 } from '@mui/material';
@@ -13,6 +14,8 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShow(!show);
@@ -24,15 +27,21 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${endpoint}users`,
-      {
-        user: {
-          name,
-          email,
-          password,
-          password_confirmation: passwordConfirmation,
-        },
-      });
+    if (password === passwordConfirmation) {
+      setErrorMessage('Loading...');
+      await axios.post(`${endpoint}users`,
+        {
+          user: {
+            name,
+            email,
+            password,
+            password_confirmation: passwordConfirmation,
+          },
+        });
+      navigate('/login', { state: { message: 'A confirmation link has been sent to your email.' } });
+    } else {
+      setErrorMessage('Make sure that the password matches the password confirmation.');
+    }
   };
 
   return (
@@ -110,6 +119,7 @@ export default function SignupPage() {
           Submit
         </Button>
       </form>
+      <p>{errorMessage}</p>
     </section>
   );
 }

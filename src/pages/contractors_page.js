@@ -27,6 +27,8 @@ export default function ContractorsPage() {
             <li key={`contractor-${contractor.id}`}>
               <span>{contractor.name}</span>
               <br />
+              <span>{contractor.job_title}</span>
+              <br />
               <span>{`Rate: $${contractor.rate}/hr`}</span>
               <br />
               <Fab

@@ -41,6 +41,11 @@ export default function ContractorDetails() {
               {userInfo.contractor.name}
             </li>
             <li>
+              Profession:
+              {' '}
+              {userInfo.contractor.job_title}
+            </li>
+            <li>
               Bio:
               {' '}
               {userInfo.contractor.bio}

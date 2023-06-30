@@ -13,6 +13,7 @@ export default function ContractorForm(props) {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const [name, setName] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
   const [rate, setRate] = useState(0);
   const [bio, setBio] = useState('');
 
@@ -24,6 +25,7 @@ export default function ContractorForm(props) {
       user_id: userInfo.user.id,
       name,
       rate,
+      job_title: jobTitle,
       bio,
     }));
   };
@@ -45,6 +47,14 @@ export default function ContractorForm(props) {
         variant="outlined"
         value={rate}
         onChange={(e) => setRate(e.target.value)}
+        required
+      />
+      <TextField
+        id="job-title"
+        label="Profession"
+        variant="outlined"
+        value={jobTitle}
+        onChange={(e) => setJobTitle(e.target.value)}
         required
       />
       <TextareaAutosize

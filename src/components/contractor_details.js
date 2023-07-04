@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Fab } from '@mui/material';
-import { editUser } from '../redux/user/UserReducer';
 import { deleteContractor } from '../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
@@ -23,16 +22,13 @@ export default function ContractorDetails() {
   };
 
   const handleDelete = async () => {
-    dispatch(editUser({
-      is_contractor: false,
-    }));
     dispatch(deleteContractor(userInfo.contractor.id));
   };
 
   return (
     <div>
       <ul>
-        { userInfo.user.is_contractor
+        { userInfo.contractor
           && (
           <div>
             <li>
@@ -80,7 +76,7 @@ export default function ContractorDetails() {
               )}
           </div>
           )}
-        { !userInfo.user.is_contractor
+        { !userInfo.contractor
           && (
           <li>
             <Fab

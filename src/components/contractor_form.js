@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
-import { editUser } from '../redux/user/UserReducer';
 import { createContractor } from '../redux/contractors/ContractorReducer';
 
 export default function ContractorForm(props) {
@@ -18,9 +17,6 @@ export default function ContractorForm(props) {
   const [bio, setBio] = useState('');
 
   const handleSubmit = () => {
-    dispatch(editUser({
-      is_contractor: true,
-    }));
     dispatch(createContractor({
       user_id: userInfo.user.id,
       name,

@@ -6,18 +6,20 @@ import endpoint from '../endpoint';
 const getReservationsEndpoint = `${endpoint}v1/reservations`;
 
 const GET_RESERVATIONS = 'Reservations/GET_RESERVATIONS';
-const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATIONS';
-const DELETE_RESERVATION = 'Reservations/DELETE_RESERVATIONS';
+// const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATIONS';
+// const DELETE_RESERVATION = 'Reservations/DELETE_RESERVATIONS';
 
 export const getReservations = createAsyncThunk(GET_RESERVATIONS, async (userId, contractorId) => {
   const response = await axios.get(getReservationsEndpoint);
-  const userReservations = [];
-  const contractorReservations = [];
+  let userReservations = [];
+  let contractorReservations = [];
 
   if (userId && !contractorId) {
-    userReservations = response.data.filter(reservation => reservation.contractor_id === contractorId);
+    userReservations = response.data.filter(
+      (reservation) => reservation.contractor_id === contractorId,
+    );
   } else if (!userId && contractorId) {
-    contractorReservations = response.data.filter(reservation => reservation.user_id === userId);
+    contractorReservations = response.data.filter((reservation) => reservation.user_id === userId);
   } else if (userId && contractorId) {
     response.data.map((reservation) => {
       if (reservation.user_id === userId) {
@@ -26,6 +28,7 @@ export const getReservations = createAsyncThunk(GET_RESERVATIONS, async (userId,
       if (reservation.contractor_id === contractorId) {
         contractorReservations.push(reservation);
       }
+      return null;
     });
   }
   return {

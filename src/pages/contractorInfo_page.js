@@ -23,6 +23,7 @@ export default function ContractorInfoPage() {
   return (
     <section>
       <h1>{contractor.name}</h1>
+      <h2>{contractor.job_title}</h2>
       <p>{contractor.bio}</p>
       <span>
         Rate: $

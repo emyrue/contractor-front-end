@@ -85,7 +85,11 @@ const userSlice = createSlice({
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.isLoading = false;
-      state.contractor = action.payload.contractor;
+      if (action.payload.contractor) {
+        state.contractor = action.payload.contractor;
+      } else {
+        state.contractor = {};
+      }
       state.errorMessage = '';
     });
     builder.addCase(userLogin.rejected, (state) => {
@@ -100,7 +104,11 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.isLoading = false;
-      state.contractor = action.payload.contractor;
+      if (action.payload.contractor) {
+        state.contractor = action.payload.contractor;
+      } else {
+        state.contractor = {};
+      }
       state.errorMessage = '';
     });
     builder.addCase(getUser.rejected, (state) => {
@@ -115,7 +123,11 @@ const userSlice = createSlice({
     builder.addCase(editUser.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.isLoading = false;
-      state.contractor = action.payload.contractor;
+      if (action.payload.contractor) {
+        state.contractor = action.payload.contractor;
+      } else {
+        state.contractor = {};
+      }
       state.errorMessage = '';
     });
     builder.addCase(editUser.rejected, (state) => {

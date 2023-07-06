@@ -17,10 +17,10 @@ export default function DeleteUserContractor(props) {
         {' '}
         will remain intact.
       </span>
-      <div>
+      <form onSubmit={handleDelete}>
         <Fab
           variant="extended"
-          onClick={handleDelete}
+          type="submit"
         >
           Yes, delete my information
         </Fab>
@@ -30,7 +30,7 @@ export default function DeleteUserContractor(props) {
         >
           No, do not delete my information
         </Fab>
-      </div>
+      </form>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export default function ContractorDetails() {
   return (
     <div>
       <ul>
-        { userInfo.contractor
+        { userInfo.contractor.name
           && (
           <div>
             <li>
@@ -76,7 +76,7 @@ export default function ContractorDetails() {
               )}
           </div>
           )}
-        { !userInfo.contractor
+        { !userInfo.contractor.name
           && (
           <li>
             <Fab

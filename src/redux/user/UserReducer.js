@@ -24,6 +24,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     return {
       user: {},
       contractor: {},
+      reservations: [],
     };
   }
 });
@@ -42,6 +43,7 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
   return {
     user: {},
     contractor: {},
+    reservations: [],
   };
 });
 
@@ -74,6 +76,7 @@ const initialState = {
   user: {},
   isLoading: false,
   contractor: {},
+  reservations: [],
   errorMessage: '',
 };
 
@@ -90,12 +93,14 @@ const userSlice = createSlice({
       } else {
         state.contractor = {};
       }
+      state.reservations = action.payload.reservations;
       state.errorMessage = '';
     });
     builder.addCase(userLogin.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.reservations = [];
       state.errorMessage = 'Please confirm your email.';
     });
     builder.addCase(userLogin.pending, (state) => {
@@ -109,12 +114,14 @@ const userSlice = createSlice({
       } else {
         state.contractor = {};
       }
+      state.reservations = action.payload.reservations;
       state.errorMessage = '';
     });
     builder.addCase(getUser.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.reservations = [];
       state.errorMessage = '';
     });
     builder.addCase(getUser.pending, (state) => {
@@ -128,6 +135,7 @@ const userSlice = createSlice({
       } else {
         state.contractor = {};
       }
+      state.reservations = action.payload.reservations;
       state.errorMessage = '';
     });
     builder.addCase(editUser.rejected, (state) => {
@@ -141,12 +149,14 @@ const userSlice = createSlice({
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.reservations = [];
       state.errorMessage = '';
     });
     builder.addCase(userLogout.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
+      state.reservations = [];
       state.errorMessage = '';
     });
     builder.addCase(userLogout.pending, (state) => {

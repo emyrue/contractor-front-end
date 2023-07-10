@@ -10,7 +10,7 @@ import { createReservation } from '../redux/reservations/ReservationsReducer';
 
 export default function ReservationsPopup() {
   const userId = useSelector((state) => state.user.user.id);
-  const contractor = useSelector((state) => state.contractors.contractorDetails);
+  const contractor = useSelector((state) => state.contractors);
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -22,12 +22,32 @@ export default function ReservationsPopup() {
     dispatch(createReservation({
       reservation: {
         user_id: userId,
-        contractor_id: contractor.id,
+        contractor_id: contractor.contractorDetails.id,
         job_description: jobDescription,
         start_date: startDate,
         end_date: endDate,
       },
     }));
+  };
+
+  const isDisabled = (date) => {
+    const reservations = contractor.contractorReservations.filter(
+      (reservation) => reservation.approved,
+    );
+
+    let disabled = false;
+
+    reservations.map((reservation) => {
+      if (((dayjs(reservation.start_date).isBefore(dayjs(date)))
+      && dayjs(date).isBefore(reservation.end_date))
+      || dayjs(date).isSame(reservation.start_date)
+      || dayjs(date).isSame(reservation.end_date)) {
+        disabled = true;
+      }
+      return disabled;
+    });
+
+    return disabled;
   };
 
   return (
@@ -46,6 +66,7 @@ export default function ReservationsPopup() {
               value={dayjs(startDate)}
               onChange={(newValue) => setStartDate(newValue)}
               label="Start Date"
+              shouldDisableDate={isDisabled}
               disablePast
             />
             <DatePicker
@@ -53,6 +74,7 @@ export default function ReservationsPopup() {
               onChange={(newValue) => setEndDate(newValue)}
               minDate={startDate}
               label="End Date"
+              shouldDisableDate={isDisabled}
               disablePast
             />
           </LocalizationProvider>

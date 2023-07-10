@@ -7,7 +7,7 @@ export default function ContractorsPage() {
   const navigate = useNavigate();
 
   const redirect = (contractor) => {
-    navigate(`/${contractor.id}`, { state: { contractor } });
+    navigate(`/${contractor.id}`);
   };
 
   return (

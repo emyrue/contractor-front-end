@@ -6,40 +6,23 @@ import endpoint from '../endpoint';
 const getReservationsEndpoint = `${endpoint}v1/reservations`;
 
 const GET_RESERVATIONS = 'Reservations/GET_RESERVATIONS';
-// const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATIONS';
+const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATION';
 // const DELETE_RESERVATION = 'Reservations/DELETE_RESERVATIONS';
 
-export const getReservations = createAsyncThunk(GET_RESERVATIONS, async (userId, contractorId) => {
+export const getReservations = createAsyncThunk(GET_RESERVATIONS, async () => {
   const response = await axios.get(getReservationsEndpoint);
-  let userReservations = [];
-  let contractorReservations = [];
+  return response.data;
+});
 
-  if (userId && !contractorId) {
-    userReservations = response.data.filter(
-      (reservation) => reservation.contractor_id === contractorId,
-    );
-  } else if (!userId && contractorId) {
-    contractorReservations = response.data.filter((reservation) => reservation.user_id === userId);
-  } else if (userId && contractorId) {
-    response.data.map((reservation) => {
-      if (reservation.user_id === userId) {
-        userReservations.push(reservation);
-      }
-      if (reservation.contractor_id === contractorId) {
-        contractorReservations.push(reservation);
-      }
-      return null;
-    });
-  }
-  return {
-    userReservations,
-    contractorReservations,
-  };
+export const createReservation = createAsyncThunk(CREATE_RESERVATION, async (object) => {
+  const response = await axios.post(getReservationsEndpoint, object);
+  console.log(response.data);
+  return response.data;
 });
 
 const initialState = {
-  user_reservations: [],
-  contractor_reservations: [],
+  allReservations: [],
+  createReservationMessages: [],
   isLoading: false,
 };
 
@@ -49,16 +32,25 @@ const reservationsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getReservations.fulfilled, (state, action) => {
-      state.user_reservations = action.payload.userReservations;
-      state.contractor_reservations = action.payload.contractorReservations;
+      state.allReservations = action.payload;
       state.isLoading = false;
     });
     builder.addCase(getReservations.rejected, (state) => {
-      state.user_reservations = [];
-      state.contractor_reservations = [];
+      state.allReservations = [];
       state.isLoading = false;
     });
     builder.addCase(getReservations.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createReservation.fulfilled, (state, action) => {
+      state.createReservationMessages = action.payload.messages;
+      state.isLoading = false;
+    });
+    builder.addCase(createReservation.rejected, (state) => {
+      state.createReservationMessages = [];
+      state.isLoading = false;
+    });
+    builder.addCase(createReservation.pending, (state) => {
       state.isLoading = true;
     });
   },

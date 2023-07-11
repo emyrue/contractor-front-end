@@ -16,7 +16,11 @@ export const getReservations = createAsyncThunk(GET_RESERVATIONS, async () => {
 
 export const createReservation = createAsyncThunk(CREATE_RESERVATION, async (object) => {
   const response = await axios.post(getReservationsEndpoint, object);
-  console.log(response.data);
+  if (response.data.messages.reservation_period) {
+    return {
+      messages: response.data.messages.reservation_period,
+    };
+  }
   return response.data;
 });
 

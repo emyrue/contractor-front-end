@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUser } from './redux/user/UserReducer';
 import { getContractors } from './redux/contractors/ContractorReducer';
+import { getReservations } from './redux/reservations/ReservationsReducer';
 import Nav from './components/nav';
 import LoginPage from './pages/login_page';
 import SignupPage from './pages/signup_page';
@@ -17,6 +18,7 @@ function App() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getContractors());
+    dispatch(getReservations());
   }, [dispatch]);
 
   return (

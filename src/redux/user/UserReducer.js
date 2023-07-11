@@ -20,7 +20,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     const { data } = response;
     return data.data;
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
     return {
       user: {},
       contractor: {},

@@ -13,7 +13,7 @@ export default function ContractorInfoPage() {
   useEffect(() => {
     const id = location.pathname.replace('/', '');
     dispatch(getOneContractor(id));
-  }, [dispatch]);
+  }, [dispatch, location.pathname]);
 
   return (
     <section>

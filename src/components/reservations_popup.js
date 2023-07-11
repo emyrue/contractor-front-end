@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../redux/reservations/ReservationsReducer';
+import ReservationNotSaved from './reservation_not_saved';
 
 export default function ReservationsPopup() {
   const userId = useSelector((state) => state.user.user.id);
@@ -14,7 +15,6 @@ export default function ReservationsPopup() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [errorMessage, setErrorMessage] = useState('');
   const [jobDescription, setJobDescription] = useState('');
 
   const handleSubmit = (e) => {
@@ -52,41 +52,39 @@ export default function ReservationsPopup() {
 
   return (
     <article>
+      <ReservationNotSaved />
       <h2>Make a Reservation</h2>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <TextareaAutosize
-            id="job_description"
-            placeholder="Job description"
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
+      <form onSubmit={handleSubmit}>
+        <TextareaAutosize
+          id="job_description"
+          placeholder="Job description"
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            value={dayjs(startDate)}
+            onChange={(newValue) => setStartDate(newValue)}
+            label="Start Date"
+            shouldDisableDate={isDisabled}
+            disablePast
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              value={dayjs(startDate)}
-              onChange={(newValue) => setStartDate(newValue)}
-              label="Start Date"
-              shouldDisableDate={isDisabled}
-              disablePast
-            />
-            <DatePicker
-              value={dayjs(endDate)}
-              onChange={(newValue) => setEndDate(newValue)}
-              minDate={startDate}
-              label="End Date"
-              shouldDisableDate={isDisabled}
-              disablePast
-            />
-          </LocalizationProvider>
-          <Button
-            type="submit"
-            variant="outlined"
-          >
-            Make Reservation
-          </Button>
-        </form>
-        <p>{errorMessage}</p>
-      </div>
+          <DatePicker
+            value={dayjs(endDate)}
+            onChange={(newValue) => setEndDate(newValue)}
+            minDate={startDate}
+            label="End Date"
+            shouldDisableDate={isDisabled}
+            disablePast
+          />
+        </LocalizationProvider>
+        <Button
+          type="submit"
+          variant="outlined"
+        >
+          Make Reservation
+        </Button>
+      </form>
     </article>
   );
 }

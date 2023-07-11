@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { userLogout } from '../redux/user/UserReducer';
+import { userLogout } from '../../redux/user/UserReducer';
 
 export default function Nav() {
   const dispatch = useDispatch();

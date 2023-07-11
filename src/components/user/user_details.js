@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import EditNamePopup from './edit_name';
-import ContractorForm from './contractors/contractor_form';
+import ContractorForm from '../contractors/contractor_form';
 
 export default function UserDetails() {
   const [nameFormDisplay, setNameFormDisplay] = useState(false);

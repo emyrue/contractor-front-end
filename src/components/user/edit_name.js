@@ -4,7 +4,7 @@ import {
   TextField, Button,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
-import { editUser } from '../redux/user/UserReducer';
+import { editUser } from '../../redux/user/UserReducer';
 
 export default function EditNamePopup(props) {
   const { handleClose } = props;

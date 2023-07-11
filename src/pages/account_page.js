@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import UserDetails from '../components/user_details';
+import UserDetails from '../components/user/user_details';
 import ContractorDetails from '../components/contractors/contractor_details';
 
 export default function AccountPage() {

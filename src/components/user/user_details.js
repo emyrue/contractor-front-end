@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import EditNamePopup from './edit_name';
 import ContractorForm from '../contractors/contractor_form';
+import UserReservations from './user_reservations';
 
 export default function UserDetails() {
   const [nameFormDisplay, setNameFormDisplay] = useState(false);
@@ -29,8 +30,7 @@ export default function UserDetails() {
           {userInfo.user.email}
         </li>
         <li>
-          Reservations:
-          {' '}
+          <UserReservations />
         </li>
       </ul>
       { nameFormDisplay

@@ -5,10 +5,12 @@ import { TextareaAutosize } from '@mui/base';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { PropTypes } from 'prop-types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../redux/reservations/ReservationsReducer';
 
-export default function ReservationsPopup() {
+export default function ReservationsPopup(props) {
+  const { setClassname } = props;
   const userId = useSelector((state) => state.user.user.id);
   const contractor = useSelector((state) => state.contractors);
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ export default function ReservationsPopup() {
         end_date: endDate,
       },
     }));
+    setClassname('hide');
   };
 
   const isDisabled = (date) => {
@@ -58,6 +61,7 @@ export default function ReservationsPopup() {
           placeholder="Job description"
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}
+          required
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -86,3 +90,7 @@ export default function ReservationsPopup() {
     </article>
   );
 }
+
+ReservationsPopup.propTypes = {
+  setClassname: PropTypes.func.isRequired,
+};

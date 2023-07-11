@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fab } from '@mui/material';
 import { getOneContractor } from '../redux/contractors/ContractorReducer';
 import ReservationsPopup from '../components/reservations_popup';
+import ReservationNotSaved from '../components/reservation_not_saved';
 
 export default function ContractorInfoPage() {
   const location = useLocation();
@@ -32,6 +33,7 @@ export default function ContractorInfoPage() {
         Make a Reservation
       </Fab>
       <ReservationsPopup />
+      <ReservationNotSaved />
     </section>
   );
 }

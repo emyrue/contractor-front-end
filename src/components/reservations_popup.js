@@ -7,7 +7,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../redux/reservations/ReservationsReducer';
-import ReservationNotSaved from './reservation_not_saved';
 
 export default function ReservationsPopup() {
   const userId = useSelector((state) => state.user.user.id);
@@ -52,7 +51,6 @@ export default function ReservationsPopup() {
 
   return (
     <article>
-      <ReservationNotSaved />
       <h2>Make a Reservation</h2>
       <form onSubmit={handleSubmit}>
         <TextareaAutosize

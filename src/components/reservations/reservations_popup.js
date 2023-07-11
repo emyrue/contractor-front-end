@@ -34,16 +34,16 @@ export default function ReservationsPopup(props) {
 
   const isDisabled = (date) => {
     const reservations = contractor.contractorReservations.filter(
-      (reservation) => reservation.approved,
+      (reservation) => reservation.reservation.approved,
     );
 
     let disabled = false;
 
     reservations.map((reservation) => {
-      if (((dayjs(reservation.start_date).isBefore(dayjs(date)))
-      && dayjs(date).isBefore(reservation.end_date))
-      || dayjs(date).isSame(reservation.start_date)
-      || dayjs(date).isSame(reservation.end_date)) {
+      if (((dayjs(reservation.reservation.start_date).isBefore(dayjs(date)))
+      && dayjs(date).isBefore(reservation.reservation.end_date))
+      || dayjs(date).isSame(reservation.reservation.start_date)
+      || dayjs(date).isSame(reservation.reservation.end_date)) {
         disabled = true;
       }
       return disabled;

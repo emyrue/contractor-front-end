@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
-import { editContractor } from '../redux/contractors/ContractorReducer';
+import { editContractor } from '../../redux/contractors/ContractorReducer';
 
 export default function EditContractorForm(props) {
   const { handleClose2 } = props;

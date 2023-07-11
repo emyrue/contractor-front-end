@@ -7,6 +7,7 @@ const getReservationsEndpoint = `${endpoint}v1/reservations`;
 
 const GET_RESERVATIONS = 'Reservations/GET_RESERVATIONS';
 const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATION';
+const EDIT_RESERVATION = 'Reservations/EDIT_RESERVATION';
 // const DELETE_RESERVATION = 'Reservations/DELETE_RESERVATIONS';
 
 export const getReservations = createAsyncThunk(GET_RESERVATIONS, async () => {

@@ -7,7 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { PropTypes } from 'prop-types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { createReservation } from '../redux/reservations/ReservationsReducer';
+import { createReservation } from '../../redux/reservations/ReservationsReducer';
 
 export default function ReservationsPopup(props) {
   const { setClassname } = props;

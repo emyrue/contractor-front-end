@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import '../styles/reservationSaved.css';
 
-export default function ReservationSaved() {
+export default function ReservationNotSaved() {
   const [classname, setClassname] = useState('hide');
   const reservationMessages = useSelector((state) => state.reservations.createReservationMessages);
 
   useEffect(() => {
-    if (reservationMessages[0] === 'Reservation created successfully.') {
+    if (reservationMessages[0] === 'overlaps with existing reservation for the same contractor') {
       setClassname('show');
     } else {
       setClassname('hide');
@@ -21,11 +20,11 @@ export default function ReservationSaved() {
 
   return (
     <article className={classname}>
-      <h1>Reservation created successfully</h1>
+      <h1>Reservation not saved</h1>
       <p>
-        Your reservation is awaiting contractor approval.
+        Your reservation overlaps with an existing reservation.
         {' '}
-        See the status of your request on your account page.
+        Consider selecting different dates.
       </p>
       <Button
         variant="outlined"

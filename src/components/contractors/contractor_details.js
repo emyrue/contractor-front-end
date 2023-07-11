@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Fab } from '@mui/material';
-import { deleteContractor } from '../redux/contractors/ContractorReducer';
+import { deleteContractor } from '../../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
 import DeleteUserContractor from './delete_user_contractor';

@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
-import { createContractor } from '../redux/contractors/ContractorReducer';
+import { createContractor } from '../../redux/contractors/ContractorReducer';
 
 export default function ContractorForm(props) {
   const { handleClose1 } = props;

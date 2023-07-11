@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import UserDetails from '../components/user_details';
-import ContractorDetails from '../components/contractor_details';
+import ContractorDetails from '../components/contractors/contractor_details';
 
 export default function AccountPage() {
   const userInfo = useSelector((state) => state.user);

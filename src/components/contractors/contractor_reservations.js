@@ -11,7 +11,7 @@ export default function ContractorReservations() {
 
   useEffect(() => {
     dispatch(getOneContractor(contractorId));
-  }, [contractorId]);
+  }, [contractorId, dispatch]);
 
   const handleCancel = (id) => {
     dispatch(editReservation({

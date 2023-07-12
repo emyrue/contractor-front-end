@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 
@@ -10,26 +9,39 @@ export default function UserReservations() {
     dispatch(id);
   };
 
+  const handleClear = (id) => {
+    dispatch(id);
+  };
+
   return (
     <article>
       <h2>Reservations</h2>
       <ul>
         { reservations.map((oneReservation) => {
           const { reservation, contractor } = oneReservation;
-          const { id, contractor_cancelled: cancelled, user_cancelled: hidden, approved } = reservation;
+          const {
+            id,
+            contractor_cancelled: cancelled,
+            user_cancelled: hidden,
+            approved,
+          } = reservation;
           let itemClassname = 'show';
           let cancelClassname = 'show';
           let clearClassname = 'hide';
+          let status = 'Pending approval from contractor';
           if (hidden) {
             itemClassname = 'hide';
-          }
-          if (cancelled) {
+          } else if (cancelled) {
             cancelClassname = 'hide';
             clearClassname = 'show';
+            status = 'Cancelled';
+          } else if (approved) {
+            status = 'Approved by contractor';
           }
           return (
             <li className={itemClassname} key={`reservation-${id}`}>
-              <h6>{contractor.name}</h6>
+              <h5>{contractor.name}</h5>
+              <h6>{status}</h6>
               <div>
                 {reservation.start_date.toString()}
                 {' '}
@@ -37,12 +49,12 @@ export default function UserReservations() {
                 {' '}
                 {reservation.end_date.toString()}
               </div>
-              <Button
-                className={cancelClassname}
-                onClick={handleCancel}
-              >
-                Cancel this reservation
-              </Button>
+              <form className={cancelClassname} onSubmit={handleCancel}>
+                <Button>Cancel this reservation</Button>
+              </form>
+              <form className={clearClassname} onSubmit={handleClear}>
+                <Button>Clear this reservation</Button>
+              </form>
             </li>
           );
         })}

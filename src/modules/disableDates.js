@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 
-export default function disableDates(date, contractor) {
+export default function disableDates(date, contractor, reservationId = null) {
   const reservations = contractor.contractorReservations.filter(
     (reservation) => (
       reservation.reservation.approved
           && !reservation.reservation.user_cancelled
           && !reservation.reservation.contractor_cancelled
+          && reservation.reservation.id !== reservationId
     ),
   );
 

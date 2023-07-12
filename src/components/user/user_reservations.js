@@ -68,7 +68,12 @@ export default function UserReservations() {
               <form className={clearClassname} onSubmit={() => handleClear(id)}>
                 <Button>Clear this reservation</Button>
               </form>
-              <EditReservation id={id} />
+              <EditReservation
+                id={id}
+                startingDate={reservation.start_date}
+                endingDate={reservation.end_date}
+                jobDescription={reservation.job_description}
+              />
             </li>
           );
         })}

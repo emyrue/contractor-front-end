@@ -34,7 +34,11 @@ export default function ReservationsPopup(props) {
 
   const isDisabled = (date) => {
     const reservations = contractor.contractorReservations.filter(
-      (reservation) => reservation.reservation.approved,
+      (reservation) => (
+        reservation.reservation.approved
+          && !reservation.reservation.user_cancelled
+          && !reservation.reservation.contractor_cancelled
+      ),
     );
 
     let disabled = false;

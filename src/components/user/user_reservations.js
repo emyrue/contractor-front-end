@@ -1,16 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
+import { editReservation, deleteReservation } from '../../redux/reservations/ReservationsReducer';
 
 export default function UserReservations() {
   const reservations = useSelector((state) => state.user.reservations);
   const dispatch = useDispatch();
 
   const handleCancel = (id) => {
-    dispatch(id);
+    dispatch(editReservation({
+      user_cancelled: true,
+      id,
+    }));
   };
 
   const handleClear = (id) => {
-    dispatch(id);
+    dispatch(deleteReservation(id));
   };
 
   return (
@@ -41,7 +45,11 @@ export default function UserReservations() {
           return (
             <li className={itemClassname} key={`reservation-${id}`}>
               <h5>{contractor.name}</h5>
-              <h6>{status}</h6>
+              <h6>
+                Status:
+                {' '}
+                {status}
+              </h6>
               <div>
                 {reservation.start_date.toString()}
                 {' '}
@@ -49,10 +57,14 @@ export default function UserReservations() {
                 {' '}
                 {reservation.end_date.toString()}
               </div>
-              <form className={cancelClassname} onSubmit={handleCancel}>
-                <Button>Cancel this reservation</Button>
+              <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
+                <Button
+                  type="submit"
+                >
+                  Cancel this reservation
+                </Button>
               </form>
-              <form className={clearClassname} onSubmit={handleClear}>
+              <form className={clearClassname} onSubmit={() => handleClear(id)}>
                 <Button>Clear this reservation</Button>
               </form>
             </li>

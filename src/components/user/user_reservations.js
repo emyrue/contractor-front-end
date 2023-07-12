@@ -38,7 +38,7 @@ export default function UserReservations() {
           } else if (cancelled) {
             cancelClassname = 'hide';
             clearClassname = 'show';
-            status = 'Cancelled';
+            status = 'Cancelled by contractor';
           } else if (approved) {
             status = 'Approved by contractor';
           }

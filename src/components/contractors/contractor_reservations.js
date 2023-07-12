@@ -24,6 +24,13 @@ export default function ContractorReservations() {
     dispatch(deleteReservation(id));
   };
 
+  const handleApprove = (id) => {
+    dispatch(editReservation({
+      approved: true,
+      id,
+    }));
+  };
+
   return (
     <article>
       <h2>Reservations</h2>
@@ -39,15 +46,18 @@ export default function ContractorReservations() {
           let itemClassname = 'show';
           let cancelClassname = 'show';
           let clearClassname = 'hide';
-          let status = 'Pending approval from contractor';
+          let status = 'Pending your approval';
+          let approvalClassname = 'show';
           if (hidden) {
             itemClassname = 'hide';
           } else if (cancelled) {
             cancelClassname = 'hide';
             clearClassname = 'show';
-            status = 'Cancelled';
+            approvalClassname = 'hide';
+            status = 'Cancelled by user';
           } else if (approved) {
-            status = 'Approved by contractor';
+            status = 'Approved';
+            approvalClassname = 'hide';
           }
           return (
             <li className={itemClassname} key={`reservation-${id}`}>
@@ -68,11 +78,22 @@ export default function ContractorReservations() {
                 <Button
                   type="submit"
                 >
-                  Cancel this reservation
+                  Reject/cancel this reservation
                 </Button>
               </form>
               <form className={clearClassname} onSubmit={() => handleClear(id)}>
-                <Button>Clear this reservation</Button>
+                <Button
+                  type="submit"
+                >
+                  Clear this reservation
+                </Button>
+              </form>
+              <form className={approvalClassname} onSubmit={() => handleApprove(id)}>
+                <Button
+                  type="submit"
+                >
+                  Approve
+                </Button>
               </form>
             </li>
           );

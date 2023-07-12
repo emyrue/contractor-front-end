@@ -29,6 +29,10 @@ export const editReservation = createAsyncThunk(EDIT_RESERVATION, async (object)
   await axios.patch(`${getReservationsEndpoint}/${object.id}`, {
     reservation: {
       user_cancelled: object.user_cancelled,
+      contractor_cancelled: object.contractor_cancelled,
+      approved: object.approved,
+      start_date: object.start_date,
+      end_date: object.end_date,
     },
   });
   const response = await axios.get(getReservationsEndpoint);

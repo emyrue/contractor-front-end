@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import { editReservation, deleteReservation } from '../../redux/reservations/ReservationsReducer';
+import EditReservation from '../reservations/edit_reservation';
 
 export default function UserReservations() {
   const reservations = useSelector((state) => state.user.reservations);
@@ -67,6 +68,7 @@ export default function UserReservations() {
               <form className={clearClassname} onSubmit={() => handleClear(id)}>
                 <Button>Clear this reservation</Button>
               </form>
+              <EditReservation id={id} />
             </li>
           );
         })}

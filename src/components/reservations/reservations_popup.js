@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { PropTypes } from 'prop-types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../../redux/reservations/ReservationsReducer';
+import disableDates from '../../modules/disableDates';
 
 export default function ReservationsPopup(props) {
   const { setClassname } = props;
@@ -32,30 +33,6 @@ export default function ReservationsPopup(props) {
     setClassname('hide');
   };
 
-  const isDisabled = (date) => {
-    const reservations = contractor.contractorReservations.filter(
-      (reservation) => (
-        reservation.reservation.approved
-          && !reservation.reservation.user_cancelled
-          && !reservation.reservation.contractor_cancelled
-      ),
-    );
-
-    let disabled = false;
-
-    reservations.map((reservation) => {
-      if (((dayjs(reservation.reservation.start_date).isBefore(dayjs(date)))
-      && dayjs(date).isBefore(reservation.reservation.end_date))
-      || dayjs(date).isSame(reservation.reservation.start_date)
-      || dayjs(date).isSame(reservation.reservation.end_date)) {
-        disabled = true;
-      }
-      return disabled;
-    });
-
-    return disabled;
-  };
-
   return (
     <article>
       <h2>Make a Reservation</h2>
@@ -72,7 +49,7 @@ export default function ReservationsPopup(props) {
             value={dayjs(startDate)}
             onChange={(newValue) => setStartDate(newValue)}
             label="Start Date"
-            shouldDisableDate={isDisabled}
+            shouldDisableDate={(date) => disableDates(date, contractor)}
             disablePast
           />
           <DatePicker
@@ -80,7 +57,7 @@ export default function ReservationsPopup(props) {
             onChange={(newValue) => setEndDate(newValue)}
             minDate={startDate}
             label="End Date"
-            shouldDisableDate={isDisabled}
+            shouldDisableDate={(date) => disableDates(date, contractor)}
             disablePast
           />
         </LocalizationProvider>

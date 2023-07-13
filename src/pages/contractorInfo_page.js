@@ -6,11 +6,13 @@ import { getOneContractor } from '../redux/contractors/ContractorReducer';
 import ReservationsPopup from '../components/reservations/reservations_popup';
 import ReservationNotSaved from '../components/reservations/reservation_not_saved';
 import ReservationSaved from '../components/reservations/reservation_saved';
+import CreateReview from '../components/reviews/createReview';
 
 export default function ContractorInfoPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const [classname, setClassname] = useState('hide');
+  const [createReviewClass, setCreateReviewClass] = useState('hide');
   const contractor = useSelector((state) => state.contractors.contractorDetails);
 
   useEffect(() => {
@@ -35,9 +37,19 @@ export default function ContractorInfoPage() {
       >
         Make a Reservation
       </Fab>
+      <Fab
+        variant="extended"
+        onClick={() => setCreateReviewClass('show')}
+      >
+        Leave a review
+      </Fab>
       <div className={classname}>
         <ReservationsPopup setClassname={setClassname} />
       </div>
+      <CreateReview
+        createReviewClass={createReviewClass}
+        handleClose={() => setCreateReviewClass('hide')}
+      />
       <ReservationNotSaved />
       <ReservationSaved />
     </section>

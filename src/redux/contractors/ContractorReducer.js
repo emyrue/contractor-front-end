@@ -47,6 +47,7 @@ const initialState = {
   isLoading: false,
   contractorDetails: {},
   contractorReservations: [],
+  contractorReviews: [],
 };
 
 const contractorsSlice = createSlice({
@@ -101,11 +102,13 @@ const contractorsSlice = createSlice({
     builder.addCase(getOneContractor.fulfilled, (state, action) => {
       state.contractorDetails = action.payload.contractor;
       state.contractorReservations = action.payload.reservations;
+      state.contractorReviews = action.payload.reviews;
       state.isLoading = false;
     });
     builder.addCase(getOneContractor.rejected, (state) => {
       state.contractorDetails = {};
       state.contractorReservations = [];
+      state.contractorReviews = [];
       state.isLoading = false;
     });
     builder.addCase(getOneContractor.pending, (state) => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import endpoint from '../endpoint';
@@ -10,5 +11,5 @@ const DELETE_REVIEW = 'Review/DELETE_REVIEW';
 const EDIT_REVIEW = 'Review/EDIT_REVIEW';
 
 export const createReview = createAsyncThunk(CREATE_REVIEW, async (object) => {
-
+  await axios.post(getReviewsEndpoint, object);
 });

@@ -14,13 +14,13 @@ export default function Nav() {
 
   return (
     <nav>
-      <a href="/">Home</a>
+      <a href="/">Contractors</a>
       { !userInfo.user.name
         && <a href="/signup">Sign up</a>}
       { !userInfo.user.name
         && <a href="/login">Log in</a>}
       { userInfo.user.name
-        && <a href="/my_account">Account</a>}
+        && <a href="/my_account">My Account</a>}
       { userInfo.user.name
         && <button onClick={handleClick} type="button">Log out</button>}
     </nav>

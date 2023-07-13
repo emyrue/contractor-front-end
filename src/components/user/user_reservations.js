@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import { editReservation, deleteReservation } from '../../redux/reservations/ReservationsReducer';
@@ -6,6 +7,7 @@ import EditReservation from '../reservations/edit_reservation';
 export default function UserReservations() {
   const reservations = useSelector((state) => state.user.reservations);
   const dispatch = useDispatch();
+  const [editDisplay, setEditDisplay] = useState('hide');
 
   const handleCancel = (id) => {
     dispatch(editReservation({
@@ -16,6 +18,10 @@ export default function UserReservations() {
 
   const handleClear = (id) => {
     dispatch(deleteReservation(id));
+  };
+
+  const handleClose = () => {
+    setEditDisplay('hide');
   };
 
   return (
@@ -66,9 +72,20 @@ export default function UserReservations() {
                 </Button>
               </form>
               <form className={clearClassname} onSubmit={() => handleClear(id)}>
-                <Button>Clear this reservation</Button>
+                <Button
+                  type="submit"
+                >
+                  Clear this reservation
+                </Button>
               </form>
+              <Button
+                onClick={() => setEditDisplay('show')}
+              >
+                Edit this reservation
+              </Button>
               <EditReservation
+                myClassName={editDisplay}
+                handleClose={handleClose}
                 id={id}
                 startingDate={reservation.start_date}
                 endingDate={reservation.end_date}

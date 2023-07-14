@@ -13,33 +13,19 @@ export default function ContractorInfoPage() {
   const dispatch = useDispatch();
   const [classname, setClassname] = useState('hide');
   const [createReviewClass, setCreateReviewClass] = useState('hide');
-  const [averageRating, setAverageRating] = useState(null);
   const contractor = useSelector((state) => state.contractors.contractorDetails);
-  const reviews = useSelector((state) => state.contractors.contractorReviews);
 
   useEffect(() => {
     const id = location.pathname.replace('/', '');
     dispatch(getOneContractor(id));
   }, [dispatch, location.pathname]);
 
-  useEffect(() => {
-    let numerator = 0;
-    let denominator = 0;
-    reviews.forEach((review) => {
-      numerator += review.rating;
-      denominator += 1;
-    });
-    if (denominator > 0) {
-      setAverageRating(((numerator * 10) / denominator) * 0.1);
-    }
-  }, [reviews]);
-
   return (
     <section>
       <h1>{contractor.name}</h1>
       <Rating
         readOnly
-        value={averageRating}
+        value={contractor.rating}
       />
       <h2>{contractor.job_title}</h2>
       <p>{contractor.bio}</p>

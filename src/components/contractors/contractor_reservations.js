@@ -35,13 +35,13 @@ export default function ContractorReservations() {
     <article>
       <h2>Reservations</h2>
       <ul>
-        { reservations.map((oneReservation) => {
-          const { reservation, user } = oneReservation;
+        { reservations.map((reservation) => {
           const {
             id,
             user_cancelled: cancelled,
             contractor_cancelled: hidden,
             approved,
+            user,
           } = reservation;
           let itemClassname = 'show';
           let cancelClassname = 'show';

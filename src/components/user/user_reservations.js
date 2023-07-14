@@ -28,13 +28,15 @@ export default function UserReservations() {
     <article>
       <h2>Reservations</h2>
       <ul>
-        { reservations.map((oneReservation) => {
-          const { reservation, contractor } = oneReservation;
+        { reservations.map((reservation) => {
           const {
             id,
             contractor_cancelled: cancelled,
             user_cancelled: hidden,
             approved,
+            contractor,
+            start_date: startDate,
+            end_date: endDate,
           } = reservation;
           let itemClassname = 'show';
           let cancelClassname = 'show';
@@ -58,11 +60,11 @@ export default function UserReservations() {
                 {status}
               </h6>
               <div>
-                {reservation.start_date.toString()}
+                {startDate.toString()}
                 {' '}
                 -
                 {' '}
-                {reservation.end_date.toString()}
+                {endDate.toString()}
               </div>
               <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
                 <Button

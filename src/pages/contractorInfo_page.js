@@ -7,6 +7,7 @@ import ReservationsPopup from '../components/reservations/reservations_popup';
 import ReservationNotSaved from '../components/reservations/reservation_not_saved';
 import ReservationSaved from '../components/reservations/reservation_saved';
 import CreateReview from '../components/reviews/createReview';
+import ShowReviews from '../components/reviews/showReviews';
 
 export default function ContractorInfoPage() {
   const location = useLocation();
@@ -14,6 +15,7 @@ export default function ContractorInfoPage() {
   const [classname, setClassname] = useState('hide');
   const [createReviewClass, setCreateReviewClass] = useState('hide');
   const contractor = useSelector((state) => state.contractors.contractorDetails);
+  const reviews = useSelector((state) => state.contractors.contractorReviews);
 
   useEffect(() => {
     const id = location.pathname.replace('/', '');
@@ -23,10 +25,31 @@ export default function ContractorInfoPage() {
   return (
     <section>
       <h1>{contractor.name}</h1>
-      <Rating
-        readOnly
-        value={contractor.rating}
-      />
+      <div>
+        <Rating
+          readOnly
+          value={parseInt(contractor.rating, 10) || 0}
+        />
+        <span>
+          (
+          {' '}
+          {reviews.length}
+          {' '}
+          review(s)
+          )
+        </span>
+        <Fab
+          variant="extended"
+        >
+          View customer reviews
+        </Fab>
+        <Fab
+          variant="extended"
+          onClick={() => setCreateReviewClass('show')}
+        >
+          Leave a review
+        </Fab>
+      </div>
       <h2>{contractor.job_title}</h2>
       <p>{contractor.bio}</p>
       <span>
@@ -41,12 +64,6 @@ export default function ContractorInfoPage() {
       >
         Make a Reservation
       </Fab>
-      <Fab
-        variant="extended"
-        onClick={() => setCreateReviewClass('show')}
-      >
-        Leave a review
-      </Fab>
       <div className={classname}>
         <ReservationsPopup setClassname={setClassname} />
       </div>
@@ -56,6 +73,8 @@ export default function ContractorInfoPage() {
       />
       <ReservationNotSaved />
       <ReservationSaved />
+      { reviews.length > 0
+        && <ShowReviews reviews={reviews} /> }
     </section>
   );
 }

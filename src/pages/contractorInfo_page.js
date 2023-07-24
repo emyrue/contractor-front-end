@@ -31,12 +31,9 @@ export default function ContractorInfoPage() {
           value={parseInt(contractor.rating, 10) || 0}
         />
         <span>
-          (
-          {' '}
           {reviews.length}
           {' '}
           review(s)
-          )
         </span>
         <Fab
           variant="extended"

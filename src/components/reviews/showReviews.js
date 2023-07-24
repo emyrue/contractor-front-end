@@ -1,11 +1,36 @@
+import { Rating } from '@mui/material';
 import { PropTypes } from 'prop-types';
+import ShowLikes from '../likes/showLikes';
 
 export default function ShowReviews(props) {
   const { reviews } = props;
+
   return (
-    <article>
-      {reviews[0].user.name}
-    </article>
+    <section>
+      <h2>Reviews</h2>
+      {reviews.map((review) => {
+        const {
+          id,
+          rating,
+          review_body: reviewBody,
+          user,
+          likes,
+          contractor_id: contractorId,
+        } = review;
+        return (
+          <article key={`review-${id}`}>
+            <header>
+              <span>{user.name}</span>
+              <Rating
+                value={rating}
+              />
+            </header>
+            <p>{reviewBody}</p>
+            <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
+          </article>
+        );
+      })}
+    </section>
   );
 }
 
@@ -17,7 +42,11 @@ ShowReviews.propTypes = {
     user_id: PropTypes.number.isRequired,
     contractor_id: PropTypes.number.isRequired,
     user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
+    likes: PropTypes.arrayOf(PropTypes.shape({
+      like: PropTypes.bool.isRequired,
+    })).isRequired,
   }).isRequired).isRequired,
 };

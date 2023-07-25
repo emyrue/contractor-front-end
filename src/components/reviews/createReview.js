@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button, Rating } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
-import { createReview } from '../../redux/reviews/ReviewsReducer';
+import createReview from '../../redux/reviews/ReviewsReducer';
 
 export default function CreateReview(props) {
   const { createReviewClass, handleClose } = props;

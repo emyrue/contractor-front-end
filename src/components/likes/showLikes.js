@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Fab } from '@mui/material';
+import {
+  ThumbUpAlt, ThumbUpOffAlt, ThumbDownAlt, ThumbDownOffAlt,
+} from '@mui/icons-material';
 import { PropTypes } from 'prop-types';
 import createLike, { editLike, deleteLike } from '../../redux/likes/LikesReducer';
+import '../../styles/likeButtons.css';
 
 export default function ShowLikes(props) {
   const { likes: allLikes, reviewId, contractorId } = props;
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
-  const [likeColor, setLikeColor] = useState('default');
-  const [dislikeColor, setDislikeColor] = useState('default');
   const [userLikeId, setUserLikeId] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
   const userId = useSelector((state) => state.user.user.id);
 
   useEffect(() => {
@@ -27,24 +30,24 @@ export default function ShowLikes(props) {
   }, [allLikes]);
 
   useEffect(() => {
-    setLikeColor('default');
-    setDislikeColor('default');
+    setLiked(false);
+    setDisliked(false);
     allLikes.forEach((opinion) => {
       if (opinion.user_id === userId) {
         setUserLikeId(opinion.id);
         if (opinion.like) {
-          setLikeColor('info');
+          setLiked(true);
         } else {
-          setDislikeColor('info');
+          setDisliked(true);
         }
       }
     });
   }, [userId, allLikes]);
 
   const handleLike = () => {
-    if (likeColor === 'info') {
+    if (liked) {
       deleteLike(userLikeId, dispatch, contractorId);
-    } else if (dislikeColor === 'info') {
+    } else if (disliked) {
       editLike({
         id: userLikeId,
         like: {
@@ -63,9 +66,9 @@ export default function ShowLikes(props) {
   };
 
   const handleDislike = () => {
-    if (dislikeColor === 'info') {
+    if (disliked) {
       deleteLike(userLikeId, dispatch, contractorId);
-    } else if (likeColor === 'info') {
+    } else if (liked) {
       editLike({
         id: userLikeId,
         like: {
@@ -86,21 +89,23 @@ export default function ShowLikes(props) {
   return (
     <footer>
       <span>
-        <Fab
-          color={likeColor}
+        <button
+          type="button"
           onClick={handleLike}
         >
-          Like
-        </Fab>
+          { liked && <ThumbUpAlt /> }
+          { !liked && <ThumbUpOffAlt /> }
+        </button>
         <span>{likes}</span>
       </span>
       <span>
-        <Fab
-          color={dislikeColor}
+        <button
+          type="button"
           onClick={handleDislike}
         >
-          Dislike
-        </Fab>
+          { disliked && <ThumbDownAlt /> }
+          { !disliked && <ThumbDownOffAlt /> }
+        </button>
         <span>{dislikes}</span>
       </span>
     </footer>

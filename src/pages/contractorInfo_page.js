@@ -30,8 +30,6 @@ export default function ContractorInfoPage() {
       if (review.user_id === user.id) {
         setLeftReview(true);
       }
-      console.log(review.user_id);
-      console.log(user.id);
     });
   }, [reviews, user]);
 

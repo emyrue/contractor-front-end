@@ -90,6 +90,7 @@ export default function ShowLikes(props) {
     <footer>
       <span>
         <button
+          className="like-dislike-button"
           type="button"
           onClick={handleLike}
         >
@@ -100,6 +101,7 @@ export default function ShowLikes(props) {
       </span>
       <span>
         <button
+          className="like-dislike-button"
           type="button"
           onClick={handleDislike}
         >

@@ -14,13 +14,26 @@ export default function ContractorInfoPage() {
   const dispatch = useDispatch();
   const [classname, setClassname] = useState('hide');
   const [createReviewClass, setCreateReviewClass] = useState('hide');
+  const [leftReview, setLeftReview] = useState(false);
   const contractor = useSelector((state) => state.contractors.contractorDetails);
   const reviews = useSelector((state) => state.contractors.contractorReviews);
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     const id = location.pathname.replace('/', '');
     dispatch(getOneContractor(id));
   }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    setLeftReview(false);
+    reviews.forEach((review) => {
+      if (review.user_id === user.id) {
+        setLeftReview(true);
+      }
+      console.log(review.user_id);
+      console.log(user.id);
+    });
+  }, [reviews, user]);
 
   return (
     <section>
@@ -40,12 +53,15 @@ export default function ContractorInfoPage() {
         >
           View customer reviews
         </Fab>
-        <Fab
-          variant="extended"
-          onClick={() => setCreateReviewClass('show')}
-        >
-          Leave a review
-        </Fab>
+        { !leftReview
+          && (
+            <Fab
+              variant="extended"
+              onClick={() => setCreateReviewClass('show')}
+            >
+              Leave a review
+            </Fab>
+          )}
       </div>
       <h2>{contractor.job_title}</h2>
       <p>{contractor.bio}</p>

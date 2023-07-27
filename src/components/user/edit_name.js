@@ -1,22 +1,28 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  TextField, Button,
+  TextField, Button, Fab,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import { editUser } from '../../redux/user/UserReducer';
 
 export default function EditNamePopup(props) {
   const { handleClose } = props;
-  const [name, setName] = useState('');
+  const user = useSelector((state) => state.user.user);
+  const [name, setName] = useState(user.name);
+  const [code, setCode] = useState('');
+  const [adminForm, setAdminForm] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // localStorage.setItem('name', `${name}`);
+    // e.preventDefault();
+    // console.log(name);
     dispatch(editUser({
+      id: user.id,
       name,
+      role: code,
     }));
-    handleClose();
   };
 
   return (
@@ -29,6 +35,25 @@ export default function EditNamePopup(props) {
         onChange={(e) => setName(e.target.value)}
         required
       />
+      { !adminForm
+        && (
+          <Fab
+            variant="extended"
+            onClick={() => setAdminForm(true)}
+          >
+            Request Admin
+          </Fab>
+        )}
+      { adminForm
+        && (
+          <TextField
+            id="code"
+            label="Admin Code"
+            variant="outlined"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+        )}
       <Button
         type="submit"
         variant="outlined"

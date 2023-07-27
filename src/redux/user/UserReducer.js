@@ -48,16 +48,12 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
 });
 
 export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
-  const serializedToken = localStorage.getItem('Authorization');
-  const user = await axios.get(getUserEndpoint,
-    {
-      headers: {
-        Authorization: JSON.parse(serializedToken),
-      },
-    });
-  const newEndpoint = `${getUserEndpoint}/${user.data.user.id}`;
+  const newEndpoint = `${getUserEndpoint}/${newInfo.id}`;
   const response = await axios.patch(newEndpoint, {
-    user: newInfo,
+    user: {
+      name: newInfo.name,
+      role: newInfo.role,
+    },
   });
   return response.data;
 });

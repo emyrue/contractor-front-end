@@ -6,7 +6,9 @@ import { TextareaAutosize } from '@mui/base';
 import { editReview } from '../../redux/reviews/ReviewsReducer';
 
 export default function EditReview(props) {
-  const { reviewId, currentRating, reviewBody } = props;
+  const {
+    reviewId, currentRating, reviewBody, setEditDisplay,
+  } = props;
   const [review, setReview] = useState(reviewBody);
   const [rating, setRating] = useState(currentRating);
   const dispatch = useDispatch();
@@ -38,7 +40,9 @@ export default function EditReview(props) {
       >
         Submit
       </Button>
-      <Button>
+      <Button
+        onClick={() => setEditDisplay(false)}
+      >
         Close
       </Button>
     </form>
@@ -49,4 +53,5 @@ EditReview.propTypes = {
   reviewId: PropTypes.number.isRequired,
   currentRating: PropTypes.number.isRequired,
   reviewBody: PropTypes.string.isRequired,
+  setEditDisplay: PropTypes.func.isRequired,
 };

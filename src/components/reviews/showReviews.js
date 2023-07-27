@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Fab, Rating } from '@mui/material';
+import { Rating } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import ShowLikes from '../likes/showLikes';
 import { deleteReview } from '../../redux/reviews/ReviewsReducer';
-import EditReview from './editReview';
+import UserReviewButtons from './userReviewButtons';
 
 export default function ShowReviews(props) {
   const { reviews } = props;
@@ -19,15 +19,20 @@ export default function ShowReviews(props) {
   return (
     <section>
       <h2>Reviews</h2>
-      {reviews.map((review) => {
+      {reviews.toReversed().map((review) => {
         const {
           id,
           rating,
           review_body: reviewBody,
           user,
           likes,
+          created_at: createDate,
+          updated_at: editDate,
           contractor_id: contractorId,
         } = review;
+        const createDateObject = (new Date(createDate)).toDateString();
+        const editDateObject = (new Date(editDate)).toDateString();
+
         return (
           <article key={`review-${id}`}>
             <header>
@@ -36,28 +41,34 @@ export default function ShowReviews(props) {
                 value={rating}
                 readOnly
               />
+              <p>
+                <span>
+                  {createDateObject}
+                  {' '}
+                </span>
+                { createDate !== editDate
+                && (
+                  <span>
+                    (edited on
+                    {' '}
+                    {editDateObject}
+                    {' '}
+                    )
+                  </span>
+                )}
+              </p>
             </header>
             <p>{reviewBody}</p>
+            <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
             { currentUser.id === user.id
               && (
-                <span>
-                  <Fab
-                    variant="extended"
-                    onClick={() => setEditDisplay(true)}
-                  >
-                    Edit Review
-                  </Fab>
-                  <Fab
-                    variant="extended"
-                    onClick={() => handleDelete(review)}
-                  >
-                    Delete Review
-                  </Fab>
-                  { editDisplay
-                    && <EditReview reviewId={id} currentRating={rating} reviewBody={reviewBody} /> }
-                </span>
+                <UserReviewButtons
+                  editDisplay={editDisplay}
+                  setEditDisplay={setEditDisplay}
+                  handleDelete={handleDelete}
+                  review={review}
+                />
               )}
-            <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
           </article>
         );
       })}

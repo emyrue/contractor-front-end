@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Fab, Rating } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import ShowLikes from '../likes/showLikes';
 import { deleteReview } from '../../redux/reviews/ReviewsReducer';
+import EditReview from './editReview';
 
 export default function ShowReviews(props) {
   const { reviews } = props;
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.user);
+  const [editDisplay, setEditDisplay] = useState(false);
 
   const handleDelete = (review) => {
     deleteReview(review.id, dispatch, review.contractor_id);
@@ -37,9 +40,10 @@ export default function ShowReviews(props) {
             <p>{reviewBody}</p>
             { currentUser.id === user.id
               && (
-                <p>
+                <span>
                   <Fab
                     variant="extended"
+                    onClick={() => setEditDisplay(true)}
                   >
                     Edit Review
                   </Fab>
@@ -49,7 +53,9 @@ export default function ShowReviews(props) {
                   >
                     Delete Review
                   </Fab>
-                </p>
+                  { editDisplay
+                    && <EditReview reviewId={id} currentRating={rating} reviewBody={reviewBody} /> }
+                </span>
               )}
             <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
           </article>

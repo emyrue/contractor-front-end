@@ -31,8 +31,9 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
 
 export const getUser = createAsyncThunk(GET_USER, async () => {
   const serializedToken = localStorage.getItem('Authorization');
+  const userId = localStorage.getItem('userId');
   if (serializedToken) {
-    const user = await axios.get(getUserEndpoint,
+    const user = await axios.get(`${getUserEndpoint}/${userId}`,
       {
         headers: {
           Authorization: JSON.parse(serializedToken),

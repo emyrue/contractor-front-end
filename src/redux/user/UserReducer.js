@@ -26,7 +26,6 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     const { data } = response;
     return data.data;
   } catch (err) {
-    // console.log(err.message);
     return {
       allUsers: [],
       user: {},
@@ -83,7 +82,6 @@ const initialState = {
   isLoading: false,
   contractor: {},
   reservations: [],
-  errorMessage: '',
 };
 
 const userSlice = createSlice({
@@ -91,14 +89,21 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.allUsers = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getAllUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllUsers.rejected, (state) => {
+      state.allUsers = [];
+      state.isLoading = false;
+    });
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.isLoading = false;
-      if (action.payload.contractor) {
-        state.contractor = action.payload.contractor;
-      } else {
-        state.contractor = {};
-      }
+      state.contractor = action.payload.contractor;
       state.reservations = action.payload.reservations;
       state.errorMessage = '';
     });
@@ -115,11 +120,7 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.isLoading = false;
-      if (action.payload.contractor) {
-        state.contractor = action.payload.contractor;
-      } else {
-        state.contractor = {};
-      }
+      state.contractor = action.payload.contractor;
       state.reservations = action.payload.reservations;
       state.errorMessage = '';
     });
@@ -142,11 +143,9 @@ const userSlice = createSlice({
         state.contractor = {};
       }
       state.reservations = action.payload.reservations;
-      state.errorMessage = '';
     });
     builder.addCase(editUser.rejected, (state) => {
       state.isLoading = false;
-      state.errorMessage = '';
     });
     builder.addCase(editUser.pending, (state) => {
       state.isLoading = false;
@@ -156,14 +155,12 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.contractor = {};
       state.reservations = [];
-      state.errorMessage = '';
     });
     builder.addCase(userLogout.rejected, (state) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
       state.reservations = [];
-      state.errorMessage = '';
     });
     builder.addCase(userLogout.pending, (state) => {
       state.isLoading = true;

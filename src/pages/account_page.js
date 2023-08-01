@@ -15,6 +15,16 @@ export default function AccountPage() {
         && <UserDetails />}
       { userInfo.user.name
         && <ContractorDetails />}
+      { userInfo.user.role === 'admin'
+        && (
+          <a href="/users">
+            <button
+              type="button"
+            >
+              View Users
+            </button>
+          </a>
+        )}
     </section>
   );
 }

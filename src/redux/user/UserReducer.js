@@ -4,13 +4,19 @@ import axios from 'axios';
 import endpoint from '../endpoint';
 
 const loginEndpoint = `${endpoint}users/sign_in`;
-const getUserEndpoint = `${endpoint}v1/users`;
+const getUsersEndpoint = `${endpoint}v1/users`;
 const logoutEndpoint = `${endpoint}users/sign_out`;
 
 const LOGIN = 'User/NEW_SESSION';
+const GET_USERS = 'User/GET_USERS';
 const GET_USER = 'User/GET_USER';
 const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
+
+export const getAllUsers = createAsyncThunk(GET_USERS, async () => {
+  const users = await axios.get(getUsersEndpoint);
+  return users.data;
+});
 
 export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   try {
@@ -22,6 +28,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
   } catch (err) {
     // console.log(err.message);
     return {
+      allUsers: [],
       user: {},
       contractor: {},
       reservations: [],
@@ -33,7 +40,7 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
   const serializedToken = localStorage.getItem('Authorization');
   const userId = localStorage.getItem('userId');
   if (serializedToken) {
-    const user = await axios.get(`${getUserEndpoint}/${userId}`,
+    const user = await axios.get(`${getUsersEndpoint}/${userId}`,
       {
         headers: {
           Authorization: JSON.parse(serializedToken),
@@ -42,6 +49,7 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
     return user.data;
   }
   return {
+    allUsers: [],
     user: {},
     contractor: {},
     reservations: [],
@@ -49,7 +57,7 @@ export const getUser = createAsyncThunk(GET_USER, async () => {
 });
 
 export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
-  const newEndpoint = `${getUserEndpoint}/${newInfo.id}`;
+  const newEndpoint = `${getUsersEndpoint}/${newInfo.id}`;
   const response = await axios.patch(newEndpoint, {
     user: {
       name: newInfo.name,
@@ -70,6 +78,7 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
 });
 
 const initialState = {
+  allUsers: [],
   user: {},
   isLoading: false,
   contractor: {},

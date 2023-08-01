@@ -11,6 +11,7 @@ import AccountPage from './pages/account_page';
 import ContractorsPage from './pages/contractors_page';
 import ContractorInfoPage from './pages/contractorInfo_page';
 import './App.css';
+import UsersPage from './pages/users_page';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/my_account" element={<AccountPage />} />
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </BrowserRouter>
   );

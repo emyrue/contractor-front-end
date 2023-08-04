@@ -37,6 +37,7 @@ export default function UserReservations() {
             contractor,
             start_date: startDate,
             end_date: endDate,
+            job_description: jobDescription,
           } = reservation;
           let itemClassname = 'show';
           let cancelClassname = 'show';
@@ -66,6 +67,7 @@ export default function UserReservations() {
                 {' '}
                 {endDate.toString()}
               </div>
+              <p>{jobDescription}</p>
               <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
                 <Button
                   type="submit"

@@ -47,6 +47,8 @@ Clone this repository to your desired folder:
 
 - git clone git@github.com:emyrue/contractor-front-end.git
 
+You will need a file in the root directory called endpoint.js that default exports the url for the api.
+
 ### Install
 
 Install this project with:
@@ -62,37 +64,22 @@ To run the project, execute the following command:
 
 ### Run tests
 
-To run tests, run the following command:
+Tests are not yet in place. Check back for updates.
 
-<!--
-Example command:
+## 👥 Authors
 
-```sh
-  bin/rails test test/models/article_test.rb
-```
---->
+👤 **Emily Robertson**
 
-<!-- AUTHORS -->
-
-## 👥 Authors <a name="authors"></a>
-
-> Mention all of the collaborators of this project.
-
-👤 **Author1**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@emyrue](https://github.com/emyrue)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/emilyruthrobertson/)
 
 <!-- FUTURE FEATURES -->
 
-## 🔭 Future Features <a name="future-features"></a>
+## 🔭 Future Features
 
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- Admin privileges will be put in place
+- Users will be able to reset their password
+- Design and styling
 
 <!-- CONTRIBUTING -->
 
@@ -106,4 +93,4 @@ Feel free to check the [issues page](../../issues/).
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](./MIT.md) licensed.

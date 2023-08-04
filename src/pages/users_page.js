@@ -14,12 +14,23 @@ export default function UsersPage() {
 
   return (
     <section>
-      <h1>All Users</h1>
-      <ul>
-        { allUsers.map((oneUser) => (
-          <AdminPageUserDetails oneUser={oneUser} key={`user-${oneUser.id}`} />
-        ))}
-      </ul>
+      { user.role === 'admin'
+        && (
+          <section>
+            <h1>All Users</h1>
+            <ul>
+              { allUsers.map((oneUser) => (
+                <AdminPageUserDetails oneUser={oneUser} key={`user-${oneUser.id}`} />
+              ))}
+            </ul>
+          </section>
+        )}
+      { user.role !== 'admin'
+        && (
+          <h1>
+            This page is for admins only. You can register as an admin through your account page.
+          </h1>
+        )}
     </section>
   );
 }

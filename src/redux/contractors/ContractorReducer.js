@@ -23,8 +23,13 @@ export const createContractor = createAsyncThunk(CREATE_CONTRACTOR, async (objec
 });
 
 export const deleteContractor = createAsyncThunk(DELETE_CONTRACTOR, async (id) => {
+  const serializedToken = localStorage.getItem('Authorization');
   const deleteContractorEndpoint = `${getContractorsEndpoint}/${id}`;
-  await axios.delete(deleteContractorEndpoint);
+  await axios.delete(deleteContractorEndpoint, {
+    headers: {
+      Authorization: JSON.parse(serializedToken),
+    },
+  });
   const response = await axios.get(getContractorsEndpoint);
   return response.data;
 });

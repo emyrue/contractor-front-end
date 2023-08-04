@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from '@mui/material';
 import UserDetails from '../components/user/user_details';
 import ContractorDetails from '../components/contractors/contractor_details';
 
@@ -17,13 +18,12 @@ export default function AccountPage() {
         && <ContractorDetails />}
       { userInfo.user.role === 'admin'
         && (
-          <a href="/users">
-            <button
-              type="button"
-            >
-              View Users
-            </button>
-          </a>
+          <Link
+            href="/users"
+            underline="hover"
+          >
+            View Users
+          </Link>
         )}
     </section>
   );

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 import { userLogout } from '../redux/user/UserReducer';
 
 export default function Nav() {
@@ -14,13 +15,39 @@ export default function Nav() {
 
   return (
     <nav>
-      <a href="/">Contractors</a>
+      <Link
+        href="/"
+        underline="hover"
+      >
+        Contractors
+      </Link>
       { !userInfo.user.name
-        && <a href="/signup">Sign up</a>}
+        && (
+        <Link
+          href="/signup"
+          underline="hover"
+        >
+          Sign up
+        </Link>
+        )}
       { !userInfo.user.name
-        && <a href="/login">Log in</a>}
+        && (
+        <Link
+          href="/login"
+          underline="hover"
+        >
+          Log in
+        </Link>
+        )}
       { userInfo.user.name
-        && <a href="/my_account">My Account</a>}
+        && (
+        <Link
+          href="/my_account"
+          underline="hover"
+        >
+          My Account
+        </Link>
+        )}
       { userInfo.user.name
         && <button onClick={handleClick} type="button">Log out</button>}
     </nav>

@@ -6,10 +6,13 @@ import AdminPageUserDetails from '../components/user/admin_page_user_details';
 export default function UsersPage() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const loading = useSelector((state) => state.user.isLoading);
   const allUsers = useSelector((state) => state.user.allUsers);
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    if (user.role === 'admin') {
+      dispatch(getAllUsers());
+    }
   }, [dispatch, user]);
 
   return (
@@ -25,11 +28,15 @@ export default function UsersPage() {
             </ul>
           </section>
         )}
-      { user.role !== 'admin'
+      { (user.role !== 'admin') && !loading
         && (
           <h1>
             This page is for admins only. You can register as an admin through your account page.
           </h1>
+        )}
+      { loading
+        && (
+          <h1>Loading...</h1>
         )}
     </section>
   );

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getOneContractor } from '../contractors/ContractorReducer';
-import endpoint from '../endpoint';
+import endpoint from '../../../endpoint';
 
 const getReviewsEndpoint = `${endpoint}/v1/reviews`;
 

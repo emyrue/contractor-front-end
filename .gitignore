@@ -10,7 +10,7 @@
 
 # production
 /build
-./src/redux/endpoint.js
+endpoint.js
 
 # misc
 .DS_Store

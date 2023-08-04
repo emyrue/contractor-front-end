@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import endpoint from '../endpoint';
+import endpoint from '../../../endpoint';
 
 const getContractorsEndpoint = `${endpoint}v1/contractors`;
 

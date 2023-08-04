@@ -47,7 +47,7 @@ Clone this repository to your desired folder:
 
 - git clone git@github.com:emyrue/contractor-front-end.git
 
-You will need a file in the root directory called endpoint.js that default exports the url for the api.
+You will need a file in the src/redux folder called endpoint.js that default exports the url for the api.
 
 ### Install
 

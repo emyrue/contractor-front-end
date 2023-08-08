@@ -39,6 +39,15 @@ export default function Nav() {
           Log in
         </Link>
         )}
+      { userInfo.user.role === 'admin'
+        && (
+          <Link
+            href="/users"
+            underline="hover"
+          >
+            View Users
+          </Link>
+        )}
       { userInfo.user.name
         && (
         <Link

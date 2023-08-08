@@ -14,7 +14,12 @@ const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
 
 export const getAllUsers = createAsyncThunk(GET_USERS, async () => {
-  const users = await axios.get(getUsersEndpoint);
+  const serializedToken = localStorage.getItem('Authorization');
+  const users = await axios.get(getUsersEndpoint, {
+    headers: {
+      Authorization: JSON.parse(serializedToken),
+    },
+  });
   return users.data;
 });
 

@@ -76,7 +76,7 @@ export default function ContractorInfoPage() {
         Make a Reservation
       </Fab>
       <div className={classname}>
-        <ReservationsPopup setClassname={setClassname} />
+        <div className="desktop-reservations-popup"><ReservationsPopup setClassname={setClassname} /></div>
       </div>
       <CreateReview
         createReviewClass={createReviewClass}

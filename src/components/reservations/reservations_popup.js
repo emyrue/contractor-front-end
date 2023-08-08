@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { PropTypes } from 'prop-types';
@@ -18,6 +18,10 @@ export default function ReservationsPopup(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [jobDescription, setJobDescription] = useState('');
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +37,16 @@ export default function ReservationsPopup(props) {
     setClassname('hide');
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+  }, []);
+
   return (
     <article>
       <h2>Make a Reservation</h2>
@@ -44,23 +58,46 @@ export default function ReservationsPopup(props) {
           onChange={(e) => setJobDescription(e.target.value)}
           required
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            value={dayjs(startDate)}
-            onChange={(newValue) => setStartDate(newValue)}
-            label="Start Date"
-            shouldDisableDate={(date) => disableDates(date, contractor)}
-            disablePast
-          />
-          <DatePicker
-            value={dayjs(endDate)}
-            onChange={(newValue) => setEndDate(newValue)}
-            minDate={startDate}
-            label="End Date"
-            shouldDisableDate={(date) => disableDates(date, contractor)}
-            disablePast
-          />
-        </LocalizationProvider>
+        { dimensions.width >= 500
+          && (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              value={dayjs(startDate)}
+              onChange={(newValue) => setStartDate(newValue)}
+              label="Start Date"
+              shouldDisableDate={(date) => disableDates(date, contractor)}
+              disablePast
+            />
+            <DatePicker
+              value={dayjs(endDate)}
+              onChange={(newValue) => setEndDate(newValue)}
+              minDate={startDate}
+              label="End Date"
+              shouldDisableDate={(date) => disableDates(date, contractor)}
+              disablePast
+            />
+          </LocalizationProvider>
+          )}
+        { dimensions.width < 500
+          && (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MobileDatePicker
+              value={dayjs(startDate)}
+              onChange={(newValue) => setStartDate(newValue)}
+              label="Start Date"
+              shouldDisableDate={(date) => disableDates(date, contractor)}
+              disablePast
+            />
+            <MobileDatePicker
+              value={dayjs(endDate)}
+              onChange={(newValue) => setEndDate(newValue)}
+              minDate={startDate}
+              label="End Date"
+              shouldDisableDate={(date) => disableDates(date, contractor)}
+              disablePast
+            />
+          </LocalizationProvider>
+          )}
         <Button
           type="submit"
           variant="outlined"

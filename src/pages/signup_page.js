@@ -38,7 +38,7 @@ export default function SignupPage() {
             password_confirmation: passwordConfirmation,
           },
         });
-      navigate('/login', { state: { message: 'A confirmation link has been sent to your email.' } });
+      navigate('/login');
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }

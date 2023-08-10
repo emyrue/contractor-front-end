@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { userLogin } from '../redux/user/UserReducer';
+import EmailFormLinks from '../components/email_forms/email_form_links';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  // const location = useLocation();
   const navigate = useNavigate();
-  // const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
+  const message = useSelector((state) => state.user.loginMessage);
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,8 +34,13 @@ export default function LoginPage() {
         password,
       },
     }));
-    navigate('/');
   };
+
+  useEffect(() => {
+    if (user.name) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <section>
@@ -80,7 +85,8 @@ export default function LoginPage() {
           Submit
         </Button>
       </form>
-      {/* { (location.state && !user.name) && <p>{location.state.message}</p> } */}
+      <p>{message}</p>
+      <EmailFormLinks />
     </section>
   );
 }

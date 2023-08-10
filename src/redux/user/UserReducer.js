@@ -12,6 +12,7 @@ const GET_USERS = 'User/GET_USERS';
 const GET_USER = 'User/GET_USER';
 const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
+const CLEAR_LOGIN = 'User/CLEAR_LOGIN';
 
 export const getAllUsers = createAsyncThunk(GET_USERS, async () => {
   const serializedToken = localStorage.getItem('Authorization');
@@ -31,14 +32,18 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     const { data } = response;
     return data.data;
   } catch (err) {
+    console.log(err.response.data.error);
     return {
       allUsers: [],
       user: {},
       contractor: {},
       reservations: [],
+      loginMessage: err.response.data.error,
     };
   }
 });
+
+export const clearLoginMessage = createAsyncThunk(CLEAR_LOGIN);
 
 export const getUser = createAsyncThunk(GET_USER, async () => {
   const serializedToken = localStorage.getItem('Authorization');
@@ -87,6 +92,7 @@ const initialState = {
   isLoading: false,
   contractor: {},
   reservations: [],
+  loginMessage: '',
 };
 
 const userSlice = createSlice({
@@ -110,14 +116,13 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.contractor = action.payload.contractor;
       state.reservations = action.payload.reservations;
-      state.errorMessage = '';
     });
-    builder.addCase(userLogin.rejected, (state) => {
+    builder.addCase(userLogin.rejected, (state, action) => {
       state.user = {};
       state.isLoading = false;
       state.contractor = {};
       state.reservations = [];
-      state.errorMessage = 'Please confirm your email.';
+      state.loginMessage = action.payload.loginMessage;
     });
     builder.addCase(userLogin.pending, (state) => {
       state.isLoading = true;
@@ -127,7 +132,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.contractor = action.payload.contractor;
       state.reservations = action.payload.reservations;
-      state.errorMessage = '';
+      state.loginMessage = '';
     });
     builder.addCase(getUser.rejected, (state) => {
       state.user = {};
@@ -169,6 +174,15 @@ const userSlice = createSlice({
     });
     builder.addCase(userLogout.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(clearLoginMessage.fulfilled, (state) => {
+      state.loginMessage = '';
+    });
+    builder.addCase(clearLoginMessage.pending, (state) => {
+      state.loginMessage = '';
+    });
+    builder.addCase(clearLoginMessage.rejected, (state) => {
+      state.loginMessage = '';
     });
   },
 });

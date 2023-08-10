@@ -19,6 +19,7 @@ function App() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getContractors());
+    // dispatch(clearLoginMessage());
     // dispatch(getReservations());
   }, [dispatch]);
 

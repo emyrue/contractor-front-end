@@ -32,7 +32,6 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     const { data } = response;
     return data.data;
   } catch (err) {
-    console.log(err.response.data.error);
     return {
       allUsers: [],
       user: {},
@@ -116,6 +115,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.contractor = action.payload.contractor;
       state.reservations = action.payload.reservations;
+      state.loginMessage = action.payload.loginMessage;
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       state.user = {};

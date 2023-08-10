@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getUser } from './redux/user/UserReducer';
+import { getUser, clearLoginMessage } from './redux/user/UserReducer';
 import { getContractors } from './redux/contractors/ContractorReducer';
 // import { getReservations } from './redux/reservations/ReservationsReducer';
 import Nav from './components/nav';
@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getContractors());
-    // dispatch(clearLoginMessage());
+    dispatch(clearLoginMessage());
     // dispatch(getReservations());
   }, [dispatch]);
 

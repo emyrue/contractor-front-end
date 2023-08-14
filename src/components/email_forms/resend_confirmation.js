@@ -1,26 +1,27 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { TextField, Button } from '@mui/material';
 import { PropTypes } from 'prop-types';
+import endpoint from '../../redux/endpoint';
 
 export default function ResendConfirmation(props) {
-  const { className, handleClose } = props;
+  const { handleClose } = props;
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleClose();
+    axios.post(`${endpoint}users/confirmation`, {
+      user: { email },
+    });
   };
 
   return (
-    <form
-      className={className}
-      onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
       <TextField
         id="resend-email"
         label="Email"
         value={email}
-        onChange={setEmail}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <Button
         type="submit"
@@ -37,6 +38,5 @@ export default function ResendConfirmation(props) {
 }
 
 ResendConfirmation.propTypes = {
-  className: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
 };

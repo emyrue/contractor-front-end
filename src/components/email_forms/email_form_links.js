@@ -3,22 +3,23 @@ import { Button } from '@mui/material';
 import ResendConfirmation from './resend_confirmation';
 
 export default function EmailFormLinks() {
-  const [resendClass, setResendClass] = useState('hide');
+  const [showResend, setShowResend] = useState(false);
 
   const handleResendHide = () => {
-    setResendClass('hide');
+    setShowResend(false);
   };
 
   return (
     <ul>
       <li>
         <Button
-          onClick={() => setResendClass('')}
+          onClick={() => setShowResend(true)}
         >
           Resend Confirmation Instructions
         </Button>
       </li>
-      <ResendConfirmation className={resendClass} handleClose={handleResendHide} />
+      { showResend
+        && <ResendConfirmation handleClose={handleResendHide} /> }
     </ul>
   );
 }

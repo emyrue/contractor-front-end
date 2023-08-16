@@ -10,8 +10,9 @@ import SignupPage from './pages/signup_page';
 import AccountPage from './pages/account_page';
 import ContractorsPage from './pages/contractors_page';
 import ContractorInfoPage from './pages/contractorInfo_page';
-import './App.css';
 import UsersPage from './pages/users_page';
+import ResetPassword from './pages/reset_password';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/my_account" element={<AccountPage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/password/*" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );

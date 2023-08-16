@@ -29,6 +29,7 @@ export const userLogin = createAsyncThunk(LOGIN, async (user) => {
     const response = await axios.post(loginEndpoint, user);
     const serializedToken = JSON.stringify(response.headers.get('Authorization'));
     localStorage.setItem('Authorization', serializedToken);
+    localStorage.setItem('userId', response.data.data.user.id);
     const { data } = response;
     return data.data;
   } catch (err) {
@@ -122,7 +123,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.contractor = {};
       state.reservations = [];
-      state.loginMessage = action.payload.loginMessage;
+      state.loginMessage = action.payload.message;
     });
     builder.addCase(userLogin.pending, (state) => {
       state.isLoading = true;

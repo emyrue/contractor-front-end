@@ -7,7 +7,6 @@ import endpoint from '../redux/endpoint';
 export default function ResetPassword() {
   const location = useLocation();
   const [token, setToken] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [message, setMessage] = useState('');
@@ -18,29 +17,22 @@ export default function ResetPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.put(`${endpoint}users/password`, {
-        user: {
-          email,
-          password,
-          confirm_password: confirmation,
-          reset_password_token: token,
-        },
-      });
-      console.log(response);
-    } catch (err) {
-      console.log('hello');
-      setMessage(err.message);
+    if (password === confirmation) {
+        try {
+            const response = await axios.put(`${endpoint}users/password`, {
+              user: {
+                password,
+                confirm_password: confirmation,
+                reset_password_token: token,
+              },
+            });
+            setMessage('Password reset successfully.');
+          } catch (err) {
+            setMessage('Password not reset.');
+          }
+    } else {
+      setMessage('Password and password confirmation do not match.')
     }
-    const response = await axios.put(`${endpoint}users/password`, {
-      user: {
-        email,
-        password,
-        confirm_password: confirmation,
-        reset_password_token: token,
-      },
-    });
-    console.log(response);
   };
 
   return (
@@ -48,12 +40,6 @@ export default function ResetPassword() {
       { token
         && (
           <form onSubmit={handleSubmit}>
-            <TextField
-              id="email"
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
             <TextField
               id="new-password"
               label="New Password"

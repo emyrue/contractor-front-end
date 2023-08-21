@@ -18,20 +18,20 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmation) {
-        try {
-            const response = await axios.put(`${endpoint}users/password`, {
-              user: {
-                password,
-                confirm_password: confirmation,
-                reset_password_token: token,
-              },
-            });
-            setMessage('Password reset successfully.');
-          } catch (err) {
-            setMessage('Password not reset.');
-          }
+      try {
+        await axios.put(`${endpoint}users/password`, {
+          user: {
+            password,
+            confirm_password: confirmation,
+            reset_password_token: token,
+          },
+        });
+        setMessage('Password reset successfully.');
+      } catch (err) {
+        setMessage('Password not reset.');
+      }
     } else {
-      setMessage('Password and password confirmation do not match.')
+      setMessage('Password and password confirmation do not match.');
     }
   };
 

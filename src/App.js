@@ -10,6 +10,7 @@ import SignupPage from './pages/signup_page';
 import AccountPage from './pages/account_page';
 import ContractorsPage from './pages/contractors_page';
 import ContractorInfoPage from './pages/contractorInfo_page';
+import ReservationsPage from './pages/reservations_page';
 import UsersPage from './pages/users_page';
 import ResetPassword from './pages/reset_password';
 import './App.css';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/my_account" element={<AccountPage />} />
+        <Route path="/my_reservations" element={<ReservationsPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/password/*" element={<ResetPassword />} />
       </Routes>

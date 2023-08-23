@@ -58,6 +58,15 @@ export default function Nav() {
         </Link>
         )}
       { userInfo.user.name
+        && (
+        <Link
+          href="/my_reservations"
+          underline="hover"
+        >
+          My Reservations
+        </Link>
+        )}
+      { userInfo.user.name
         && <button onClick={handleClick} type="button">Log out</button>}
     </nav>
   );

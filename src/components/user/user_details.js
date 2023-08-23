@@ -29,9 +29,9 @@ export default function UserDetails() {
           {' '}
           {userInfo.user.email}
         </li>
-        <li>
+        {/* <li>
           <UserReservations />
-        </li>
+        </li> */}
       </ul>
       { nameFormDisplay
         && <EditNamePopup handleClose={handleClose} />}

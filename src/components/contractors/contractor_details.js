@@ -52,9 +52,9 @@ export default function ContractorDetails() {
               {userInfo.contractor.rate}
               /hr
             </li>
-            <li>
+            {/* <li>
               <ContractorReservations />
-            </li>
+            </li> */}
             <li>
               <Fab
                 onClick={() => setEditFormDisplay(true)}

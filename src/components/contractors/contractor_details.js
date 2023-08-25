@@ -5,7 +5,7 @@ import { deleteContractor } from '../../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
 import DeleteUserContractor from './delete_user_contractor';
-import ContractorReservations from './contractor_reservations';
+// import ContractorReservations from './contractor_reservations';
 
 export default function ContractorDetails() {
   const [contractorFormDisplay, setContractorFormDisplay] = useState(false);

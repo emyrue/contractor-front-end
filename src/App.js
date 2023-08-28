@@ -14,6 +14,7 @@ import ReservationsPage from './pages/reservations_page';
 import UsersPage from './pages/users_page';
 import ResetPassword from './pages/reset_password';
 import TestCloudinary from './pages/test_cloudinary';
+import CloudinaryWidget from './pages/cloudinary_widget';
 import './App.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/password/*" element={<ResetPassword />} />
         <Route path="/cloudinary" element={<TestCloudinary />} />
+        <Route path="/widget" element={<CloudinaryWidget />} />
       </Routes>
     </BrowserRouter>
   );

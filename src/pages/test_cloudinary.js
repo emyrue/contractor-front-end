@@ -1,11 +1,23 @@
-import { useRef } from 'react';
-import Input from '@mui/material/Input';
+import { useRef, useState, useEffect } from 'react';
 
 export default function TestCloudinary() {
-  const fileButtonRef = useRef(null);
+  const [file, setFile] = useState('');
+  const fileButtonRef = useRef();
+
+  useEffect(() => {
+    if (file === '') {
+      fileButtonRef.current.value = '';
+    } else {
+      fileButtonRef.current.files = file;
+    }
+  }, [file]);
 
   const handleClick = () => {
     fileButtonRef.current.click();
+  };
+
+  const handleChange = (e) => {
+    setFile(e.target.file);
   };
 
   return (
@@ -13,8 +25,23 @@ export default function TestCloudinary() {
       <input
         type="file"
         className="hide"
-        onChange
+        onChange={handleChange}
+        ref={fileButtonRef}
+        accept="image/png, image/jpeg"
       />
+      <button
+        type="button"
+        onClick={handleClick}
+      >
+        Click
+      </button>
+      { fileButtonRef.current
+        && <span>{fileButtonRef.current.files[0].name}</span> }
+      { !fileButtonRef.current
+        && <span>No file chosen</span>}
+      <button type="submit">
+        Submit
+      </button>
     </form>
   );
 }

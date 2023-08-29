@@ -6,6 +6,7 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
+import CloudinaryWidget from '../components/cloudinary_widget';
 import endpoint from '../redux/endpoint';
 
 export default function SignupPage() {
@@ -15,6 +16,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [pictureLink, setPictureLink] = useState('');
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
@@ -23,6 +25,10 @@ export default function SignupPage() {
 
   const handleMouseDownPassword = (e) => {
     e.preventDefault();
+  };
+
+  const changePictureLink = (value) => {
+    setPictureLink(value);
   };
 
   const handleSubmit = async (e) => {
@@ -36,6 +42,7 @@ export default function SignupPage() {
             email,
             password,
             password_confirmation: passwordConfirmation,
+            picture_link: pictureLink,
           },
         });
       navigate('/login');
@@ -112,6 +119,7 @@ export default function SignupPage() {
             required
           />
         </FormControl>
+        <CloudinaryWidget setPictureLink={changePictureLink} />
         <Button
           type="submit"
           variant="outlined"

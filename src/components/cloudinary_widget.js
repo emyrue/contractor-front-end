@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function CloudinaryWidget() {
+export default function CloudinaryWidget(props) {
+  const { setPictureLink } = props;
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
+  const [pictureName, setPictureName] = useState('No file chosen');
 
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
@@ -10,7 +13,13 @@ export default function CloudinaryWidget() {
       cloudName: process.env.REACT_APP_CLOUD_NAME,
       uploadPreset: process.env.REACT_APP_UPLOAD_PRESET,
     }, (error, result) => {
-      console.log(result);
+      if (result.event === 'success') {
+        console.log('success');
+        setPictureName(result.info.original_filename);
+        setPictureLink(result.info.secure_url);
+      } else {
+        console.log(result);
+      }
     });
   }, []);
 
@@ -19,7 +28,11 @@ export default function CloudinaryWidget() {
       <button type="button" onClick={() => widgetRef.current.open()}>
         Upload
       </button>
-      <img alt="" src="https://res.cloudinary.com/dvxsnjluz/image/upload/v1693340619/oglnkxmtoplspvzz7yml.png" />
+      <span>{pictureName}</span>
     </section>
   );
 }
+
+CloudinaryWidget.propTypes = {
+  setPictureLink: PropTypes.func.isRequired,
+};

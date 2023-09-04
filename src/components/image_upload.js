@@ -1,7 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function TestCloudinary() {
+export default function ImageUpload(props) {
+  const { changeFile } = props;
   const [file, setFile] = useState('');
+  const [fileName, setFileName] = useState('No file chosen');
   const fileButtonRef = useRef();
 
   useEffect(() => {
@@ -9,6 +12,7 @@ export default function TestCloudinary() {
       fileButtonRef.current.value = '';
     } else {
       fileButtonRef.current.files = file;
+      setFileName(fileButtonRef.current.files[0].name);
     }
   }, [file]);
 
@@ -17,11 +21,12 @@ export default function TestCloudinary() {
   };
 
   const handleChange = (e) => {
+    changeFile(e.target.file);
     setFile(e.target.file);
   };
 
   return (
-    <form>
+    <div>
       <input
         type="file"
         className="hide"
@@ -35,13 +40,11 @@ export default function TestCloudinary() {
       >
         Click
       </button>
-      { fileButtonRef.current
-        && <span>{fileButtonRef.current.files[0].name}</span> }
-      { !fileButtonRef.current
-        && <span>No file chosen</span>}
-      <button type="submit">
-        Submit
-      </button>
-    </form>
+      <span>{fileName}</span>
+    </div>
   );
 }
+
+ImageUpload.propTypes = {
+  changeFile: PropTypes.func.isRequired,
+};

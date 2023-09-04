@@ -27,12 +27,6 @@ export default function Nav() {
       >
         Cloudinary
       </Link>
-      <Link
-        href="/widget"
-        underline="hover"
-      >
-        Widget
-      </Link>
       { !userInfo.user.name
         && (
         <Link

@@ -13,7 +13,7 @@ import ContractorInfoPage from './pages/contractorInfo_page';
 import ReservationsPage from './pages/reservations_page';
 import UsersPage from './pages/users_page';
 import ResetPassword from './pages/reset_password';
-import TestCloudinary from './pages/test_cloudinary';
+// import ImageUpload from './components/image_upload';
 import './App.css';
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
         <Route path="/my_reservations" element={<ReservationsPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/password/*" element={<ResetPassword />} />
-        <Route path="/cloudinary" element={<TestCloudinary />} />
+        {/* <Route path="/cloudinary" element={<ImageUpload />} /> */}
       </Routes>
     </BrowserRouter>
   );

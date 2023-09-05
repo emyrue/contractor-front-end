@@ -13,6 +13,8 @@ export default function ImageUpload(props) {
     } else {
       fileButtonRef.current.files = file;
       setFileName(fileButtonRef.current.files[0].name);
+      changeFile(fileButtonRef.current.files[0]);
+      console.log(fileButtonRef.current.files[0]);
     }
   }, [file]);
 
@@ -21,8 +23,7 @@ export default function ImageUpload(props) {
   };
 
   const handleChange = (e) => {
-    changeFile(e.target.file);
-    setFile(e.target.file);
+    setFile(e.target.files);
   };
 
   return (
@@ -32,7 +33,7 @@ export default function ImageUpload(props) {
         className="hide"
         onChange={handleChange}
         ref={fileButtonRef}
-        accept="image/png, image/jpeg"
+        accept="image/*"
       />
       <button
         type="button"

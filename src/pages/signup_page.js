@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
@@ -11,15 +11,9 @@ import ImageUpload from '../components/image_upload';
 import { Cloudinary } from '@cloudinary/url-gen';
 import endpoint from '../redux/endpoint';
 
-// cloudinary.config({
-//   cloud_name: process.env.REACT_APP_CLOUD_NAME,
-//   api_key: process.env.REACT_APP_API_KEY,
-//   api_secret: process.env.REACT_APP_API_SECRET
-// });
-
 export default function SignupPage() {
   const [show, setShow] = useState(false);
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
   // const [fileLink, setFileLink] = useState('');
   // const [publicId, setPublicId] = useState('');
   // const [signature, setSignature] = useState('');
@@ -31,8 +25,21 @@ export default function SignupPage() {
   const navigate = useNavigate();
 
   const cld = new Cloudinary({
-    cloudName: process.env.REACT_APP_CLOUD_NAME,
+    cloud: {
+      cloudName: process.env.REACT_APP_CLOUD_NAME,
+    },
+    url: {
+      secure: true,
+      api_key: process.env.REACT_APP_API_KEY,
+      api_secret: process.env.REACT_APP_API_SECRET,
+    },
   });
+
+  const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`;
+
+  useEffect(() => {
+    console.log(file);
+  }, [file]);
 
   // const changeLink = (value) => {
   //   setFileLink(value);
@@ -63,19 +70,27 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(file);
-    if (password === passwordConfirmation) {
+    if (file === null) {
+      setErrorMessage('Please select an image for your profile picture.');
+    } else if (password === passwordConfirmation) {
       setErrorMessage('Loading...');
-      await axios.post(`${endpoint}users`,
-        {
-          user: {
-            name,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-          },
-        });
-      navigate('/login');
+      const body = new FormData();
+      body.append('file', file);
+      body.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
+      const response = await axios.post(uploadUrl, body);
+      console.log(response);
+
+
+      // await axios.post(`${endpoint}users`,
+      //   {
+      //     user: {
+      //       name,
+      //       email,
+      //       password,
+      //       password_confirmation: passwordConfirmation,
+      //     },
+      //   });
+      // navigate('/login');
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }

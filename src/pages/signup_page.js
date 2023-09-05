@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
@@ -7,16 +7,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 import ImageUpload from '../components/image_upload';
-// import CloudinaryWidget from '../components/cloudinary_widget';
-import { Cloudinary } from '@cloudinary/url-gen';
-import endpoint from '../redux/endpoint';
+import { userSignUp } from '../redux/user/UserReducer';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
-  // const [fileLink, setFileLink] = useState('');
-  // const [publicId, setPublicId] = useState('');
-  // const [signature, setSignature] = useState('');
+  const [signature, setSignature] = useState('');
+  const [publicId, setPublicId] = useState('');
+  const [pictureLink, setPictureLink] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,41 +22,11 @@ export default function SignupPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: process.env.REACT_APP_CLOUD_NAME,
-    },
-    url: {
-      secure: true,
-      api_key: process.env.REACT_APP_API_KEY,
-      api_secret: process.env.REACT_APP_API_SECRET,
-    },
-  });
-
   const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`;
-
-  useEffect(() => {
-    console.log(file);
-  }, [file]);
-
-  // const changeLink = (value) => {
-  //   setFileLink(value);
-  //   console.log(fileLink);
-  // };
 
   const changeFile = (value) => {
     setFile(value);
   };
-
-  // const changePublicId = (value) => {
-  //   setPublicId(value);
-  //   console.log(publicId);
-  // };
-
-  // const changeSignature = (value) => {
-  //   setSignature(value);
-  //   console.log(signature);
-  // };
 
   const handleClickShowPassword = () => {
     setShow(!show);
@@ -78,19 +46,27 @@ export default function SignupPage() {
       body.append('file', file);
       body.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
       const response = await axios.post(uploadUrl, body);
-      console.log(response);
 
+      if (response.status === 200) {
+        setPublicId(response.data.public_id);
+        setSignature(response.data.signature);
+        setPictureLink(response.data.secure_url);
+      } else {
+        setErrorMessage('Profile picture not uploaded correctly.');
+        setPictureLink(`https://res.cloudinary.com/${process.env.REACT_APP_CLOUD_NAME}/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg`);
+      }
 
-      // await axios.post(`${endpoint}users`,
-      //   {
-      //     user: {
-      //       name,
-      //       email,
-      //       password,
-      //       password_confirmation: passwordConfirmation,
-      //     },
-      //   });
-      // navigate('/login');
+      await userSignUp({
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+        picture_link: pictureLink,
+        public_id: publicId,
+        signature,
+      });
+
+      navigate('/login');
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }
@@ -101,11 +77,6 @@ export default function SignupPage() {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <h2>Select Profile Picture</h2>
-        {/* <CloudinaryWidget
-          setPictureLink={changeLink}
-          setPublicId={changePublicId}
-          setSignature={changeSignature}
-        /> */}
         <ImageUpload changeFile={changeFile} />
         <TextField
           id="name"

@@ -14,7 +14,6 @@ export default function ImageUpload(props) {
       fileButtonRef.current.files = file;
       setFileName(fileButtonRef.current.files[0].name);
       changeFile(fileButtonRef.current.files[0]);
-      console.log(fileButtonRef.current.files[0]);
     }
   }, [file]);
 

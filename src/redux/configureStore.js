@@ -9,4 +9,5 @@ export default configureStore({
     contractors: contractorsReducer,
     reservations: reservationsReducer,
   },
+  // devTools: false,
 });

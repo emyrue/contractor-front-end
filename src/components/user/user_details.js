@@ -18,6 +18,9 @@ export default function UserDetails() {
     <div>
       <ul>
         <li>
+          <img src={userInfo.user.picture_link} alt="profile" />
+        </li>
+        <li>
           Username:
           {' '}
           {userInfo.user.name}
@@ -29,9 +32,6 @@ export default function UserDetails() {
           {' '}
           {userInfo.user.email}
         </li>
-        {/* <li>
-          <UserReservations />
-        </li> */}
       </ul>
       { nameFormDisplay
         && <EditNamePopup handleClose={handleClose} />}

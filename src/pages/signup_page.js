@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   TextField, Button, InputAdornment, IconButton, OutlinedInput, InputLabel, FormControl,
@@ -20,9 +20,27 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [stateUpdated, setStateUpdated] = useState(false);
   const navigate = useNavigate();
 
   const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`;
+
+  useEffect(() => {
+    const signUp = async () => {
+      await userSignUp({
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+        picture_link: pictureLink,
+        public_id: publicId,
+        signature,
+      });
+
+      navigate('/login');
+    };
+    signUp();
+  }, [stateUpdated]);
 
   const changeFile = (value) => {
     setFile(value);
@@ -51,22 +69,12 @@ export default function SignupPage() {
         setPublicId(response.data.public_id);
         setSignature(response.data.signature);
         setPictureLink(response.data.secure_url);
+        setStateUpdated(true);
       } else {
         setErrorMessage('Profile picture not uploaded correctly.');
         setPictureLink(`https://res.cloudinary.com/${process.env.REACT_APP_CLOUD_NAME}/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg`);
+        setStateUpdated(true);
       }
-
-      await userSignUp({
-        name,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-        picture_link: pictureLink,
-        public_id: publicId,
-        signature,
-      });
-
-      navigate('/login');
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }

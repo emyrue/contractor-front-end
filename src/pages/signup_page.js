@@ -23,7 +23,7 @@ export default function SignupPage() {
   const [stateUpdated, setStateUpdated] = useState(false);
   const navigate = useNavigate();
 
-  const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`;
+  const uploadUrl = `${process.env.REACT_APP_API_URL}upload`;
 
   useEffect(() => {
     const signUp = async () => {

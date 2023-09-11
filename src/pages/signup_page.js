@@ -5,9 +5,9 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import axios from 'axios';
 import ImageUpload from '../components/image_upload';
 import { userSignUp } from '../redux/user/UserReducer';
+import postPhoto from '../modules/profilePictures';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);
@@ -26,20 +26,21 @@ export default function SignupPage() {
   const uploadUrl = `${process.env.REACT_APP_API_URL}upload`;
 
   useEffect(() => {
-    const signUp = async () => {
-      await userSignUp({
-        name,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-        picture_link: pictureLink,
-        public_id: publicId,
-        signature,
-      });
-
-      navigate('/login');
-    };
-    signUp();
+    if (stateUpdated) {
+      const signUp = async () => {
+        await userSignUp({
+          name,
+          email,
+          password,
+          password_confirmation: passwordConfirmation,
+          picture_link: pictureLink,
+          public_id: publicId,
+          signature,
+        });
+        navigate('/login');
+      };
+      signUp();
+    }
   }, [stateUpdated]);
 
   const changeFile = (value) => {
@@ -60,21 +61,15 @@ export default function SignupPage() {
       setErrorMessage('Please select an image for your profile picture.');
     } else if (password === passwordConfirmation) {
       setErrorMessage('Loading...');
-      const body = new FormData();
-      body.append('file', file);
-      body.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
-      const response = await axios.post(uploadUrl, body);
-
-      if (response.status === 200) {
-        setPublicId(response.data.public_id);
-        setSignature(response.data.signature);
-        setPictureLink(response.data.secure_url);
-        setStateUpdated(true);
-      } else {
-        setErrorMessage('Profile picture not uploaded correctly.');
-        setPictureLink(`https://res.cloudinary.com/${process.env.REACT_APP_CLOUD_NAME}/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg`);
-        setStateUpdated(true);
-      }
+      postPhoto(
+        file,
+        uploadUrl,
+        setPublicId,
+        setSignature,
+        setPictureLink,
+        setStateUpdated,
+        setErrorMessage,
+      );
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }

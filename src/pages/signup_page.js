@@ -12,8 +12,6 @@ import postPhoto from '../modules/profilePictures';
 export default function SignupPage() {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
-  const [signature, setSignature] = useState('');
-  const [publicId, setPublicId] = useState('');
   const [pictureLink, setPictureLink] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,8 +32,6 @@ export default function SignupPage() {
           password,
           password_confirmation: passwordConfirmation,
           picture_link: pictureLink,
-          public_id: publicId,
-          signature,
         });
         navigate('/login');
       };
@@ -64,8 +60,6 @@ export default function SignupPage() {
       postPhoto(
         file,
         uploadUrl,
-        setPublicId,
-        setSignature,
         setPictureLink,
         setStateUpdated,
         setErrorMessage,

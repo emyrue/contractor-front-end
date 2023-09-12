@@ -4,7 +4,6 @@ import {
   TextField, Button, Fab,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
-import axios from 'axios';
 import crypto from 'crypto-js';
 import { editUser } from '../../redux/user/UserReducer';
 import ImageUpload from '../image_upload';
@@ -15,15 +14,16 @@ export default function EditNamePopup(props) {
   const [name, setName] = useState(user.name);
   const [code, setCode] = useState('');
   const [file, setFile] = useState('');
+  const [pictureLink, setPictureLink] = useState(user.picture_link);
+  const [stateUpdated, setStateUpdated] = useState(false);
   const [adminForm, setAdminForm] = useState(false);
   const dispatch = useDispatch();
 
   const cloudinaryUrl = `${process.env.REACT_APP_API_URL}destroy`;
+  const uploadUrl = `${process.env.REACT_APP_API_URL}upload`;
 
   const generateSHA256 = (data) => {
-    const hash = crypto.SHA256(data).toString();
-    // hash.update(data);
-    return hash;
+    return crypto.SHA256(data).toString();
   };
 
   const getPublicIdFromURL = (url) => {
@@ -39,28 +39,44 @@ export default function EditNamePopup(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const publicId = getPublicIdFromURL(user.picture_link);
-    console.log(publicId);
-    console.log(user.public_id);
-    const date = new Date();
-    const timestamp = date.getTime();
-    const signature = generateSHA256(generateSignature(publicId, process.env.REACT_APP_API_SECRET));
-    if (file) {
-      if (publicId) {
-        const response = await axios.post(cloudinaryUrl, {
-          public_id: publicId,
-          api_key: process.env.REACT_APP_API_KEY,
-          timestamp,
-          signature,
-        });
-        console.log(response);
-      }
-    }
+    deletePhoto(
+      getPublicIdFromURL,
+      user,
+      generateSHA256,
+      generateSignature,
+      file,
+      cloudinaryUrl,
+    );
+    postPhoto(
+      file,
+      uploadUrl,
+      setPictureLink,
+      setStateUpdated,
+      null,
+    );
+    // const publicId = getPublicIdFromURL(user.picture_link);
+    // console.log(publicId);
+    // console.log(user.public_id);
+    // const date = new Date();
+    // const timestamp = date.getTime();
+    // const signature = generateSHA256(generateSignature(publicId, process.env.REACT_APP_API_SECRET));
+    // if (file) {
+    //   if (publicId) {
+    //     const response = await axios.post(cloudinaryUrl, {
+    //       public_id: publicId,
+    //       api_key: process.env.REACT_APP_API_KEY,
+    //       timestamp,
+    //       signature,
+    //     });
+    //     console.log(response);
+    //   }
+    // }
 
     dispatch(editUser({
       id: user.id,
       name,
       role: code,
+      picture_link: pictureLink,
     }));
   };
 

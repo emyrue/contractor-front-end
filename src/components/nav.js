@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { userLogout } from '../redux/user/UserReducer';
+import '../styles/nav.scss';
 
 export default function Nav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [mobileHide, setMobileHide] = useState('mobile-hide');
   const userInfo = useSelector((state) => state.user);
 
   const handleClick = () => {
@@ -13,21 +16,33 @@ export default function Nav() {
     navigate('/');
   };
 
+  const handleMenuButton = () => {
+    if (mobileHide === 'mobile-hide') {
+      setMobileHide('mobile-show');
+    } else {
+      setMobileHide('mobile-hide');
+    }
+  };
+
   return (
     <nav>
-      <Link
-        href="/"
-        underline="hover"
-      >
-        Contractors
-      </Link>
-      <Link
-        href="/cloudinary"
-        underline="hover"
-      >
-        Cloudinary
-      </Link>
-      { !userInfo.user.name
+      <button className="menu-button desktop-hide" type="button" onClick={handleMenuButton}>
+        <img alt="menu-icon" src="" />
+      </button>
+      <div className={mobileHide}>
+        <Link
+          href="/"
+          underline="hover"
+        >
+          Contractors
+        </Link>
+        <Link
+          href="/cloudinary"
+          underline="hover"
+        >
+          Cloudinary
+        </Link>
+        { !userInfo.user.name
         && (
         <Link
           href="/signup"
@@ -36,7 +51,7 @@ export default function Nav() {
           Sign up
         </Link>
         )}
-      { !userInfo.user.name
+        { !userInfo.user.name
         && (
         <Link
           href="/login"
@@ -45,7 +60,7 @@ export default function Nav() {
           Log in
         </Link>
         )}
-      { userInfo.user.role === 'admin'
+        { userInfo.user.role === 'admin'
         && (
           <Link
             href="/users"
@@ -54,7 +69,7 @@ export default function Nav() {
             View Users
           </Link>
         )}
-      { userInfo.user.name
+        { userInfo.user.name
         && (
         <Link
           href="/my_account"
@@ -63,7 +78,7 @@ export default function Nav() {
           My Account
         </Link>
         )}
-      { userInfo.user.name
+        { userInfo.user.name
         && (
         <Link
           href="/my_reservations"
@@ -72,8 +87,12 @@ export default function Nav() {
           My Reservations
         </Link>
         )}
-      { userInfo.user.name
+        { userInfo.user.name
         && <button onClick={handleClick} type="button">Log out</button>}
+        <button className="close desktop-hide" type="button" onClick={handleMenuButton}>
+          <img alt="close" src="" />
+        </button>
+      </div>
     </nav>
   );
 }

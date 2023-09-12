@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { getOneContractor } from '../contractors/ContractorReducer';
-import endpoint from '../endpoint';
 
-const getLikesEndpoint = `${endpoint}/v1/likes`;
+const getLikesEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}/v1/likes`;
 
 const createLike = async (object, dispatch, contractorId) => {
   await axios.post(getLikesEndpoint, object);

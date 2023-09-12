@@ -6,7 +6,6 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
-import endpoint from '../redux/endpoint';
 
 export default function ResetPassword() {
   const location = useLocation();
@@ -37,7 +36,7 @@ export default function ResetPassword() {
     e.preventDefault();
     if (password === confirmation) {
       try {
-        await axios.put(`${endpoint}users/password`, {
+        await axios.put(`${process.env.REACT_APP_BACKEND_ENDPOINT}users/password`, {
           user: {
             password,
             confirm_password: confirmation,

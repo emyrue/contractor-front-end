@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { getOneContractor } from '../contractors/ContractorReducer';
-import endpoint from '../endpoint';
 
-const getReviewsEndpoint = `${endpoint}/v1/reviews`;
+const getReviewsEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}/v1/reviews`;
 
 const createReview = async (object) => {
   await axios.post(getReviewsEndpoint, object);

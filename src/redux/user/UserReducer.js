@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import endpoint from '../endpoint';
 
-const loginEndpoint = `${endpoint}users/sign_in`;
-const getUsersEndpoint = `${endpoint}v1/users`;
-const logoutEndpoint = `${endpoint}users/sign_out`;
+const loginEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}users/sign_in`;
+const getUsersEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}v1/users`;
+const logoutEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}users/sign_out`;
 
 const LOGIN = 'User/NEW_SESSION';
 const GET_USERS = 'User/GET_USERS';
@@ -15,7 +14,7 @@ const LOGOUT = 'User/END_SESSION';
 const CLEAR_LOGIN = 'User/CLEAR_LOGIN';
 
 export const userSignUp = async (user) => {
-  await axios.post(`${endpoint}users`,
+  await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}users`,
     {
       user,
     });

@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import endpoint from '../endpoint';
 
-const getReservationsEndpoint = `${endpoint}v1/reservations`;
+const getReservationsEndpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}v1/reservations`;
 
 const GET_RESERVATIONS = 'Reservations/GET_RESERVATIONS';
 const CREATE_RESERVATION = 'Reservations/CREATE_RESERVATION';

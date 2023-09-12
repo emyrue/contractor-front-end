@@ -2,7 +2,6 @@ import { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button } from '@mui/material';
 import { PropTypes } from 'prop-types';
-import endpoint from '../../redux/endpoint';
 
 export default function ResendConfirmation(props) {
   const { handleClose } = props;
@@ -11,7 +10,7 @@ export default function ResendConfirmation(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${endpoint}users/confirmation`, {
+    axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}users/confirmation`, {
       user: { email },
     });
     setSubmitted(true);

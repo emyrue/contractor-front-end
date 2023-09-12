@@ -7,7 +7,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ImageUpload from '../components/image_upload';
 import { userSignUp } from '../redux/user/UserReducer';
-import { postPhoto } from '../modules/profilePictures';
+import defaultPhoto, { postPhoto } from '../modules/profilePictures';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);
@@ -37,7 +37,7 @@ export default function SignupPage() {
       };
       signUp();
     }
-  }, [stateUpdated]);
+  }, [stateUpdated, name, email, password, passwordConfirmation, pictureLink, navigate]);
 
   const changeFile = (value) => {
     setFile(value);
@@ -54,7 +54,8 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      setPictureLink('https://res.cloudinary.com/dvxsnjluz/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg');
+      setPictureLink(defaultPhoto);
+      setStateUpdated(true);
     } else {
       postPhoto(
         file,

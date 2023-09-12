@@ -54,7 +54,7 @@ export default function UserReservations() {
           }
           return (
             <li className={itemClassname} key={`reservation-${id}`}>
-              <h5>{contractor.name}</h5>
+              <h5>{contractor.user.name}</h5>
               <h6>
                 Status:
                 {' '}

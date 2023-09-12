@@ -11,7 +11,6 @@ export default function ContractorForm(props) {
   const { handleClose1 } = props;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
-  const [name, setName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [rate, setRate] = useState(0);
   const [bio, setBio] = useState('');
@@ -19,7 +18,6 @@ export default function ContractorForm(props) {
   const handleSubmit = () => {
     dispatch(createContractor({
       user_id: userInfo.user.id,
-      name,
       rate,
       job_title: jobTitle,
       bio,
@@ -28,14 +26,6 @@ export default function ContractorForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
-        id="name"
-        label="Name"
-        variant="outlined"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
       <TextField
         id="rate"
         label="Hourly Rate"

@@ -40,13 +40,12 @@ export const deletePhoto = async (
   const signature = generateSHA256(generateSignature(publicId, process.env.REACT_APP_API_SECRET));
   if (file) {
     if (publicId) {
-      const response = await axios.post(cloudinaryUrl, {
+      await axios.post(cloudinaryUrl, {
         public_id: publicId,
         api_key: process.env.REACT_APP_API_KEY,
         timestamp,
         signature,
       });
-      console.log(response);
     }
   }
 };

@@ -11,7 +11,6 @@ export default function EditContractorForm(props) {
   const { handleClose2 } = props;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
-  const [name, setName] = useState(userInfo.contractor.name);
   const [rate, setRate] = useState(userInfo.contractor.rate);
   const [bio, setBio] = useState(userInfo.contractor.bio);
 
@@ -19,7 +18,6 @@ export default function EditContractorForm(props) {
     dispatch(editContractor({
       contractor: {
         id: userInfo.contractor.id,
-        name,
         rate,
         bio,
       },
@@ -28,14 +26,6 @@ export default function EditContractorForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
-        id="name"
-        label="Name"
-        variant="outlined"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
       <TextField
         id="rate"
         label="Hourly Rate"

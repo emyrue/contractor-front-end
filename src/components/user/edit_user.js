@@ -9,7 +9,7 @@ import { editUser } from '../../redux/user/UserReducer';
 import { postPhoto, deletePhoto } from '../../modules/profilePictures';
 import ImageUpload from '../image_upload';
 
-export default function EditNamePopup(props) {
+export default function EditUserPopup(props) {
   const { handleClose } = props;
   const user = useSelector((state) => state.user.user);
   const [name, setName] = useState(user.name);
@@ -32,7 +32,7 @@ export default function EditNamePopup(props) {
         picture_link: pictureLink,
       }));
     }
-  }, [stateUpdated]);
+  }, [stateUpdated, user.id, code, pictureLink, name, dispatch]);
 
   const generateSHA256 = (data) => crypto.SHA256(data).toString();
 
@@ -122,6 +122,6 @@ export default function EditNamePopup(props) {
   );
 }
 
-EditNamePopup.propTypes = {
+EditUserPopup.propTypes = {
   handleClose: PropTypes.func.isRequired,
 };

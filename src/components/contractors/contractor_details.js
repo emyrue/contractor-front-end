@@ -29,14 +29,9 @@ export default function ContractorDetails() {
   return (
     <div>
       <ul>
-        { userInfo.contractor.name
+        { userInfo.contractor.id
           && (
           <div>
-            <li>
-              Display name:
-              {' '}
-              {userInfo.contractor.name}
-            </li>
             <li>
               Profession:
               {' '}
@@ -52,9 +47,6 @@ export default function ContractorDetails() {
               {userInfo.contractor.rate}
               /hr
             </li>
-            {/* <li>
-              <ContractorReservations />
-            </li> */}
             <li>
               <Fab
                 onClick={() => setEditFormDisplay(true)}
@@ -80,7 +72,7 @@ export default function ContractorDetails() {
               )}
           </div>
           )}
-        { !userInfo.contractor.name
+        { !userInfo.contractor.id
           && (
           <li>
             <Fab

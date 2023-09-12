@@ -26,7 +26,7 @@ export default function Nav() {
 
   return (
     <nav>
-      <button className="menu-button desktop-hide" type="button" onClick={handleMenuButton}>
+      <button className="menu-button" type="button" onClick={handleMenuButton}>
         <img alt="menu-icon" src="" />
       </button>
       <div className={mobileHide}>
@@ -88,8 +88,8 @@ export default function Nav() {
         </Link>
         )}
         { userInfo.user.name
-        && <button onClick={handleClick} type="button">Log out</button>}
-        <button className="close desktop-hide" type="button" onClick={handleMenuButton}>
+        && <button className="logout" onClick={handleClick} type="button">Log out</button>}
+        <button className="close" type="button" onClick={handleMenuButton}>
           <img alt="close" src="" />
         </button>
       </div>

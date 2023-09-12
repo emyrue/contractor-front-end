@@ -25,6 +25,8 @@ export default function ContractorsPage() {
         <ul>
           {contractorsInfo.allContractors.map((contractor) => (
             <li key={`contractor-${contractor.id}`}>
+              <img alt="" src={contractor.user.picture_link} />
+              <br />
               <span>{contractor.user.name}</span>
               <br />
               <span>{contractor.job_title}</span>

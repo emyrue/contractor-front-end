@@ -47,7 +47,18 @@ Clone this repository to your desired folder:
 
 - git clone git@github.com:emyrue/contractor-front-end.git
 
-You will need a file in the src/redux folder called endpoint.js that default exports the url for the api.
+This app involves using a cloudinary account to store profile pictures. The app should work fine without it, but there will be some empty image tags and failed api calls.
+
+You will need a gitignored .env file in the root directory with the following values:
+- REACT-APP-CLOUD-NAME
+- REACT_APP_UPLOAD_PRESET
+- REACT_APP_API_KEY
+- REACT_APP_API_SECRET
+- REACT_APP_CLOUDINARY_URL
+- REACT_APP_API_URL
+- REACT_APP_BACKEND_ENDPOINT
+The first six values have to do with cloudinary, if you choose to set up an account. Otherwise, fill these values with empty strings so the values do not return as undefined.
+The last value is the endpoint used to fetch and post data stored in the back end. Visit <a href="https://github.com/emyrue/contractor_api/">Contractor Connect API</a> to see how to set up the back end.
 
 ### Install
 

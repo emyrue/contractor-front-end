@@ -10,7 +10,6 @@
 
 # production
 /build
-endpoint.js
 
 # misc
 .DS_Store

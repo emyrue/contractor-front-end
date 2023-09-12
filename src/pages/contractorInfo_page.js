@@ -66,6 +66,7 @@ export default function ContractorInfoPage() {
             </Fab>
           )}
         </div>
+        <img alt="" src={contractor.user.picture_link} />
         <h2>{contractor.job_title}</h2>
         <p>{contractor.bio}</p>
         <span>

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const postPhoto = async (
+const defaultPhoto = 'https://res.cloudinary.com/dvxsnjluz/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg';
+
+export const postPhoto = async (
   file,
   uploadUrl,
   setPictureLink,
@@ -49,4 +51,4 @@ export const deletePhoto = async (
   }
 };
 
-export default postPhoto;
+export default defaultPhoto;

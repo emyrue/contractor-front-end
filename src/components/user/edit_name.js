@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   TextField, Button, Fab,
@@ -6,6 +6,7 @@ import {
 import { PropTypes } from 'prop-types';
 import crypto from 'crypto-js';
 import { editUser } from '../../redux/user/UserReducer';
+import { postPhoto, deletePhoto } from '../../modules/profilePictures';
 import ImageUpload from '../image_upload';
 
 export default function EditNamePopup(props) {
@@ -22,9 +23,18 @@ export default function EditNamePopup(props) {
   const cloudinaryUrl = `${process.env.REACT_APP_API_URL}destroy`;
   const uploadUrl = `${process.env.REACT_APP_API_URL}upload`;
 
-  const generateSHA256 = (data) => {
-    return crypto.SHA256(data).toString();
-  };
+  useEffect(() => {
+    if (stateUpdated) {
+      dispatch(editUser({
+        id: user.id,
+        name,
+        role: code,
+        picture_link: pictureLink,
+      }));
+    }
+  }, [stateUpdated]);
+
+  const generateSHA256 = (data) => crypto.SHA256(data).toString();
 
   const getPublicIdFromURL = (url) => {
     const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
@@ -37,47 +47,28 @@ export default function EditNamePopup(props) {
     return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    deletePhoto(
-      getPublicIdFromURL,
-      user,
-      generateSHA256,
-      generateSignature,
-      file,
-      cloudinaryUrl,
-    );
-    postPhoto(
-      file,
-      uploadUrl,
-      setPictureLink,
-      setStateUpdated,
-      null,
-    );
-    // const publicId = getPublicIdFromURL(user.picture_link);
-    // console.log(publicId);
-    // console.log(user.public_id);
-    // const date = new Date();
-    // const timestamp = date.getTime();
-    // const signature = generateSHA256(generateSignature(publicId, process.env.REACT_APP_API_SECRET));
-    // if (file) {
-    //   if (publicId) {
-    //     const response = await axios.post(cloudinaryUrl, {
-    //       public_id: publicId,
-    //       api_key: process.env.REACT_APP_API_KEY,
-    //       timestamp,
-    //       signature,
-    //     });
-    //     console.log(response);
-    //   }
-    // }
-
-    dispatch(editUser({
-      id: user.id,
-      name,
-      role: code,
-      picture_link: pictureLink,
-    }));
+  const handleSubmit = async () => {
+    if (file) {
+      if (pictureLink !== 'https://res.cloudinary.com/dvxsnjluz/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg') {
+        deletePhoto(
+          getPublicIdFromURL,
+          user,
+          generateSHA256,
+          generateSignature,
+          file,
+          cloudinaryUrl,
+        );
+      }
+      postPhoto(
+        file,
+        uploadUrl,
+        setPictureLink,
+        setStateUpdated,
+        null,
+      );
+    } else {
+      setStateUpdated(true);
+    }
   };
 
   const changeFile = (value) => {

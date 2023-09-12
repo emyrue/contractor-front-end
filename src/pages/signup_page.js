@@ -7,7 +7,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ImageUpload from '../components/image_upload';
 import { userSignUp } from '../redux/user/UserReducer';
-import postPhoto from '../modules/profilePictures';
+import { postPhoto } from '../modules/profilePictures';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);
@@ -53,10 +53,9 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (file === null) {
-      setErrorMessage('Please select an image for your profile picture.');
-    } else if (password === passwordConfirmation) {
-      setErrorMessage('Loading...');
+    if (!file) {
+      setPictureLink('https://res.cloudinary.com/dvxsnjluz/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg');
+    } else {
       postPhoto(
         file,
         uploadUrl,
@@ -64,6 +63,9 @@ export default function SignupPage() {
         setStateUpdated,
         setErrorMessage,
       );
+    }
+    if (password === passwordConfirmation) {
+      setErrorMessage('Loading...');
     } else {
       setErrorMessage('Make sure that the password matches the password confirmation.');
     }

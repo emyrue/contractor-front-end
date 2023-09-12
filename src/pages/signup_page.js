@@ -8,6 +8,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ImageUpload from '../components/image_upload';
 import { userSignUp } from '../redux/user/UserReducer';
 import defaultPhoto, { postPhoto } from '../modules/profilePictures';
+import '../styles/signup.scss';
 
 export default function SignupPage() {
   const [show, setShow] = useState(false);

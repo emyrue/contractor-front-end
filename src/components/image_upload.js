@@ -38,7 +38,7 @@ export default function ImageUpload(props) {
         type="button"
         onClick={handleClick}
       >
-        Click
+        Select
       </button>
       <span>{fileName}</span>
     </div>

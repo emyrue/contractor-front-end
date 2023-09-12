@@ -5,7 +5,7 @@ import {
 } from '@mui/icons-material';
 import { PropTypes } from 'prop-types';
 import createLike, { editLike, deleteLike } from '../../redux/likes/LikesReducer';
-import '../../styles/likeButtons.css';
+import '../../styles/likeButtons.scss';
 
 export default function ShowLikes(props) {
   const { likes: allLikes, reviewId, contractorId } = props;

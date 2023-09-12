@@ -58,7 +58,7 @@ export default function ReservationsPopup(props) {
           onChange={(e) => setJobDescription(e.target.value)}
           required
         />
-        { dimensions.width >= 500
+        { dimensions.width >= 602
           && (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -78,7 +78,7 @@ export default function ReservationsPopup(props) {
             />
           </LocalizationProvider>
           )}
-        { dimensions.width < 500
+        { dimensions.width < 602
           && (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <MobileDatePicker

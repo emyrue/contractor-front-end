@@ -74,11 +74,13 @@ export default function SignupPage() {
   };
 
   return (
-    <section>
+    <section className="signup-page-section">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Select Profile Picture</h2>
-        <ImageUpload changeFile={changeFile} />
+        <div className="profile-picture-upload">
+          <h2>Select Profile Picture</h2>
+          <ImageUpload changeFile={changeFile} />
+        </div>
         <TextField
           id="name"
           label="Username"

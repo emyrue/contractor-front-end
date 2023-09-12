@@ -25,7 +25,7 @@ export default function ContractorsPage() {
         <ul>
           {contractorsInfo.allContractors.map((contractor) => (
             <li key={`contractor-${contractor.id}`}>
-              <span>{contractor.name}</span>
+              <span>{contractor.user.name}</span>
               <br />
               <span>{contractor.job_title}</span>
               <br />

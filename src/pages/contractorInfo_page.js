@@ -37,10 +37,10 @@ export default function ContractorInfoPage() {
 
   return (
     <section>
-      { contractor.name && !isLoading
+      { contractor.id && !isLoading
       && (
       <section>
-        <h1>{contractor.name}</h1>
+        <h1>{contractor.user.name}</h1>
         <div>
           <Rating
             readOnly
@@ -93,7 +93,7 @@ export default function ContractorInfoPage() {
         && <ShowReviews reviews={reviews} /> }
       </section>
       )}
-      { !contractor.name && !isLoading
+      { !contractor.id && !isLoading
         && (
           <section>
             <h1>This contrator does not exist.</h1>

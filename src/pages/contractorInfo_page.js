@@ -51,11 +51,6 @@ export default function ContractorInfoPage() {
             {' '}
             review(s)
           </span>
-          <Fab
-            variant="extended"
-          >
-            View customer reviews
-          </Fab>
           { !leftReview
           && (
             <Fab

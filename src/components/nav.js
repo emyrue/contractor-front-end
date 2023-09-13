@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { Link } from '@mui/material';
 import { userLogout } from '../redux/user/UserReducer';
 import '../styles/nav.scss';
@@ -27,7 +29,7 @@ export default function Nav() {
   return (
     <nav>
       <button className="menu-button" type="button" onClick={handleMenuButton}>
-        <img alt="menu-icon" src="" />
+        <MenuIcon fontSize="large" />
       </button>
       <div className={mobileHide}>
         <Link
@@ -90,7 +92,7 @@ export default function Nav() {
         { userInfo.user.name
         && <button className="logout" onClick={handleClick} type="button">Log out</button>}
         <button className="close" type="button" onClick={handleMenuButton}>
-          <img alt="close" src="" />
+          <CloseIcon fontSize="large" />
         </button>
       </div>
     </nav>

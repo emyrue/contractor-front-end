@@ -13,7 +13,7 @@ export default function Nav() {
   const [mobileHide, setMobileHide] = useState('mobile-hide');
   const userInfo = useSelector((state) => state.user);
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     dispatch(userLogout());
     navigate('/');
   };
@@ -90,7 +90,11 @@ export default function Nav() {
         </Link>
         )}
         { userInfo.user.name
-        && <button className="logout" onClick={handleClick} type="button">Log out</button>}
+        && (
+        <form onSubmit={handleSubmit}>
+          <button className="logout" type="submit">Log out</button>
+        </form>
+        )}
         <button className="close" type="button" onClick={handleMenuButton}>
           <CloseIcon fontSize="large" />
         </button>

@@ -6,7 +6,7 @@ import {
 import { PropTypes } from 'prop-types';
 import crypto from 'crypto-js';
 import { editUser } from '../../redux/user/UserReducer';
-import { postPhoto, deletePhoto } from '../../modules/profilePictures';
+import postPhoto, { deletePhoto } from '../../modules/profilePictures';
 import ImageUpload from '../image_upload';
 
 export default function EditUserPopup(props) {
@@ -49,7 +49,7 @@ export default function EditUserPopup(props) {
 
   const handleSubmit = async () => {
     if (file) {
-      if (pictureLink !== 'https://res.cloudinary.com/dvxsnjluz/image/upload/v1693955285/cetxtwkworl98bhmc0yg.jpg') {
+      if (pictureLink !== process.env.REACT_APP_DEFAULT_PHOTO) {
         deletePhoto(
           getPublicIdFromURL,
           user,

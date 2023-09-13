@@ -20,9 +20,33 @@ export default function SignupPage() {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [stateUpdated, setStateUpdated] = useState(false);
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+  const [width, setWidth] = useState('60vw');
   const navigate = useNavigate();
 
   const uploadUrl = `${process.env.REACT_APP_API_URL}upload`;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (dimensions.width <= 601) {
+      setWidth('80vw');
+    } else {
+      setWidth('60vw');
+    }
+  }, [dimensions]);
 
   useEffect(() => {
     if (stateUpdated) {
@@ -88,6 +112,9 @@ export default function SignupPage() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          sx={{
+            width,
+          }}
         />
         <TextField
           id="email"
@@ -96,8 +123,16 @@ export default function SignupPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          sx={{
+            width,
+          }}
         />
-        <FormControl variant="outlined">
+        <FormControl
+          variant="outlined"
+          sx={{
+            width,
+          }}
+        >
           <InputLabel>Password</InputLabel>
           <OutlinedInput
             id="password"
@@ -121,7 +156,12 @@ export default function SignupPage() {
             required
           />
         </FormControl>
-        <FormControl variant="outlined">
+        <FormControl
+          variant="outlined"
+          sx={{
+            width,
+          }}
+        >
           <InputLabel>Confirm Password</InputLabel>
           <OutlinedInput
             id="password-confirmation"

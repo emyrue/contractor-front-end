@@ -33,3 +33,23 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .email-form-section {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .email-form {
+      min-width: 400px;
+      max-width: 600px;
+      width: 60vw;
+      height: auto;
+
+      h2 {
+        margin: none;
+      }
+    }
+  }
+}

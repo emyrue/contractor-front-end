@@ -18,16 +18,17 @@ export default function ResendConfirmation(props) {
   };
 
   return (
-    <form className="email-form" onSubmit={handleSubmit}>
-      <h2>Resend Confirmation Email</h2>
-      <TextField
-        id="resend-email"
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      { !submitted
+    <section className="email-form-section">
+      <form className="email-form" onSubmit={handleSubmit}>
+        <h2>Resend Confirmation Email</h2>
+        <TextField
+          id="resend-email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        { !submitted
         && (
         <div className="email-buttons">
           <Button
@@ -42,7 +43,7 @@ export default function ResendConfirmation(props) {
           </Button>
         </div>
         )}
-      { submitted
+        { submitted
         && (
         <div>
           <p>
@@ -57,7 +58,8 @@ export default function ResendConfirmation(props) {
           </Button>
         </div>
         )}
-    </form>
+      </form>
+    </section>
   );
 }
 

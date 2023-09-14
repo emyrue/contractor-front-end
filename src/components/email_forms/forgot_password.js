@@ -18,16 +18,17 @@ export default function ForgotPassword(props) {
   };
 
   return (
-    <form className="email-form" onSubmit={handleSubmit}>
-      <h2>Forgot Password</h2>
-      <TextField
-        id="forgot-email"
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      { !submitted
+    <section className="email-form-section">
+      <form className="email-form" onSubmit={handleSubmit}>
+        <h2>Forgot Password</h2>
+        <TextField
+          id="forgot-email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        { !submitted
         && (
         <div className="email-buttons">
           <Button
@@ -42,7 +43,7 @@ export default function ForgotPassword(props) {
           </Button>
         </div>
         )}
-      { submitted
+        { submitted
         && (
         <div>
           <p>
@@ -57,7 +58,8 @@ export default function ForgotPassword(props) {
           </Button>
         </div>
         )}
-    </form>
+      </form>
+    </section>
   );
 }
 

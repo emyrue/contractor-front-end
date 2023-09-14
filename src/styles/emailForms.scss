@@ -1,12 +1,23 @@
-.email-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.email-form-section {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11000;
 
-  .email-buttons {
+  .email-form {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+  
+    .email-buttons {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 }

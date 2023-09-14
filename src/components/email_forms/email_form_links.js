@@ -19,16 +19,16 @@ export default function EmailFormLinks() {
     <ul>
       <li>
         <Button
-          onClick={() => setShowResend(true)}
+          onClick={() => setShowForgot(true)}
         >
-          Resend Confirmation Instructions
+          Forgot Password
         </Button>
       </li>
       <li>
         <Button
-          onClick={() => setShowForgot(true)}
+          onClick={() => setShowResend(true)}
         >
-          Forgot Password
+          Resend Confirmation Instructions
         </Button>
       </li>
       { showResend

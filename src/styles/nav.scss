@@ -55,7 +55,8 @@ nav {
     }
 
     .mobile-hide {
-      display: block;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

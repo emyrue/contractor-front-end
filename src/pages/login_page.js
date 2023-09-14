@@ -70,7 +70,7 @@ export default function LoginPage() {
   return (
     <section className="login-page-section">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <TextField
           id="email"
           label="Email"

@@ -1,0 +1,12 @@
+.email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .email-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

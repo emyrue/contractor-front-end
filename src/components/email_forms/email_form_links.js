@@ -19,22 +19,28 @@ export default function EmailFormLinks() {
     <ul>
       <li>
         <Button
-          onClick={() => setShowForgot(true)}
+          onClick={() => {
+            setShowForgot(true);
+            setShowResend(false);
+          }}
         >
           Forgot Password
         </Button>
       </li>
       <li>
         <Button
-          onClick={() => setShowResend(true)}
+          onClick={() => {
+            setShowResend(true);
+            setShowForgot(false);
+          }}
         >
           Resend Confirmation Instructions
         </Button>
       </li>
-      { showResend
-        && <ResendConfirmation handleClose={handleResendHide} /> }
       { showForgot
         && <ForgotPassword handleClose={handleForgotHide} /> }
+      { showResend
+        && <ResendConfirmation handleClose={handleResendHide} /> }
     </ul>
   );
 }

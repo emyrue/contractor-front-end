@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button } from '@mui/material';
 import { PropTypes } from 'prop-types';
+import '../../styles/emailForms.scss';
 
 export default function ForgotPassword(props) {
   const { handleClose } = props;
@@ -17,23 +18,30 @@ export default function ForgotPassword(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="email-form" onSubmit={handleSubmit}>
+      <h2>Forgot Password</h2>
       <TextField
         id="forgot-email"
         label="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
-      <Button
-        type="submit"
-      >
-        Submit
-      </Button>
-      <Button
-        onClick={handleClose}
-      >
-        Close
-      </Button>
+      { !submitted
+        && (
+        <div className="email-buttons">
+          <Button
+            type="submit"
+          >
+            Submit
+          </Button>
+          <Button
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+        </div>
+        )}
       { submitted
         && (
         <div>

@@ -12,6 +12,29 @@
     justify-content: space-between;
     height: 410px;
 
+    button {
+      border-color: black;
+      border-radius: 0;
+      color: black;
+    }
+
+    div {
+      margin-bottom: 10px;
+      border-radius: 0;
+
+      button {
+        font-size: 20px;
+        background-color: transparent;
+        border-radius: 0;
+        border: 1px solid black;
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 20px;
+      }
+    }
+
     .profile-picture-upload {
       display: flex;
       align-items: center;
@@ -22,32 +45,6 @@
         margin: 10px;
         margin-top: 0;
       }
-
-      div {
-        margin-bottom: 10px;
-
-        button {
-          font-size: 20px;
-          background-color: transparent;
-          border-radius: 0;
-          border: 1px solid black;
-          margin-right: 10px;
-        }
-
-        span {
-          font-size: 20px;
-        }
-      }
-    }
-
-    div {
-      border-radius: 0;
-    }
-
-    button {
-      border-color: black;
-      border-radius: 0;
-      color: black;
     }
   }
 }

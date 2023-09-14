@@ -8,6 +8,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { userLogin } from '../redux/user/UserReducer';
 import EmailFormLinks from '../components/email_forms/email_form_links';
+import '../styles/login.scss';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -17,6 +18,36 @@ export default function LoginPage() {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+  const [width, setWidth] = useState('60vw');
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (dimensions.width <= 601) {
+      setWidth('80vw');
+    } else {
+      setWidth('60vw');
+    }
+  }, [dimensions]);
+
+  useEffect(() => {
+    if (user.name) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleClickShowPassword = () => {
     setShow(!show);
@@ -36,14 +67,8 @@ export default function LoginPage() {
     }));
   };
 
-  useEffect(() => {
-    if (user.name) {
-      navigate('/');
-    }
-  }, [user, navigate]);
-
   return (
-    <section>
+    <section className="login-page-section">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -53,8 +78,16 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          sx={{
+            width,
+          }}
         />
-        <FormControl variant="outlined">
+        <FormControl
+          variant="outlined"
+          sx={{
+            width,
+          }}
+        >
           <InputLabel>Password</InputLabel>
           <OutlinedInput
             id="password"

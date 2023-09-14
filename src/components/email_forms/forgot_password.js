@@ -45,7 +45,7 @@ export default function ForgotPassword(props) {
         )}
         { submitted
         && (
-        <div>
+        <div className="email-sent">
           <p>
             If there is an account associated with the submitted email address,
             {' '}

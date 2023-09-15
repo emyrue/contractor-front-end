@@ -22,7 +22,9 @@ export default function ImageUpload(props) {
   };
 
   const handleChange = (e) => {
-    setFile(e.target.files);
+    if (e.target.files[0]) {
+      setFile(e.target.files);
+    }
   };
 
   return (

@@ -31,6 +31,7 @@ export default function EditUserPopup(props) {
         role: code,
         picture_link: pictureLink,
       }));
+      handleClose();
     }
   }, [stateUpdated, user.id, code, pictureLink, name, dispatch]);
 
@@ -47,7 +48,8 @@ export default function EditUserPopup(props) {
     return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (file) {
       if (pictureLink !== process.env.REACT_APP_DEFAULT_PHOTO) {
         deletePhoto(

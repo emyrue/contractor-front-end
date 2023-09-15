@@ -192,7 +192,7 @@ export default function SignupPage() {
           Submit
         </Button>
       </form>
-      <p>{errorMessage}</p>
+      <p className="error-message">{errorMessage}</p>
     </section>
   );
 }

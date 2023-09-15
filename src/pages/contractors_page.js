@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Fab } from '@mui/material';
+import '../styles/homepage.scss';
 
 export default function ContractorsPage() {
   const contractorsInfo = useSelector((state) => state.contractors);
@@ -11,7 +12,7 @@ export default function ContractorsPage() {
   };
 
   return (
-    <section>
+    <section className="homepage-section">
       { contractorsInfo.isLoading
       && (
       <h1>Loading...</h1>

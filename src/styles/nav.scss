@@ -50,6 +50,7 @@ nav {
   nav {
     display: flex;
     justify-content: center;
+    padding: 15px 0;
 
     .menu-button,
     .close,
@@ -62,7 +63,9 @@ nav {
       justify-content: space-around;
       width: 80%;
 
-      a {
+      a,
+      .logout {
+        font-size: 17px;
         color: black;
       }
     }

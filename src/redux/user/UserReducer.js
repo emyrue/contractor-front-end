@@ -85,12 +85,12 @@ export const editUser = createAsyncThunk(EDIT_USER, async (newInfo) => {
 
 export const userLogout = createAsyncThunk(LOGOUT, async () => {
   const serializedToken = localStorage.getItem('Authorization');
+  localStorage.clear();
   await axios.delete(logoutEndpoint, {
     headers: {
       Authorization: JSON.parse(serializedToken),
     },
   });
-  localStorage.clear();
 });
 
 const initialState = {

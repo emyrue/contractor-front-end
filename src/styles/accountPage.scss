@@ -53,6 +53,48 @@
           width: 100px;
         }
       }
+
+      .delete-contractor {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 11000;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        div {
+          background-color: white;
+          width: 80%;
+          box-sizing: border-box;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+
+          h3 {
+            margin: 10px;
+            text-align: center;
+          }
+
+          span {
+            text-align: center;
+          }
+
+          form {
+            display: flex;
+            justify-content: space-around;
+
+            button {
+              width: 200px;
+              margin: 10px 5px;
+              font-size: 13px;
+            }
+          }
+        }
+      }
     }
   }
 }

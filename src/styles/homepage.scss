@@ -8,14 +8,14 @@
     display: flex;
     flex-direction: column;
 
-    ul {
+    .all-contractors {
       list-style: none;
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      li {
+      .one-contractor {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -40,3 +40,29 @@
   }
 }
 
+@media screen and (width >= 602px) {
+  .homepage-section {
+    article {
+      height: calc(100vh - 55px);
+
+      .all-contractors {
+        height: calc(100% - 95px);
+        width: 100vw;
+        flex-direction: row;
+        overflow-x: scroll;
+        margin: 0;
+
+        .one-contractor {
+          margin: 0 20px;
+        }
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    article::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

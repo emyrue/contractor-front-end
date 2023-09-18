@@ -33,7 +33,7 @@ export default function EditUserPopup(props) {
       }));
       handleClose();
     }
-  }, [stateUpdated, user.id, code, pictureLink, name, dispatch]);
+  }, [stateUpdated, user.id, code, pictureLink, name, dispatch, handleClose]);
 
   const generateSHA256 = (data) => crypto.SHA256(data).toString();
 

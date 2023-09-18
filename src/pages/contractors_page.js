@@ -23,9 +23,9 @@ export default function ContractorsPage() {
       && (
       <article>
         <h1>All Contractors</h1>
-        <ul>
+        <ul className="all-contractors">
           {contractorsInfo.allContractors.map((contractor) => (
-            <li key={`contractor-${contractor.id}`}>
+            <li className="one-contractor" key={`contractor-${contractor.id}`}>
               <img alt="" src={contractor.user.picture_link} />
               <br />
               <span>{contractor.user.name}</span>

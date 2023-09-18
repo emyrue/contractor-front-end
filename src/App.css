@@ -11,6 +11,11 @@
   display: none;
 }
 
+body {
+  margin: 0;
+  width: 100vw;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

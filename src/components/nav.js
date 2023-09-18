@@ -38,12 +38,6 @@ export default function Nav() {
         >
           Contractors
         </Link>
-        <Link
-          href="/cloudinary"
-          underline="hover"
-        >
-          Cloudinary
-        </Link>
         { !userInfo.user.name
         && (
         <Link

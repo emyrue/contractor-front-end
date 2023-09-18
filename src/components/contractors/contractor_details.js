@@ -52,7 +52,7 @@ export default function ContractorDetails() {
                 onClick={() => setEditFormDisplay(true)}
                 variant="extended"
               >
-                Edit your contractor info
+                Edit contractor info
               </Fab>
             </li>
             <li>
@@ -60,7 +60,7 @@ export default function ContractorDetails() {
                 onClick={() => setDeleteDisplay(true)}
                 variant="extended"
               >
-                Delete your contractor profile
+                Delete contractor profile
               </Fab>
             </li>
             { deleteDisplay

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Fab } from '@mui/material';
 import EditUserPopup from './edit_user';
 import ContractorForm from '../contractors/contractor_form';
 
@@ -14,9 +15,9 @@ export default function UserDetails() {
   };
 
   return (
-    <div>
-      <ul>
-        <li>
+    <div className="user-details">
+      <ul className="user-list">
+        <li className="account-photo">
           <img src={userInfo.user.picture_link} alt="profile" />
         </li>
         <li>
@@ -24,7 +25,6 @@ export default function UserDetails() {
           {' '}
           {userInfo.user.name}
           {' '}
-          <button onClick={() => setNameFormDisplay(true)} type="button">Edit</button>
         </li>
         <li>
           Email:
@@ -32,6 +32,12 @@ export default function UserDetails() {
           {userInfo.user.email}
         </li>
       </ul>
+      <Fab
+        onClick={() => setNameFormDisplay(true)}
+        variant="extended"
+      >
+        Edit user info
+      </Fab>
       { nameFormDisplay
         && <EditUserPopup handleClose={handleClose} />}
       { contractorFormDisplay

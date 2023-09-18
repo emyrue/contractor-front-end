@@ -82,7 +82,10 @@ export default function EditUserPopup(props) {
     <article className="edit-user">
       <form className="edit-user-form" onSubmit={handleSubmit}>
         <h2>Edit User</h2>
-        <ImageUpload changeFile={changeFile} />
+        <div className="profile-picture-upload">
+          <h3>Select Profile Picture</h3>
+          <ImageUpload changeFile={changeFile} />
+        </div>
         <TextField
           id="name"
           label="Name"

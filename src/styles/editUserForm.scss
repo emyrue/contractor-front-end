@@ -13,7 +13,32 @@
   .edit-user-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: white;
     width: 80%;
+    padding: 10px;
+
+    h2 {
+      margin: 10px;
+    }
+
+    .profile-picture-upload {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      h3 {
+        font-size: 20px;
+        margin-top: 0;
+      }
+
+      button {
+        font-size: 20px;
+        background-color: transparent;
+        border-radius: 0;
+        border: 1px solid black;
+        margin-right: 10px;
+      }
+    }
   }
 }

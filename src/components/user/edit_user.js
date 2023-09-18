@@ -8,6 +8,7 @@ import crypto from 'crypto-js';
 import { editUser } from '../../redux/user/UserReducer';
 import postPhoto, { deletePhoto } from '../../modules/profilePictures';
 import ImageUpload from '../image_upload';
+import '../../styles/editUserForm.scss';
 
 export default function EditUserPopup(props) {
   const { handleClose } = props;
@@ -78,17 +79,19 @@ export default function EditUserPopup(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ImageUpload changeFile={changeFile} />
-      <TextField
-        id="name"
-        label="Name"
-        variant="outlined"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      { !adminForm
+    <article className="edit-user">
+      <form className="edit-user-form" onSubmit={handleSubmit}>
+        <h2>Edit User</h2>
+        <ImageUpload changeFile={changeFile} />
+        <TextField
+          id="name"
+          label="Name"
+          variant="outlined"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        { !adminForm
         && (
           <Fab
             variant="extended"
@@ -97,7 +100,7 @@ export default function EditUserPopup(props) {
             Request Admin
           </Fab>
         )}
-      { adminForm
+        { adminForm
         && (
           <TextField
             id="code"
@@ -107,20 +110,21 @@ export default function EditUserPopup(props) {
             onChange={(e) => setCode(e.target.value)}
           />
         )}
-      <Button
-        type="submit"
-        variant="outlined"
-      >
-        Submit
-      </Button>
-      <Button
-        type="button"
-        variant="outlined"
-        onClick={handleClose}
-      >
-        Cancel
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          variant="outlined"
+        >
+          Submit
+        </Button>
+        <Button
+          type="button"
+          variant="outlined"
+          onClick={handleClose}
+        >
+          Cancel
+        </Button>
+      </form>
+    </article>
   );
 }
 

@@ -30,6 +30,7 @@ export default function ContractorDetails() {
       { userInfo.contractor.id
       && (
       <ul className="contractor-list">
+        <h2>Contractor Info</h2>
         <li>
           Profession:
           {' '}

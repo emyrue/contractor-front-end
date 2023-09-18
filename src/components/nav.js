@@ -41,19 +41,19 @@ export default function Nav() {
         { !userInfo.user.name
         && (
         <Link
-          href="/signup"
+          href="/login"
           underline="hover"
         >
-          Sign up
+          Log in
         </Link>
         )}
         { !userInfo.user.name
         && (
         <Link
-          href="/login"
+          href="/signup"
           underline="hover"
         >
-          Log in
+          Sign up
         </Link>
         )}
         { userInfo.user.role === 'admin'

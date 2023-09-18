@@ -5,7 +5,6 @@ import { deleteContractor } from '../../redux/contractors/ContractorReducer';
 import ContractorForm from './contractor_form';
 import EditContractorForm from './edit_contractor';
 import DeleteUserContractor from './delete_user_contractor';
-// import ContractorReservations from './contractor_reservations';
 
 export default function ContractorDetails() {
   const [contractorFormDisplay, setContractorFormDisplay] = useState(false);
@@ -27,71 +26,67 @@ export default function ContractorDetails() {
   };
 
   return (
-    <div>
-      <ul>
-        { userInfo.contractor.id
-          && (
-          <div>
-            <li>
-              Profession:
-              {' '}
-              {userInfo.contractor.job_title}
-            </li>
-            <li>
-              Bio:
-              {' '}
-              {userInfo.contractor.bio}
-            </li>
-            <li>
-              Rate: $
-              {userInfo.contractor.rate}
-              /hr
-            </li>
-            <li>
-              <Fab
-                onClick={() => setEditFormDisplay(true)}
-                variant="extended"
-              >
-                Edit contractor info
-              </Fab>
-            </li>
-            <li>
-              <Fab
-                onClick={() => setDeleteDisplay(true)}
-                variant="extended"
-              >
-                Delete contractor profile
-              </Fab>
-            </li>
-            { deleteDisplay
+    <div className="contractor-details">
+      { userInfo.contractor.id
+      && (
+      <ul className="contractor-list">
+        <li>
+          Profession:
+          {' '}
+          {userInfo.contractor.job_title}
+        </li>
+        <li>
+          Bio:
+          {' '}
+          {userInfo.contractor.bio}
+        </li>
+        <li>
+          Rate: $
+          {userInfo.contractor.rate}
+          /hr
+        </li>
+        <div className="contractor-account-buttons">
+          <Fab
+            onClick={() => setEditFormDisplay(true)}
+            variant="extended"
+          >
+            Edit
+          </Fab>
+          <Fab
+            onClick={() => setDeleteDisplay(true)}
+            variant="extended"
+          >
+            Delete
+          </Fab>
+        </div>
+        { deleteDisplay
               && (
               <DeleteUserContractor
                 handleDelete={handleDelete}
                 setDeleteDisplay={setDeleteDisplay}
               />
               )}
-          </div>
-          )}
-        { !userInfo.contractor.id
+      </ul>
+      )}
+      { !userInfo.contractor.id
           && (
-          <li>
+          <div>
             <Fab
               onClick={() => setContractorFormDisplay(true)}
               variant="extended"
             >
               Register as a Contractor
             </Fab>
-          </li>
+          </div>
           )}
-        { contractorFormDisplay
+      { contractorFormDisplay
           && (
           <ContractorForm handleClose1={handleClose1} />
           )}
-        { editFormDisplay
+      { editFormDisplay
           && (
           <EditContractorForm handleClose2={handleClose2} />
           )}
-      </ul>
     </div>
   );
 }

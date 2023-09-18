@@ -16,10 +16,12 @@ export default function UserDetails() {
 
   return (
     <div className="user-details">
+      <h1>
+        {userInfo.user.name}
+        &apos;s Account
+      </h1>
+      <img src={userInfo.user.picture_link} alt="profile" />
       <ul className="user-list">
-        <li className="account-photo">
-          <img src={userInfo.user.picture_link} alt="profile" />
-        </li>
         <li>
           Username:
           {' '}

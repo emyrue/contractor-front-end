@@ -47,7 +47,7 @@ export default function EditContractorForm(props) {
           onChange={(e) => setBio(e.target.value)}
           required
         />
-        <div>
+        <div className="edit-contractor-buttons">
           <Button
             type="submit"
             variant="outlined"

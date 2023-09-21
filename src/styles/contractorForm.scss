@@ -1,4 +1,4 @@
-.edit-contractor {
+.contractor-form-section {
   position: fixed;
   z-index: 11000;
   top: 0;
@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
 
-  .edit-contractor-form {
+  form {
     width: 80%;
     background-color: white;
     display: flex;
@@ -52,7 +52,7 @@
         sans-serif;
     }
 
-    .edit-contractor-buttons {
+    .new-contractor-buttons {
       display: flex;
       justify-content: space-between;
     }

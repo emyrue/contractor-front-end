@@ -6,6 +6,7 @@ import {
 import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
 import { editContractor } from '../../redux/contractors/ContractorReducer';
+import '../../styles/editContractorForm.scss';
 
 export default function EditContractorForm(props) {
   const { handleClose2 } = props;
@@ -25,39 +26,44 @@ export default function EditContractorForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        id="rate"
-        label="Hourly Rate"
-        type="number"
-        variant="outlined"
-        value={rate}
-        onChange={(e) => setRate(e.target.value)}
-        required
-      />
-      <TextareaAutosize
-        id="bio"
-        placeholder="Bio"
-        aria-label="minimum height"
-        minRows={3}
-        value={bio}
-        onChange={(e) => setBio(e.target.value)}
-        required
-      />
-      <Button
-        type="submit"
-        variant="outlined"
-      >
-        Submit
-      </Button>
-      <Button
-        type="button"
-        variant="outlined"
-        onClick={handleClose2}
-      >
-        Cancel
-      </Button>
-    </form>
+    <article className="edit-contractor">
+      <form className="edit-contractor-form" onSubmit={handleSubmit}>
+        <h2>Edit Contractor</h2>
+        <TextField
+          id="rate"
+          label="Hourly Rate"
+          type="number"
+          variant="outlined"
+          value={rate}
+          onChange={(e) => setRate(e.target.value)}
+          required
+        />
+        <TextareaAutosize
+          id="bio"
+          placeholder="Bio"
+          aria-label="minimum height"
+          minRows={3}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          required
+        />
+        <div>
+          <Button
+            type="submit"
+            variant="outlined"
+          >
+            Submit
+          </Button>
+          <Button
+            type="button"
+            variant="outlined"
+            onClick={handleClose2}
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </article>
   );
 }
 

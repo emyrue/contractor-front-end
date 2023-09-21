@@ -22,6 +22,14 @@
       margin: 10px;
     }
 
+    div {
+      margin: 10px;
+
+      div {
+        margin: 0px;
+      }
+    }
+
     .profile-picture-upload {
       display: flex;
       align-items: center;
@@ -38,6 +46,15 @@
         border-radius: 0;
         border: 1px solid black;
         margin-right: 10px;
+      }
+    }
+
+    .edit-user-buttons {
+      display: flex;
+      justify-content: space-around;
+      
+      button {
+        margin: 5px;
       }
     }
   }

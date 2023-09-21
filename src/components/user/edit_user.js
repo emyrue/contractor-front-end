@@ -113,19 +113,21 @@ export default function EditUserPopup(props) {
             onChange={(e) => setCode(e.target.value)}
           />
         )}
-        <Button
-          type="submit"
-          variant="outlined"
-        >
-          Submit
-        </Button>
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={handleClose}
-        >
-          Cancel
-        </Button>
+        <div className="edit-user-buttons">
+          <Button
+            type="submit"
+            variant="outlined"
+          >
+            Submit
+          </Button>
+          <Button
+            type="button"
+            variant="outlined"
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </article>
   );

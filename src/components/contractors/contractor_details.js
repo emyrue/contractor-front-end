@@ -71,7 +71,7 @@ export default function ContractorDetails() {
       )}
       { !userInfo.contractor.id
           && (
-          <div>
+          <div className="contractor-registration">
             <Fab
               onClick={() => setContractorFormDisplay(true)}
               variant="extended"

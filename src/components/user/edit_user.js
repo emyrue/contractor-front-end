@@ -100,7 +100,7 @@ export default function EditUserPopup(props) {
             variant="extended"
             onClick={() => setAdminForm(true)}
           >
-            Request Admin
+            Request Admin Status
           </Fab>
         )}
         { adminForm

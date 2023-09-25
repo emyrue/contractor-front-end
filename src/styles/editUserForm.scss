@@ -10,6 +10,11 @@
   align-items: center;
   justify-content: center;
 
+  button {
+    max-width: 70%;
+    font-size: 12px;
+  }
+
   .edit-user-form {
     display: flex;
     flex-direction: column;
@@ -20,13 +25,16 @@
 
     h2 {
       margin: 10px;
+      text-align: center;
     }
 
     div {
       margin: 10px;
+      width: 70%;
 
       div {
         margin: 0;
+        width: 100%;
       }
     }
 
@@ -38,6 +46,12 @@
       h3 {
         font-size: 20px;
         margin-top: 0;
+        text-align: center;
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
       }
 
       button {
@@ -51,7 +65,8 @@
 
     .edit-user-buttons {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      width: 70%;
 
       button {
         margin: 5px;

@@ -27,52 +27,50 @@ export default function ContractorForm(props) {
 
   return (
     <article className="contractor-form-section">
-      <article className="contractor-form-box">
-        <form onSubmit={handleSubmit}>
-          <h2>New Contractor</h2>
-          <TextField
-            id="rate"
-            label="Hourly Rate"
-            type="number"
+      <form onSubmit={handleSubmit}>
+        <h2>New Contractor</h2>
+        <TextField
+          id="rate"
+          label="Hourly Rate"
+          type="number"
+          variant="outlined"
+          value={rate}
+          onChange={(e) => setRate(e.target.value)}
+          required
+        />
+        <TextField
+          id="job-title"
+          label="Profession"
+          variant="outlined"
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
+          required
+        />
+        <TextareaAutosize
+          id="bio"
+          placeholder="Bio"
+          aria-label="minimum height"
+          minRows={3}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          required
+        />
+        <div className="new-contractor-buttons">
+          <Button
+            type="submit"
             variant="outlined"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            required
-          />
-          <TextField
-            id="job-title"
-            label="Profession"
+          >
+            Submit
+          </Button>
+          <Button
+            type="button"
             variant="outlined"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-            required
-          />
-          <TextareaAutosize
-            id="bio"
-            placeholder="Bio"
-            aria-label="minimum height"
-            minRows={3}
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            required
-          />
-          <div className="new-contractor-buttons">
-            <Button
-              type="submit"
-              variant="outlined"
-            >
-              Submit
-            </Button>
-            <Button
-              type="button"
-              variant="outlined"
-              onClick={handleClose1}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </article>
+            onClick={handleClose1}
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
     </article>
   );
 }

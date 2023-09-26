@@ -83,7 +83,7 @@ export default function EditUserPopup(props) {
       <form className="edit-user-form" onSubmit={handleSubmit}>
         <h2>Edit User</h2>
         <div className="profile-picture-upload">
-          <h3>Select Profile Picture</h3>
+          <h3>Profile Picture:</h3>
           <ImageUpload changeFile={changeFile} />
         </div>
         <TextField
@@ -94,7 +94,7 @@ export default function EditUserPopup(props) {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        { !adminForm
+        { !adminForm && user.role !== 'admin'
         && (
           <Fab
             variant="extended"
@@ -115,17 +115,17 @@ export default function EditUserPopup(props) {
         )}
         <div className="edit-user-buttons">
           <Button
-            type="submit"
-            variant="outlined"
-          >
-            Submit
-          </Button>
-          <Button
             type="button"
             variant="outlined"
             onClick={handleClose}
           >
             Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Submit
           </Button>
         </div>
       </form>

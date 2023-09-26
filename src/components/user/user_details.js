@@ -33,6 +33,11 @@ export default function UserDetails() {
           {' '}
           {userInfo.user.email}
         </li>
+        <li>
+          Role:
+          {' '}
+          {userInfo.user.role}
+        </li>
       </ul>
       <Fab
         onClick={() => setNameFormDisplay(true)}

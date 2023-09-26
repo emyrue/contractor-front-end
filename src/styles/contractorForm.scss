@@ -61,3 +61,11 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .contractor-form-section {
+    form {
+      width: 60%;
+    }
+  }
+}

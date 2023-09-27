@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   TextField, Button,
@@ -14,6 +14,15 @@ export default function EditContractorForm(props) {
   const userInfo = useSelector((state) => state.user);
   const [rate, setRate] = useState(userInfo.contractor.rate);
   const [bio, setBio] = useState(userInfo.contractor.bio);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (bio.length < 200) {
+      setMessage(`${200 - bio.length} characters remaining`);
+    } else {
+      setMessage('');
+    }
+  }, [bio]);
 
   const handleSubmit = () => {
     dispatch(editContractor({
@@ -42,24 +51,26 @@ export default function EditContractorForm(props) {
           id="bio"
           placeholder="Bio"
           aria-label="minimum height"
-          minRows={3}
+          minRows={10}
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           required
         />
+        { message
+          && <p>{message}</p>}
         <div className="edit-contractor-buttons">
-          <Button
-            type="submit"
-            variant="outlined"
-          >
-            Submit
-          </Button>
           <Button
             type="button"
             variant="outlined"
             onClick={handleClose2}
           >
             Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Submit
           </Button>
         </div>
       </form>

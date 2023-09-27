@@ -27,6 +27,10 @@
       flex-direction: column;
       width: 70%;
       max-width: 300px;
+
+      li {
+        margin: 5px;
+      }
     }
   }
 
@@ -44,11 +48,15 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      width: 60%;
+      width: 70%;
 
       h2 {
         font-weight: normal;
         align-self: center;
+      }
+
+      li {
+        margin: 5px;
       }
 
       .contractor-account-buttons {
@@ -56,6 +64,7 @@
 
         button {
           margin: 5px;
+          margin-top: 20px;
           width: 100px;
         }
       }
@@ -120,6 +129,12 @@
       .user-list {
         font-size: 18px;
         max-width: 400px;
+      }
+    }
+
+    .contractor-details {
+      .contractor-list {
+        width: 60%;
       }
     }
   }

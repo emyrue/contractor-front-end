@@ -24,7 +24,6 @@
 
     div {
       margin: 10px;
-      box-sizing: border-box;
       width: 70%;
 
       div {
@@ -65,7 +64,19 @@
 @media screen and (width >= 602px) {
   .contractor-form-section {
     form {
-      width: 60%;
+      width: 50%;
+
+      div {
+        width: 80%;
+
+        div {
+          width: 100%;
+        }
+      }
+
+      textarea {
+        width: 80%;
+      }
     }
   }
 }

@@ -51,23 +51,24 @@ export default function ContractorForm(props) {
           placeholder="Bio"
           aria-label="minimum height"
           minRows={3}
+          maxRows={4}
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           required
         />
         <div className="new-contractor-buttons">
           <Button
-            type="submit"
-            variant="outlined"
-          >
-            Submit
-          </Button>
-          <Button
             type="button"
             variant="outlined"
             onClick={handleClose1}
           >
             Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Submit
           </Button>
         </div>
       </form>

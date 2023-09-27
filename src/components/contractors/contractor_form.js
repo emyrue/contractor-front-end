@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   TextField, Button,
@@ -15,14 +15,27 @@ export default function ContractorForm(props) {
   const [jobTitle, setJobTitle] = useState('');
   const [rate, setRate] = useState(0);
   const [bio, setBio] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = () => {
-    dispatch(createContractor({
-      user_id: userInfo.user.id,
-      rate,
-      job_title: jobTitle,
-      bio,
-    }));
+  useEffect(() => {
+    if (bio.length < 200) {
+      setMessage(`${200 - bio.length} characters remaining`);
+    } else {
+      setMessage('');
+    }
+  }, [bio]);
+
+  const handleSubmit = (e) => {
+    if (bio.length <= 200) {
+      e.preventDefault();
+    } else {
+      dispatch(createContractor({
+        user_id: userInfo.user.id,
+        rate,
+        job_title: jobTitle,
+        bio,
+      }));
+    }
   };
 
   return (
@@ -56,6 +69,8 @@ export default function ContractorForm(props) {
           onChange={(e) => setBio(e.target.value)}
           required
         />
+        { message
+          && <p>{message}</p>}
         <div className="new-contractor-buttons">
           <Button
             type="button"

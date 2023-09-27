@@ -54,6 +54,14 @@
         sans-serif;
     }
 
+    p {
+      margin: 0;
+      width: 70%;
+      font-size: 12px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+
     .new-contractor-buttons {
       display: flex;
       justify-content: space-between;
@@ -75,6 +83,10 @@
       }
 
       textarea {
+        width: 80%;
+      }
+
+      p {
         width: 80%;
       }
     }

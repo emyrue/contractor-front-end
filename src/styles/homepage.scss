@@ -46,23 +46,16 @@
       height: calc(100vh - 55px);
 
       .all-contractors {
-        height: calc(100% - 95px);
-        width: 100vw;
-        flex-direction: row;
-        overflow-x: scroll;
+        height: calc(100vh - 95px);
         margin: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: scroll;
 
         .one-contractor {
-          margin: 0 20px;
+          margin: 20px;
         }
       }
-
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    article::-webkit-scrollbar {
-      display: none;
     }
   }
 }

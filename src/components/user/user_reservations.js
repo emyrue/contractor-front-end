@@ -86,7 +86,11 @@ export default function UserReservations() {
                   {' '}
                   {endDate.toString().split('-').join('/')}
                 </p>
-                <p>{jobDescription}</p>
+                <p>
+                  Description:
+                  {' '}
+                  {jobDescription}
+                </p>
                 <div className="buttons">
                   <form className={editClassname}>
                     <Button

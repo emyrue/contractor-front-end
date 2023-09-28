@@ -95,7 +95,11 @@ export default function ContractorReservations() {
                   {' '}
                   {reservation.end_date.toString()}
                 </p>
-                <p>{jobDescription}</p>
+                <p>
+                  Description:
+                  {' '}
+                  {jobDescription}
+                </p>
                 <div className="buttons">
                   <form className={rejectClassname} onSubmit={() => handleCancel(id)}>
                     <Button

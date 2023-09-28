@@ -55,8 +55,9 @@ export default function ContractorReservations() {
               job_description: jobDescription,
             } = reservation;
             let itemClassname = 'show';
-            let cancelClassname = 'show';
+            let cancelClassname = 'hide';
             let clearClassname = 'hide';
+            let rejectClassname = 'show';
             let status = 'Pending your approval';
             let approvalClassname = 'show';
             if (hidden) {
@@ -65,48 +66,70 @@ export default function ContractorReservations() {
               cancelClassname = 'hide';
               clearClassname = 'show';
               approvalClassname = 'hide';
+              rejectClassname = 'hide';
               status = 'Cancelled by user';
             } else if (approved) {
               status = 'Approved';
               approvalClassname = 'hide';
+              rejectClassname = 'hide';
+              cancelClassname = 'show';
             }
             return (
               <li className={itemClassname} key={`reservation-${id}`}>
-                <h5>{user.name}</h5>
+                <h5>
+                  Reservation with
+                  {' '}
+                  {user.name}
+                </h5>
                 <h6>
                   Status:
                   {' '}
                   {status}
                 </h6>
-                <div>
+                <p>
+                  Date:
+                  {' '}
                   {reservation.start_date.toString()}
                   {' '}
-                  -
+                  &mdash;
                   {' '}
                   {reservation.end_date.toString()}
-                </div>
+                </p>
                 <p>{jobDescription}</p>
-                <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
-                  <Button
-                    type="submit"
-                  >
-                    Reject/cancel this reservation
-                  </Button>
-                </form>
-                <form className={clearClassname} onSubmit={() => handleClear(id)}>
-                  <Button
-                    type="submit"
-                  >
-                    Clear this reservation
-                  </Button>
-                </form>
-                <form className={approvalClassname} onSubmit={() => handleApprove(id)}>
-                  <Button
-                    type="submit"
-                  >
-                    Approve
-                  </Button>
-                </form>
+                <div className="buttons">
+                  <form className={rejectClassname} onSubmit={() => handleCancel(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Reject
+                    </Button>
+                  </form>
+                  <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Cancel
+                    </Button>
+                  </form>
+                  <form className={clearClassname} onSubmit={() => handleClear(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Clear
+                    </Button>
+                  </form>
+                  <form className={approvalClassname} onSubmit={() => handleApprove(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Approve
+                    </Button>
+                  </form>
+                </div>
               </li>
             );
           })}

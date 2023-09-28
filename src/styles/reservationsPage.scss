@@ -13,7 +13,35 @@
     }
 
     ul {
-      list-style: none;
+      list-style: ' - ';
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      li {
+        h5,
+        h6 {
+          font-size: 15px;
+          font-weight: normal;
+          margin: 0;
+        }
+
+        p {
+          text-align: start;
+        }
+
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+
+          form {
+            button {
+              width: 100px;
+            }
+          }
+        }
+      }
     }
   }
 }

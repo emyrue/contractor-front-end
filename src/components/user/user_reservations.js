@@ -53,51 +53,66 @@ export default function UserReservations() {
             let itemClassname = 'show';
             let cancelClassname = 'show';
             let clearClassname = 'hide';
+            let editClassname = 'show';
             let status = 'Pending approval from contractor';
             if (hidden) {
               itemClassname = 'hide';
             } else if (cancelled) {
               cancelClassname = 'hide';
               clearClassname = 'show';
+              editClassname = 'hide';
               status = 'Cancelled by contractor';
             } else if (approved) {
               status = 'Approved by contractor';
             }
             return (
               <li className={itemClassname} key={`reservation-${id}`}>
-                <h5>{contractor.name}</h5>
+                <h5>
+                  Reservation with
+                  {' '}
+                  {contractor.name}
+                </h5>
                 <h6>
                   Status:
                   {' '}
                   {status}
                 </h6>
-                <div>
-                  {startDate.toString()}
+                <p>
+                  Date:
                   {' '}
-                  -
+                  {startDate.toString().split('-').join('/')}
                   {' '}
-                  {endDate.toString()}
+                  &mdash;
+                  {' '}
+                  {endDate.toString().split('-').join('/')}
+                </p>
+                <p>{jobDescription}</p>
+                <div className="buttons">
+                  <form className={editClassname}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => setEditDisplay('show')}
+                    >
+                      Edit
+                    </Button>
+                  </form>
+                  <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Cancel
+                    </Button>
+                  </form>
+                  <form className={clearClassname} onSubmit={() => handleClear(id)}>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                    >
+                      Clear
+                    </Button>
+                  </form>
                 </div>
-                <p className="job-description">{jobDescription}</p>
-                <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
-                  <Button
-                    type="submit"
-                  >
-                    Cancel this reservation
-                  </Button>
-                </form>
-                <form className={clearClassname} onSubmit={() => handleClear(id)}>
-                  <Button
-                    type="submit"
-                  >
-                    Clear this reservation
-                  </Button>
-                </form>
-                <Button
-                  onClick={() => setEditDisplay('show')}
-                >
-                  Edit this reservation
-                </Button>
                 <EditReservation
                   myClassName={editDisplay}
                   handleClose={handleClose}

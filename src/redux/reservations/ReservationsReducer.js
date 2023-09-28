@@ -32,6 +32,7 @@ export const editReservation = createAsyncThunk(EDIT_RESERVATION, async (object)
       approved: object.approved,
       start_date: object.start_date,
       end_date: object.end_date,
+      job_description: object.job_description,
     },
   });
   const response = await axios.get(getReservationsEndpoint);

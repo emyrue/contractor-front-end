@@ -42,8 +42,8 @@ export default function EditReservation(props) {
     ) {
       dispatch(editReservation({
         id,
-        start_date: startingDate,
-        end_date: endingDate,
+        start_date: startDate,
+        end_date: endDate,
         job_description: editJobDescription,
         approved: false,
       }));
@@ -96,7 +96,7 @@ export default function EditReservation(props) {
           )}
         <TextareaAutosize
           value={editJobDescription}
-          onChange={setEditJobDescription}
+          onChange={(e) => setEditJobDescription(e.target.value)}
         />
         <Button
           type="submit"

@@ -36,7 +36,11 @@ export default function ContractorReservations() {
       <h2>Reservations Made by Other Users</h2>
       { reservations.length === 0
         && (
-          <p>No reservations yet.</p>
+          <p>
+            No reservations yet.
+            {' '}
+            Check back for updates.
+          </p>
         )}
       { reservations.length >= 0
         && (

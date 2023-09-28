@@ -29,7 +29,7 @@ export default function UserReservations() {
       { reservations.length === 0
         && (
           <p>
-            You haven&apos;t made any reservations yet.
+            You haven&apos;t made any reservations.
             {' '}
             Visit the contractors page to view
             {' '}
@@ -65,7 +65,7 @@ export default function UserReservations() {
             }
             return (
               <li className={itemClassname} key={`reservation-${id}`}>
-                <h5>{contractor.user.name}</h5>
+                <h5>{contractor.name}</h5>
                 <h6>
                   Status:
                   {' '}
@@ -78,7 +78,7 @@ export default function UserReservations() {
                   {' '}
                   {endDate.toString()}
                 </div>
-                <p>{jobDescription}</p>
+                <p className="job-description">{jobDescription}</p>
                 <form className={cancelClassname} onSubmit={() => handleCancel(id)}>
                   <Button
                     type="submit"

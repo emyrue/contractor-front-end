@@ -34,7 +34,7 @@ export default function ContractorReservations() {
   return (
     <article>
       <h2>Reservations Made by Other Users</h2>
-      { reservations.length === 0
+      { reservations.filter((reservation) => !reservation.contractor_cancelled).length === 0
         && (
           <p>
             No reservations yet.

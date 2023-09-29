@@ -26,7 +26,7 @@ export default function UserReservations() {
 
   return (
     <article>
-      { reservations.length === 0
+      { reservations.filter((reservation) => !reservation.user_cancelled).length === 0
         && (
           <p>
             You haven&apos;t made any reservations.

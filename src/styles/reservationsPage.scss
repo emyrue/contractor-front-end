@@ -6,6 +6,8 @@
   article {
     h2 {
       text-align: center;
+      max-width: 80%;
+      margin: auto;
     }
 
     p {
@@ -13,25 +15,28 @@
     }
 
     ul {
-      list-style: ' - ';
+      list-style: none;
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
 
       li {
+        width: 80%;
+
         h5,
         h6,
         p {
           font-size: 15px;
           font-weight: normal;
-          text-align: start;
+          text-align: center;
           margin: 0;
         }
 
         .buttons {
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
+          margin-top: 15px;
 
           form {
             button {

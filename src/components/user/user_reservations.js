@@ -95,7 +95,7 @@ export default function UserReservations() {
                   <form className={editClassname}>
                     <Button
                       variant="outlined"
-                      onClick={() => setEditDisplay('show')}
+                      onClick={() => setEditDisplay('edit-reservation')}
                     >
                       Edit
                     </Button>

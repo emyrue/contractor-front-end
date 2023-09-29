@@ -9,6 +9,7 @@ import { TextareaAutosize } from '@mui/base';
 import { Button } from '@mui/material';
 import { editReservation } from '../../redux/reservations/ReservationsReducer';
 import disableDates from '../../modules/disableDates';
+import '../../styles/editReservationForm.scss';
 
 export default function EditReservation(props) {
   const {

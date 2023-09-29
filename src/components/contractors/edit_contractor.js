@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   TextField, Button,
 } from '@mui/material';
-import { TextareaAutosize } from '@mui/base';
 import { PropTypes } from 'prop-types';
 import { editContractor } from '../../redux/contractors/ContractorReducer';
 import '../../styles/editContractorForm.scss';
@@ -47,11 +46,11 @@ export default function EditContractorForm(props) {
           onChange={(e) => setRate(e.target.value)}
           required
         />
-        <TextareaAutosize
+        <textarea
           id="bio"
           placeholder="Bio"
           aria-label="minimum height"
-          minRows={10}
+          rows={6}
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           required

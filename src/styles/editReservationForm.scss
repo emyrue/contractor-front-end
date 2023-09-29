@@ -1,3 +1,60 @@
 .edit-reservation {
-  
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 11000;
+  box-sizing: border-box;
+
+  section {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+
+    .edit-reservation-heading {
+      padding: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin: auto;
+
+      div {
+        margin: 10px 0;
+
+        div {
+          margin: 0;
+        }
+      }
+
+      textarea {
+        border: 1px solid lightgray;
+        border-radius: 3px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0;
+        resize: none;
+        font-family:
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
+          'Cantarell',
+          'Fira Sans',
+          'Droid Sans',
+          'Helvetica Neue',
+          sans-serif;
+      }
+
+      .edit-reservation-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
 }

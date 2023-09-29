@@ -5,7 +5,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { PropTypes } from 'prop-types';
-import { TextareaAutosize } from '@mui/base';
 import { Button } from '@mui/material';
 import { editReservation } from '../../redux/reservations/ReservationsReducer';
 import disableDates from '../../modules/disableDates';
@@ -53,9 +52,10 @@ export default function EditReservation(props) {
 
   return (
     <article className={myClassName}>
-      <h2>Edit reservation</h2>
-      <form onSubmit={handleSubmit}>
-        { dimensions.width >= 500
+      <section>
+        <h2 className="edit-reservation-heading">Edit reservation</h2>
+        <form onSubmit={handleSubmit}>
+          { dimensions.width >= 500
           && (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -75,7 +75,7 @@ export default function EditReservation(props) {
             />
           </LocalizationProvider>
           )}
-        { dimensions.width < 500
+          { dimensions.width < 500
           && (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <MobileDatePicker
@@ -95,21 +95,27 @@ export default function EditReservation(props) {
             />
           </LocalizationProvider>
           )}
-        <TextareaAutosize
-          value={editJobDescription}
-          onChange={(e) => setEditJobDescription(e.target.value)}
-        />
-        <Button
-          type="submit"
-        >
-          Submit changes
-        </Button>
-        <Button
-          onClick={handleClose}
-        >
-          Close
-        </Button>
-      </form>
+          <textarea
+            value={editJobDescription}
+            onChange={(e) => setEditJobDescription(e.target.value)}
+            rows={4}
+          />
+          <div className="edit-reservation-buttons">
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+            >
+              Close
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </section>
     </article>
   );
 }

@@ -88,7 +88,7 @@ export default function EditReservation(props) {
             <MobileDatePicker
               value={dayjs(endDate)}
               onChange={(newValue) => setEndDate(newValue)}
-              minDate={startDate}
+              minDate={dayjs(startDate)}
               label="End Date"
               shouldDisableDate={(date) => disableDates(date, contractor, id)}
               disablePast

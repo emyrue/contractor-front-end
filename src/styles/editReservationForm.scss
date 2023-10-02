@@ -58,3 +58,18 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .edit-reservation {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    section {
+      width: 60%;
+      height: auto;
+      padding-bottom: 20px;
+    }
+  }
+}

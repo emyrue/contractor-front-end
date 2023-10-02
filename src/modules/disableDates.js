@@ -7,6 +7,7 @@ export default function disableDates(date, contractor, reservationId = null) {
           && !reservation.user_cancelled
           && !reservation.contractor_cancelled
           && reservation.id !== reservationId
+          && reservation.contractor_id === contractor.contractorDetails.id
     ),
   );
 

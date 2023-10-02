@@ -9,10 +9,11 @@ import { Button } from '@mui/material';
 import { editReservation } from '../../redux/reservations/ReservationsReducer';
 import disableDates from '../../modules/disableDates';
 import '../../styles/editReservationForm.scss';
+import { getOneContractor } from '../../redux/contractors/ContractorReducer';
 
 export default function EditReservation(props) {
   const {
-    id, startingDate, endingDate, jobDescription, handleClose, myClassName,
+    id, startingDate, endingDate, jobDescription, handleClose, contractorId,
   } = props;
   const [startDate, setStartDate] = useState(startingDate);
   const [endDate, setEndDate] = useState(endingDate);
@@ -25,6 +26,7 @@ export default function EditReservation(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getOneContractor(contractorId));
     const handleResize = () => {
       setDimensions({
         height: window.innerHeight,
@@ -32,7 +34,7 @@ export default function EditReservation(props) {
       });
     };
     window.addEventListener('resize', handleResize);
-  }, []);
+  }, [dispatch, contractorId]);
 
   const handleSubmit = () => {
     if (
@@ -51,7 +53,7 @@ export default function EditReservation(props) {
   };
 
   return (
-    <article className={myClassName}>
+    <article className="edit-reservation">
       <section>
         <h2 className="edit-reservation-heading">Edit reservation</h2>
         <form onSubmit={handleSubmit}>
@@ -126,5 +128,5 @@ EditReservation.propTypes = {
   endingDate: PropTypes.string.isRequired,
   jobDescription: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
-  myClassName: PropTypes.string.isRequired,
+  contractorId: PropTypes.number.isRequired,
 };

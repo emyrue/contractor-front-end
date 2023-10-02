@@ -6,7 +6,7 @@ import { TextareaAutosize } from '@mui/base';
 import createReview from '../../redux/reviews/ReviewsReducer';
 
 export default function CreateReview(props) {
-  const { createReviewClass, handleClose } = props;
+  const { handleClose } = props;
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(null);
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function CreateReview(props) {
   };
 
   return (
-    <article className={createReviewClass}>
+    <article>
       <form onSubmit={handleSubmit}>
         <Rating
           value={rating}
@@ -51,6 +51,5 @@ export default function CreateReview(props) {
 }
 
 CreateReview.propTypes = {
-  createReviewClass: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
 };

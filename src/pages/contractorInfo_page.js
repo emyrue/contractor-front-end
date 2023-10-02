@@ -8,13 +8,14 @@ import ReservationNotSaved from '../components/reservations/reservation_not_save
 import ReservationSaved from '../components/reservations/reservation_saved';
 import CreateReview from '../components/reviews/createReview';
 import ShowReviews from '../components/reviews/showReviews';
+import '../styles/contractorInfo.scss';
 
 export default function ContractorInfoPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [classname, setClassname] = useState('hide');
-  const [createReviewClass, setCreateReviewClass] = useState('hide');
+  const [createReview, setCreateReview] = useState(false);
   const [leftReview, setLeftReview] = useState(false);
   const isLoading = useSelector((state) => state.contractors.isLoading);
   const contractor = useSelector((state) => state.contractors.contractorDetails);
@@ -36,26 +37,28 @@ export default function ContractorInfoPage() {
   }, [reviews, user]);
 
   return (
-    <section>
+    <section className="contractor-info-section">
       { contractor.id && !isLoading
       && (
       <section>
         <h1>{contractor.user.name}</h1>
-        <div>
-          <Rating
-            readOnly
-            value={parseInt(contractor.rating, 10) || 0}
-          />
-          <span>
-            {reviews.length}
-            {' '}
-            review(s)
-          </span>
+        <div className="average-rating">
+          <div>
+            <Rating
+              readOnly
+              value={parseInt(contractor.rating, 10) || 0}
+            />
+            <span className="review-count">
+              {reviews.length}
+              {' '}
+              review(s)
+            </span>
+          </div>
           { !leftReview
           && (
             <Fab
               variant="extended"
-              onClick={() => setCreateReviewClass('show')}
+              onClick={() => setCreateReview(true)}
             >
               Leave a review
             </Fab>
@@ -79,10 +82,12 @@ export default function ContractorInfoPage() {
         <div className={classname}>
           <div className="desktop-reservations-popup"><ReservationsPopup setClassname={setClassname} /></div>
         </div>
-        <CreateReview
-          createReviewClass={createReviewClass}
-          handleClose={() => setCreateReviewClass('hide')}
-        />
+        { createReview
+          && (
+          <CreateReview
+            handleClose={() => setCreateReview(false)}
+          />
+          )}
         <ReservationNotSaved />
         <ReservationSaved />
         { reviews.length > 0

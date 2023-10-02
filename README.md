@@ -58,6 +58,7 @@ You will need a gitignored .env file in the root directory with the following va
 - REACT_APP_API_URL
 - REACT_APP_DEFAULT_PHOTO
 - REACT_APP_BACKEND_ENDPOINT
+
 The first six values have to do with cloudinary, if you choose to set up an account. Otherwise, fill these values with empty strings so the values do not return as undefined.
 The second to last value is the link to a default profile picture of your choice.
 The last value is the endpoint used to fetch and post data stored in the back end. Visit <a href="https://github.com/emyrue/contractor_api/">Contractor Connect API</a> to see how to set up the back end.

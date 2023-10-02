@@ -66,13 +66,12 @@ export default function ContractorInfoPage() {
         </div>
         <img alt="" src={contractor.user.picture_link} />
         <h2>{contractor.job_title}</h2>
-        <p>{contractor.bio}</p>
         <span>
           Rate: $
           {contractor.rate}
           /hr
         </span>
-        <br />
+        <p>{contractor.bio}</p>
         <Fab
           variant="extended"
           onClick={() => setClassname('show')}

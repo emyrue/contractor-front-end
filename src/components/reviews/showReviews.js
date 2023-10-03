@@ -37,6 +37,8 @@ export default function ShowReviews(props) {
         return (
           <article key={`review-${id}`}>
             <header>
+              <img className="review-picture" src={user.picture_link} alt=""/>
+              <div>
               <span className="reviewer">{user.name}</span>
               <Rating
                 value={rating}
@@ -58,6 +60,7 @@ export default function ShowReviews(props) {
                   </span>
                 )}
               </p>
+              </div>
             </header>
             <p className="review-body">{reviewBody}</p>
             <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
@@ -87,6 +90,7 @@ ShowReviews.propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
+      picture_link: PropTypes.string.isRequired,
     }).isRequired,
     likes: PropTypes.arrayOf(PropTypes.shape({
       like: PropTypes.bool.isRequired,

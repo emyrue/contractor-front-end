@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button, Rating } from '@mui/material';
-import { TextareaAutosize } from '@mui/base';
 import createReview from '../../redux/reviews/ReviewsReducer';
+import '../../styles/createReview.scss';
 
 export default function CreateReview(props) {
   const { handleClose } = props;
@@ -23,14 +23,14 @@ export default function CreateReview(props) {
   };
 
   return (
-    <article>
+    <article className="create-review">
       <form onSubmit={handleSubmit}>
         <Rating
           value={rating}
           onChange={(e, newValue) => setRating(newValue)}
           required
         />
-        <TextareaAutosize
+        <textarea
           placeholder="Leave your review here"
           value={review}
           onChange={(e) => setReview(e.target.value)}

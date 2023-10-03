@@ -54,7 +54,7 @@ export default function ContractorInfoPage() {
               review(s)
             </span>
           </div>
-          { !leftReview
+          { !leftReview && !createReview
           && (
             <Fab
               variant="extended"
@@ -64,6 +64,12 @@ export default function ContractorInfoPage() {
             </Fab>
           )}
         </div>
+        { createReview
+          && (
+          <CreateReview
+            handleClose={() => setCreateReview(false)}
+          />
+          )}
         <img alt="" src={contractor.user.picture_link} />
         <h2>{contractor.job_title}</h2>
         <span>
@@ -81,12 +87,6 @@ export default function ContractorInfoPage() {
         <div className={classname}>
           <div className="desktop-reservations-popup"><ReservationsPopup setClassname={setClassname} /></div>
         </div>
-        { createReview
-          && (
-          <CreateReview
-            handleClose={() => setCreateReview(false)}
-          />
-          )}
         <ReservationNotSaved />
         <ReservationSaved />
         { reviews.length > 0

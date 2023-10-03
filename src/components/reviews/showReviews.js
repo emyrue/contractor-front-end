@@ -37,13 +37,16 @@ export default function ShowReviews(props) {
         return (
           <article key={`review-${id}`}>
             <header>
-              <img className="review-picture" src={user.picture_link} alt=""/>
-              <div>
-              <span className="reviewer">{user.name}</span>
-              <Rating
-                value={rating}
-                readOnly
-              />
+              <div className="reviewer-info">
+                <img className="review-picture" src={user.picture_link} alt="" />
+                <div>
+                  <span className="reviewer">{user.name}</span>
+                  <Rating
+                    value={rating}
+                    readOnly
+                  />
+                </div>
+              </div>
               <p>
                 <span>
                   {createDateObject}
@@ -55,12 +58,10 @@ export default function ShowReviews(props) {
                     (edited on
                     {' '}
                     {editDateObject}
-                    {' '}
                     )
                   </span>
                 )}
               </p>
-              </div>
             </header>
             <p className="review-body">{reviewBody}</p>
             <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />

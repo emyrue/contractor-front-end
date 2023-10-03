@@ -15,12 +15,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 20px;
 
       div {
         display: flex;
         align-items: center;
-        margin-bottom: 15px;
 
         .review-count {
           margin-left: 10px;
@@ -29,6 +27,7 @@
 
       button {
         width: 175px;
+        margin: 15px 0;
       }
     }
 

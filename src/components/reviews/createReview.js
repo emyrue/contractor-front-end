@@ -25,6 +25,7 @@ export default function CreateReview(props) {
   return (
     <article className="create-review">
       <form onSubmit={handleSubmit}>
+        <h3>Leave a Review</h3>
         <Rating
           value={rating}
           onChange={(e, newValue) => setRating(newValue)}
@@ -34,17 +35,22 @@ export default function CreateReview(props) {
           placeholder="Leave your review here"
           value={review}
           onChange={(e) => setReview(e.target.value)}
+          required
         />
-        <Button
-          type="submit"
-        >
-          Submit
-        </Button>
-        <Button
-          onClick={handleClose}
-        >
-          Close
-        </Button>
+        <div>
+          <Button
+            variant="outlined"
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+          <Button
+            variant="contained"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </article>
   );

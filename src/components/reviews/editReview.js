@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button, Rating } from '@mui/material';
-import { TextareaAutosize } from '@mui/base';
 import { editReview } from '../../redux/reviews/ReviewsReducer';
+import '../../styles/createReview.scss';
 
 export default function EditReview(props) {
   const {
@@ -24,28 +24,36 @@ export default function EditReview(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Rating
-        value={rating}
-        onChange={(e, newValue) => setRating(newValue)}
-        required
-      />
-      <TextareaAutosize
-        placeholder="Leave your review here"
-        value={review}
-        onChange={(e) => setReview(e.target.value)}
-      />
-      <Button
-        type="submit"
-      >
-        Submit
-      </Button>
-      <Button
-        onClick={() => setEditDisplay(false)}
-      >
-        Close
-      </Button>
-    </form>
+    <article className="create-review">
+      <form onSubmit={handleSubmit}>
+        <h3>Edit your Review</h3>
+        <Rating
+          value={rating}
+          onChange={(e, newValue) => setRating(newValue)}
+          required
+        />
+        <textarea
+          placeholder="Leave your review here"
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+          required
+        />
+        <div>
+          <Button
+            variant="outlined"
+            onClick={() => setEditDisplay(false)}
+          >
+            Close
+          </Button>
+          <Button
+            variant="contained"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
+    </article>
   );
 }
 

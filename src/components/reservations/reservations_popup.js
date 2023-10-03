@@ -11,7 +11,7 @@ import { createReservation } from '../../redux/reservations/ReservationsReducer'
 import disableDates from '../../modules/disableDates';
 
 export default function ReservationsPopup(props) {
-  const { setClassname } = props;
+  const { setNewReservation } = props;
   const userId = useSelector((state) => state.user.user.id);
   const contractor = useSelector((state) => state.contractors);
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function ReservationsPopup(props) {
         end_date: endDate,
       },
     }));
-    setClassname('hide');
+    setNewReservation(false);
   };
 
   useEffect(() => {
@@ -110,5 +110,5 @@ export default function ReservationsPopup(props) {
 }
 
 ReservationsPopup.propTypes = {
-  setClassname: PropTypes.func.isRequired,
+  setNewReservation: PropTypes.func.isRequired,
 };

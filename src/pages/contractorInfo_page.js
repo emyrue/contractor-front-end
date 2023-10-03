@@ -14,7 +14,7 @@ export default function ContractorInfoPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [classname, setClassname] = useState('hide');
+  const [newReservation, setNewReservation] = useState(false);
   const [createReview, setCreateReview] = useState(false);
   const [leftReview, setLeftReview] = useState(false);
   const isLoading = useSelector((state) => state.contractors.isLoading);
@@ -80,13 +80,12 @@ export default function ContractorInfoPage() {
         <p>{contractor.bio}</p>
         <Fab
           variant="extended"
-          onClick={() => setClassname('show')}
+          onClick={() => setNewReservation(true)}
         >
           Make a Reservation
         </Fab>
-        <div className={classname}>
-          <div className="desktop-reservations-popup"><ReservationsPopup setClassname={setClassname} /></div>
-        </div>
+        { newReservation
+          && (<div className="desktop-reservations-popup"><ReservationsPopup setNewReservation={setNewReservation} /></div>) }
         <ReservationNotSaved />
         <ReservationSaved />
         { reviews.length > 0

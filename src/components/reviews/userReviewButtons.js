@@ -11,19 +11,21 @@ export default function UserReviewButtons(props) {
   } = props;
 
   return (
-    <span className="user-review-buttons">
-      <Fab
-        variant="extended"
-        onClick={() => setEditDisplay(true)}
-      >
-        Edit
-      </Fab>
-      <Fab
-        variant="extended"
-        onClick={() => handleDelete(review)}
-      >
-        Delete
-      </Fab>
+    <span className="user-review-buttons-span">
+      <div className="user-review-buttons">
+        <Fab
+          variant="extended"
+          onClick={() => setEditDisplay(true)}
+        >
+          Edit
+        </Fab>
+        <Fab
+          variant="extended"
+          onClick={() => handleDelete(review)}
+        >
+          Delete
+        </Fab>
+      </div>
       { editDisplay
         && (
           <EditReview

@@ -43,13 +43,21 @@
       }
     }
 
-    .user-review-buttons {
+    .user-review-buttons-span {
       width: 70%;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
 
-      button {
-        width: 100px;
+      .user-review-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        button {
+          width: 100px;
+          margin-bottom: 30px;
+        }
       }
     }
   }

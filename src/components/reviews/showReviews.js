@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import ShowLikes from '../likes/showLikes';
 import { deleteReview } from '../../redux/reviews/ReviewsReducer';
 import UserReviewButtons from './userReviewButtons';
+import '../../styles/allReviews.scss';
 
 export default function ShowReviews(props) {
   const { reviews } = props;
@@ -17,7 +18,7 @@ export default function ShowReviews(props) {
   };
 
   return (
-    <section>
+    <section className="all-reviews">
       <h2>Reviews</h2>
       {reviews.toReversed().map((review) => {
         const {
@@ -36,7 +37,7 @@ export default function ShowReviews(props) {
         return (
           <article key={`review-${id}`}>
             <header>
-              <span>{user.name}</span>
+              <span className="reviewer">{user.name}</span>
               <Rating
                 value={rating}
                 readOnly
@@ -58,7 +59,7 @@ export default function ShowReviews(props) {
                 )}
               </p>
             </header>
-            <p>{reviewBody}</p>
+            <p className="review-body">{reviewBody}</p>
             <ShowLikes likes={likes} reviewId={id} contractorId={contractorId} />
             { currentUser.id === user.id
               && (

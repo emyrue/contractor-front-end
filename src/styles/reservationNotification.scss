@@ -30,3 +30,14 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .reservation-notification {
+    section {
+      div {
+        width: 50%;
+        max-width: 350px;
+      }
+    }
+  }
+}

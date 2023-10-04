@@ -44,3 +44,22 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .contractor-info-section {
+    section {
+      h1 {
+        font-size: 30px;
+      }
+
+      img {
+        width: 350px;
+        height: 350px;
+      }
+
+      p {
+        max-width: 60%;
+      }
+    }
+  }
+}

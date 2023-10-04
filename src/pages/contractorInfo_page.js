@@ -9,6 +9,7 @@ import ReservationSaved from '../components/reservations/reservation_saved';
 import CreateReview from '../components/reviews/createReview';
 import ShowReviews from '../components/reviews/showReviews';
 import '../styles/contractorInfo.scss';
+import '../styles/reservationNotification.scss';
 
 export default function ContractorInfoPage() {
   const location = useLocation();

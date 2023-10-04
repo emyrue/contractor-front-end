@@ -10,6 +10,7 @@ import CreateReview from '../components/reviews/createReview';
 import ShowReviews from '../components/reviews/showReviews';
 import '../styles/contractorInfo.scss';
 import '../styles/reservationNotification.scss';
+import '../styles/newReservation.scss';
 
 export default function ContractorInfoPage() {
   const location = useLocation();

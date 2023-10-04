@@ -8,7 +8,6 @@ import { PropTypes } from 'prop-types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../../redux/reservations/ReservationsReducer';
 import disableDates from '../../modules/disableDates';
-import '../../styles/newReservation.scss';
 
 export default function ReservationsPopup(props) {
   const { setNewReservation } = props;

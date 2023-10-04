@@ -1,4 +1,8 @@
 .all-reviews {
+  h2 {
+    text-align: center;
+  }
+
   article {
     display: flex;
     flex-direction: column;
@@ -77,6 +81,23 @@
           width: 100px;
         }
       }
+    }
+  }
+}
+
+@media screen and (width >= 602px) {
+  .all-reviews {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+
+    h2 {
+      width: 100vw;
+      text-align: center;
+    }
+
+    article {
+      width: 400px;
     }
   }
 }

@@ -41,7 +41,7 @@ export default function ContractorInfoPage() {
     <section className="contractor-info-section">
       { contractor.id && !isLoading
       && (
-      <section>
+      <section className="contractor-info">
         <h1>{contractor.user.name}</h1>
         <div className="average-rating">
           <div>
@@ -78,7 +78,7 @@ export default function ContractorInfoPage() {
           {contractor.rate}
           /hr
         </span>
-        <p>{contractor.bio}</p>
+        <p className="bio">{contractor.bio}</p>
         { !newReservation
           && (
             <Fab

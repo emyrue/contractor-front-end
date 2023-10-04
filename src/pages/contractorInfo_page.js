@@ -78,12 +78,15 @@ export default function ContractorInfoPage() {
           /hr
         </span>
         <p>{contractor.bio}</p>
-        <Fab
-          variant="extended"
-          onClick={() => setNewReservation(true)}
-        >
-          Make a Reservation
-        </Fab>
+        { !newReservation
+          && (
+            <Fab
+              variant="extended"
+              onClick={() => setNewReservation(true)}
+            >
+              Make a Reservation
+            </Fab>
+          )}
         { newReservation
           && (<div className="desktop-reservations-popup"><ReservationsPopup setNewReservation={setNewReservation} /></div>) }
         <ReservationNotSaved />

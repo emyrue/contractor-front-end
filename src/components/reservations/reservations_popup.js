@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
-import { TextareaAutosize } from '@mui/base';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -9,6 +8,7 @@ import { PropTypes } from 'prop-types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createReservation } from '../../redux/reservations/ReservationsReducer';
 import disableDates from '../../modules/disableDates';
+import '../../styles/newReservation.scss';
 
 export default function ReservationsPopup(props) {
   const { setNewReservation } = props;
@@ -48,10 +48,10 @@ export default function ReservationsPopup(props) {
   }, []);
 
   return (
-    <article>
-      <h2>Make a Reservation</h2>
+    <article className="reservations-popup">
       <form onSubmit={handleSubmit}>
-        <TextareaAutosize
+        <h2>Make a Reservation</h2>
+        <textarea
           id="job_description"
           placeholder="Job description"
           value={jobDescription}
@@ -98,12 +98,20 @@ export default function ReservationsPopup(props) {
             />
           </LocalizationProvider>
           )}
-        <Button
-          type="submit"
-          variant="outlined"
-        >
-          Make Reservation
-        </Button>
+        <div className="popup-buttons">
+          <Button
+            variant="outlined"
+            onClick={() => setNewReservation(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </article>
   );

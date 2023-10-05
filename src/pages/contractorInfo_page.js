@@ -72,15 +72,17 @@ export default function ContractorInfoPage() {
             handleClose={() => setCreateReview(false)}
           />
           )}
-        <img alt="" src={contractor.user.picture_link} />
-        <h2>{contractor.job_title}</h2>
-        <span>
-          Rate: $
-          {contractor.rate}
-          /hr
-        </span>
-        <p className="bio">{contractor.bio}</p>
-        { !newReservation
+        <article className="contractor-info-article">
+          <img alt="" src={contractor.user.picture_link} />
+          <div className="contractor-info-text">
+            <h2>{contractor.job_title}</h2>
+            <span>
+              Rate: $
+              {contractor.rate}
+              /hr
+            </span>
+            <p className="bio">{contractor.bio}</p>
+            { !newReservation
           && (
             <Fab
               variant="extended"
@@ -89,6 +91,8 @@ export default function ContractorInfoPage() {
               Make a Reservation
             </Fab>
           )}
+          </div>
+        </article>
         { newReservation
           && (<div className="desktop-reservations-popup"><ReservationsPopup setNewReservation={setNewReservation} /></div>) }
         <ReservationNotSaved />

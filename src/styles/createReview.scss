@@ -48,3 +48,16 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .create-review {
+    form {
+      width: 60vw;
+
+      textarea,
+      div {
+        width: 50vw;
+      }
+    }
+  }
+}

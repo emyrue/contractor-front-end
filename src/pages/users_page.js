@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../redux/user/UserReducer';
 import AdminPageUserDetails from '../components/user/admin_page_user_details';
+import '../styles/usersPage.scss';
 
 export default function UsersPage() {
   const dispatch = useDispatch();
@@ -16,12 +17,12 @@ export default function UsersPage() {
   }, [dispatch, user]);
 
   return (
-    <section>
+    <section className="users-page">
       { user.role === 'admin'
         && (
-          <section>
+          <section className="users-page-section">
             <h1>All Users</h1>
-            <ul>
+            <ul className="users-list">
               { allUsers.map((oneUser) => (
                 <AdminPageUserDetails oneUser={oneUser} key={`user-${oneUser.id}`} />
               ))}

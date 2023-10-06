@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Fab } from '@mui/material';
 import { PropTypes } from 'prop-types';
@@ -10,10 +10,6 @@ export default function AdminPageUserDetails(props) {
   const navigate = useNavigate();
   const [deleteContractor, setDeleteContractor] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
-
-  useEffect(() => {
-    console.log(typeof oneUser.contractor.rating);
-  }, []);
 
   const handleNavigate = () => {
     navigate(`/${oneUser.contractor.id}`);
@@ -28,7 +24,7 @@ export default function AdminPageUserDetails(props) {
   };
 
   return (
-    <li>
+    <li className="one-user">
       <img alt="" src={oneUser.picture_link} />
       <ul>
         <li>{oneUser.name}</li>

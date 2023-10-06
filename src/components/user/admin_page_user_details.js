@@ -26,7 +26,7 @@ export default function AdminPageUserDetails(props) {
   return (
     <li className="one-user">
       <img alt="" src={oneUser.picture_link} />
-      <ul>
+      <ul className="user-info">
         <li>{oneUser.name}</li>
         <li>{oneUser.email}</li>
         { oneUser.contractor.id

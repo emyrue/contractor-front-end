@@ -29,9 +29,16 @@
 
       .one-user {
         margin-bottom: 20px;
+        width: 80%;
+        align-items: center;
+
+        .user-info {
+          width: 80%;
+        }
 
         button {
           margin: 5px 0;
+          z-index: 900;
         }
       }
     }

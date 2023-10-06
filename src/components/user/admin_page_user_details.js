@@ -1,27 +1,41 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Fab } from '@mui/material';
 import { PropTypes } from 'prop-types';
+import AdminDeleteContractor from '../contractors/admin_delete_contractor';
+import AdminDeleteUser from './admin_delete_user';
 
 export default function AdminPageUserDetails(props) {
   const { oneUser } = props;
   const navigate = useNavigate();
+  const [deleteContractor, setDeleteContractor] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
+
+  useEffect(() => {
+    console.log(typeof oneUser.contractor.rating);
+  }, []);
 
   const handleNavigate = () => {
     navigate(`/${oneUser.contractor.id}`);
   };
 
+  const handleCloseContractor = () => {
+    setDeleteContractor(false);
+  };
+
+  const handleCloseUser = () => {
+    setDeleteUser(false);
+  };
+
   return (
     <li>
-      <h2>{oneUser.name}</h2>
-      <h3>{oneUser.email}</h3>
-      { oneUser.contractor.name
+      <img alt="" src={oneUser.picture_link} />
+      <ul>
+        <li>{oneUser.name}</li>
+        <li>{oneUser.email}</li>
+        { oneUser.contractor.id
                 && (
                   <ul>
-                    <li>
-                      Contractor Name:
-                      {' '}
-                      {oneUser.contractor.name}
-                    </li>
                     <li>
                       Rate:
                       {' '}
@@ -52,6 +66,38 @@ export default function AdminPageUserDetails(props) {
                     </li>
                   </ul>
                 )}
+        <li>
+          { oneUser.contractor.id
+            && (
+              <Fab
+                variant="extended"
+                onClick={() => setDeleteContractor(true)}
+              >
+                Delete Contractor
+              </Fab>
+            )}
+          <Fab
+            variant="extended"
+            onClick={() => setDeleteUser(true)}
+          >
+            Delete User
+          </Fab>
+        </li>
+      </ul>
+      { deleteContractor
+        && (
+          <AdminDeleteContractor
+            contractorId={oneUser.contractor.id}
+            handleClose={handleCloseContractor}
+          />
+        )}
+      { deleteUser
+        && (
+          <AdminDeleteUser
+            userId={oneUser.id}
+            handleClose={handleCloseUser}
+          />
+        )}
     </li>
   );
 }
@@ -61,9 +107,9 @@ AdminPageUserDetails.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
+    picture_link: PropTypes.string.isRequired,
     contractor: PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
       rate: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,
       number_of_reviews: PropTypes.number.isRequired,

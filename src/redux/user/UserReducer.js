@@ -12,6 +12,7 @@ const GET_USER = 'User/GET_USER';
 const EDIT_USER = 'User/EDIT_USER';
 const LOGOUT = 'User/END_SESSION';
 const CLEAR_LOGIN = 'User/CLEAR_LOGIN';
+const DELETE_USER = 'User/DELETE_USER';
 
 export const userSignUp = async (user) => {
   await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}users`,
@@ -91,6 +92,19 @@ export const userLogout = createAsyncThunk(LOGOUT, async () => {
       Authorization: JSON.parse(serializedToken),
     },
   });
+});
+
+export const deleteUser = createAsyncThunk(DELETE_USER, async (id, adminId) => {
+  const serializedToken = localStorage.getItem('Authorization');
+  const deleteUserEndpoint = `${getUsersEndpoint}/${id}`;
+  await axios.delete(deleteUserEndpoint, {
+    headers: {
+      Authorization: JSON.parse(serializedToken),
+    },
+  });
+  if (id === adminId) {
+    localStorage.clear();
+  }
 });
 
 const initialState = {

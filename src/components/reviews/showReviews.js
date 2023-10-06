@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Rating } from '@mui/material';
+import { Rating, Fab } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import ShowLikes from '../likes/showLikes';
 import { deleteReview } from '../../redux/reviews/ReviewsReducer';
@@ -73,6 +73,15 @@ export default function ShowReviews(props) {
                   handleDelete={handleDelete}
                   review={review}
                 />
+              )}
+            { currentUser.role === 'admin' && currentUser.id !== user.id
+              && (
+                <Fab
+                  variant="extended"
+                  onClick={() => handleDelete(review)}
+                >
+                  Delete
+                </Fab>
               )}
           </article>
         );

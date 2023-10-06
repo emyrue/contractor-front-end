@@ -63,7 +63,10 @@ export default function AdminPageUserDetails(props) {
                   </ul>
                 )}
         <li>
-          { oneUser.contractor.id
+          { !deleteContractor && !deleteUser
+            && (
+              <div>
+                { oneUser.contractor.id
             && (
               <Fab
                 variant="extended"
@@ -72,12 +75,14 @@ export default function AdminPageUserDetails(props) {
                 Delete Contractor
               </Fab>
             )}
-          <Fab
-            variant="extended"
-            onClick={() => setDeleteUser(true)}
-          >
-            Delete User
-          </Fab>
+                <Fab
+                  variant="extended"
+                  onClick={() => setDeleteUser(true)}
+                >
+                  Delete User
+                </Fab>
+              </div>
+            )}
         </li>
       </ul>
       { deleteContractor

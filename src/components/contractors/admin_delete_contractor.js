@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button } from '@mui/material';
 import { deleteContractor } from '../../redux/contractors/ContractorReducer';
+import '../../styles/deleteAccount.scss';
 
 export default function AdminDeleteContractor(props) {
   const { contractorId, handleClose } = props;
@@ -12,7 +13,7 @@ export default function AdminDeleteContractor(props) {
   };
 
   return (
-    <article>
+    <article className="delete-account-article">
       <section>
         <h2>Are You Sure?</h2>
         <p>

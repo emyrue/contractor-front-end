@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button } from '@mui/material';
 import { deleteUser } from '../../redux/user/UserReducer';
+import '../../styles/deleteAccount.scss';
 
 export default function AdminDeleteUser(props) {
   const { userId, handleClose } = props;
@@ -13,7 +14,7 @@ export default function AdminDeleteUser(props) {
   };
 
   return (
-    <article>
+    <article className="delete-account-article">
       <section>
         <h2>Are You Sure?</h2>
         <p>

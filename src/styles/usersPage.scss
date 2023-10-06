@@ -36,6 +36,11 @@
           width: 80%;
         }
 
+        div {
+          display: flex;
+          flex-direction: column;
+        }
+
         button {
           margin: 5px 0;
           z-index: 900;

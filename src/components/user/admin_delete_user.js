@@ -34,7 +34,7 @@ export default function AdminDeleteUser(props) {
             Delete
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={handleClose}
           >
             Don&apos;t Delete

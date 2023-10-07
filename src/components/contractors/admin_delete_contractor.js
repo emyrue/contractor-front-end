@@ -31,7 +31,7 @@ export default function AdminDeleteContractor(props) {
             Delete
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={handleClose}
           >
             Don&apos;t Delete

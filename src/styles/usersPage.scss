@@ -49,3 +49,19 @@
     }
   }
 }
+
+@media screen and (width >= 602px) {
+  .users-page {
+    .users-page-section {
+      .users-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .one-user {
+           max-width: 500px;
+        }
+      }
+    }
+  }
+}
